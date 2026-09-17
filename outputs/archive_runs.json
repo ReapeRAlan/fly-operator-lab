@@ -1,0 +1,94 @@
+{
+  "database": "D:\\FlyOperatorLab\\work\\learning\\experiments.sqlite",
+  "size_before_gb": 2.361,
+  "keep": [
+    "v4.1-night1"
+  ],
+  "drop": [
+    "smoke-v4.1",
+    "smoke-v4.1-science"
+  ],
+  "archived": {
+    "pilot-v2": {
+      "episodes": {
+        "rows": 4,
+        "sha256": "7190f10b1798cfb8ac8dc0c34dd56992493a627a38d086bb4e81e55e08d8ff2a",
+        "path": "archive\\experiments\\pilot-v2\\episodes.jsonl.gz",
+        "bytes": 594
+      },
+      "steps": {
+        "rows": 739,
+        "sha256": "50dec75062dc105f786eeb34ade12f77a76c82b4f1ff403096d60b5c7ea26f5a",
+        "path": "archive\\experiments\\pilot-v2\\steps.jsonl.gz",
+        "bytes": 1367440
+      }
+    },
+    "pilot-v2-final": {
+      "episodes": {
+        "rows": 143,
+        "sha256": "da3d32679d79cd662f4dba1ff6765888b4e355508c3fd31bba3c6966dfafadec",
+        "path": "archive\\experiments\\pilot-v2-final\\episodes.jsonl.gz",
+        "bytes": 8053
+      },
+      "steps": {
+        "rows": 21791,
+        "sha256": "0288ec9caaf89c1bfc9453871be983a5e3976e4f84c0aa1096dffbe2d808eee3",
+        "path": "archive\\experiments\\pilot-v2-final\\steps.jsonl.gz",
+        "bytes": 36443627
+      }
+    },
+    "pilot-v3-curriculum": {
+      "episodes": {
+        "rows": 15,
+        "sha256": "3c16b037652604e9338efca77ab1723ebbdc9a29a6d456ecd948bd38ab228698",
+        "path": "archive\\experiments\\pilot-v3-curriculum\\episodes.jsonl.gz",
+        "bytes": 1672
+      },
+      "steps": {
+        "rows": 1719,
+        "sha256": "cbc9040765a2690875ea2082e2363b6b8137ea2616acc1e5c2b77ba46b5fe3b1",
+        "path": "archive\\experiments\\pilot-v3-curriculum\\steps.jsonl.gz",
+        "bytes": 2512492
+      }
+    },
+    "pilot-v3.1-curriculum": {
+      "episodes": {
+        "rows": 73,
+        "sha256": "9bb3ef7271414c7d0572107cbc0f32e680c000fb45ee2a659d4e675ed10b321f",
+        "path": "archive\\experiments\\pilot-v3.1-curriculum\\episodes.jsonl.gz",
+        "bytes": 6451
+      },
+      "steps": {
+        "rows": 9059,
+        "sha256": "de46248f828404e4615253ee392227ba242c3ac966e2ad093de7ff29b1bae20b",
+        "path": "archive\\experiments\\pilot-v3.1-curriculum\\steps.jsonl.gz",
+        "bytes": 13362327
+      }
+    },
+    "pilot-v3.2-curriculum": {
+      "episodes": {
+        "rows": 1278,
+        "sha256": "86bbe97e5c8324166979025e785613125b3b2d9c1c40baa48c0b0d6a32bcb4d4",
+        "path": "archive\\experiments\\pilot-v3.2-curriculum\\episodes.jsonl.gz",
+        "bytes": 102830
+      },
+      "steps": {
+        "rows": 96255,
+        "sha256": "2cd36484c7a64078c1ac5adfaead2c146408d06c1af2495fafa52703a392a7da",
+        "path": "archive\\experiments\\pilot-v3.2-curriculum\\steps.jsonl.gz",
+        "bytes": 152663495
+      }
+    }
+  },
+  "dropped": {
+    "smoke-v4.1": {
+      "episodes": 28,
+      "steps": 1243
+    },
+    "smoke-v4.1-science": {
+      "episodes": 19,
+      "steps": 1725
+    }
+  },
+  "size_after_gb": 0.002
+}

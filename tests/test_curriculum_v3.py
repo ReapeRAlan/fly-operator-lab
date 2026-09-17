@@ -24,14 +24,17 @@ def mission(stage='move'):
     return {'goal':[4,0,2],'goal_angle':0.,'stage':stage,'max_seconds':30,'geometry':[]}
 
 
-def test_pending_move_is_mechanical_until_stop_context_is_reached():
+def test_pending_move_is_a_choice_between_continuing_and_intervening():
+    """Protocol 3.3: stopping is legal while the engine moves, far from the goal as well as near it."""
     catalog=ActionCatalog();obs=clean_observation(raw_observation({'status':'in_progress','action':'move'}),mission())
     mask=catalog.mask(obs)
-    assert forced_wait(mask) and not decision_required(obs,mask)
-    assert {catalog.entries[i]['action'] for i in np.flatnonzero(mask)}=={'wait'}
-    obs['goal']=[.1,0,0];mask=catalog.mask(obs)
-    assert decision_required(obs,mask)
-    assert {catalog.entries[i]['action'] for i in np.flatnonzero(mask)}=={'wait','stop'}
+    assert not forced_wait(mask) and decision_required(obs,mask)
+    assert {catalog.entries[i]['action'] for i in np.flatnonzero(mask)}=={'wait','stop','cancel'}
+    obs['goal']=[.1,0,0];near=catalog.mask(obs)
+    assert np.array_equal(near,mask) # the mask no longer reveals when to stop
+    start=clean_observation(raw_observation(None,sim_time=0),mission())
+    start_mask=catalog.mask(start)
+    assert forced_wait(start_mask) and not decision_required(start,start_mask)
 
 
 def test_v3_encoder_exposes_people_goal_time_and_pending(tmp_path):

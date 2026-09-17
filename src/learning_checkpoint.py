@@ -12,7 +12,8 @@ SEMANTIC_KEYS=('version','semantic_protocol_version','dataset','classified_neuro
   'dagger_episodes_per_stage','bootstrap_evaluation_episodes','max_extra_dagger_episodes','dagger_teacher_beta',
   'stage_transfer_imitation_epochs','promotion_evaluation_episodes','acceptance_evaluation_episodes_per_seed','imitation','motor_plasticity_learning_rate',
   'imitation_epochs','promotion_success','retention_fraction','evaluation_interval_steps','policy_collapse_free_wait_steps',
-  'policy_no_progress_decisions','free_wait_penalty','plasticity_reward_gain','plasticity_rule','stage_order')
+  'policy_no_progress_decisions','free_wait_penalty','plasticity_reward_gain','plasticity_rule','stage_order',
+  'ppo_v33','tracks','condition_settings','promotion','control_imitation_epochs')
 
 
 def _assert_finite(value,label):
@@ -86,6 +87,8 @@ def save_checkpoint(name,brain,model,env,counters,store,teaching_examples=None,c
     state={'version':2,'policy':policy_state,'optimizer':optimizer_state,
       'torch_rng':torch.get_rng_state(),'numpy_rng':np.random.get_state(),'python_rng':random.getstate(),
       'filters':torch.from_numpy(env.readout.filters.copy()),'features':torch.from_numpy(env.last_features.copy()),
+      **({'sensor_filters':torch.from_numpy(env.sensor_readout.filters.copy())} if hasattr(env,'sensor_readout') else {}),
+      'brain_mode':getattr(env,'brain_mode','connectome'),
       'counters':counters,'episode_count':env.episode_count,'total_steps':env.total_steps,'total_simulated_ms':env.total_simulated_ms,'num_timesteps':model.num_timesteps,
       'config':env.config if hasattr(env,'config') else {},'game_episode_resume':'restart interrupted episode; game heap is not serialized'}
     torch.save(state,temporary);os.replace(temporary,path)
@@ -96,7 +99,8 @@ def save_checkpoint(name,brain,model,env,counters,store,teaching_examples=None,c
           'actions':np.array([e[1] for e in teaching_examples],np.int64),
           'masks':np.stack([e[2] for e in teaching_examples]) if teaching_examples else np.empty((0,model.action_space.n),bool),
           'stages':np.array([e[3] if len(e)>3 else 'unknown' for e in teaching_examples],dtype='<U32') if teaching_examples else np.empty(0,dtype='<U32'),
-          **({'episodes':np.array([e[4] for e in teaching_examples],np.int64)} if teaching_examples and all(len(e)>4 for e in teaching_examples) else {})})
+          **({'episodes':np.array([e[4] for e in teaching_examples],np.int64)} if teaching_examples and all(len(e)>4 for e in teaching_examples) else {}),
+          **({'sensor_features':np.stack([e[5] for e in teaching_examples])} if teaching_examples and all(len(e)>5 for e in teaching_examples) else {})})
         examples_metadata={'examples_sha256':file_hash(example_path),'examples_count':len(teaching_examples)}
     manifest={'version':2,'generation':generation,'brain_sha256':brain_hash,'policy_sha256':file_hash(path),
       'condition':env.condition,'seed':env.seed_base,'saved':time.time(),'counters':counters,'graph_hash':brain.graph_hash,
@@ -122,7 +126,9 @@ def load_checkpoint(pointer,brain,model,env):
     model.policy.load_state_dict(state['policy']);model.policy.optimizer.load_state_dict(state['optimizer'])
     if manifest.get('actor_sha256') and actor_hash(model)!=manifest['actor_sha256']:raise ValueError('Restored actor differs from checkpoint')
     torch.set_rng_state(state['torch_rng']);np.random.set_state(state['numpy_rng']);random.setstate(state['python_rng'])
+    if state.get('brain_mode','connectome')!=getattr(env,'brain_mode','connectome'):raise ValueError('Checkpoint brain mode mismatch')
     env.readout.filters[:]=state['filters'].numpy();env.last_features=state['features'].numpy().copy()
+    if 'sensor_filters' in state and hasattr(env,'sensor_readout'):env.sensor_readout.filters[:]=state['sensor_filters'].numpy()
     env.episode_count=state['episode_count'];env.total_steps=state['total_steps'];model.num_timesteps=state['num_timesteps']
     env.total_simulated_ms=state.get('total_simulated_ms',state['total_steps']*50)
     return state['counters']
@@ -138,5 +144,7 @@ def load_teaching_examples(pointer,legacy_path):
     with np.load(path,allow_pickle=False) as archive:
         x=archive['features'];y=archive['actions'];masks=archive['masks'];stages=archive['stages'] if 'stages' in archive else None
         if len(x)!=len(y) or len(x)!=len(masks) or manifest.get('examples_count',len(x))!=len(x):raise ValueError('Teaching example count mismatch')
+        if stages is not None and 'episodes' in archive and 'sensor_features' in archive:
+            return list(zip(x,y.tolist(),masks,stages.tolist(),archive['episodes'].tolist(),archive['sensor_features']))
         if stages is not None and 'episodes' in archive:return list(zip(x,y.tolist(),masks,stages.tolist(),archive['episodes'].tolist()))
         return list(zip(x,y.tolist(),masks,stages.tolist())) if stages is not None else list(zip(x,y.tolist(),masks))

@@ -21,7 +21,7 @@ def main():
     schedule_path=RUNTIME/'schedule.json';schedule=json.loads(schedule_path.read_text()) if schedule_path.exists() else {'version':2,'seed_index':0,'condition_index':0,'round':0,'stage_index':0,'prepared_seeds':[],'evaluations':{}}
     cap=json.loads((ROOT/'outputs/native_capabilities_v2.json').read_text());stages=[s for s in cfg['stage_order'] if REQUIRED[s] in cap['validated_actions']]
     store.update(state='preparing',reason='Cargando MaleCNS completo',enabled_stages=stages,pending_stages=[s for s in cfg['stage_order'] if s not in stages],pilot_hours=args.hours)
-    guard();brain=LearningBrain();env=FlyOperatorEnv(brain,guard=guard);env.config=cfg;live=LiveState(brain)
+    guard();brain=LearningBrain();env=FlyOperatorEnv(brain,guard=guard);env.config=cfg;live=LiveState(brain,store.run)
     model=None;counters={};current_name=None;latest_checkpoint=None;examples=[];checkpoint_ready=False
     def persist():
         nonlocal latest_checkpoint

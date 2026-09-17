@@ -14,7 +14,7 @@ def run():
     p=argparse.ArgumentParser();p.add_argument('--checkpoint',required=True);p.add_argument('--condition',choices=['frozen','adapter','internal','combined'],required=True);p.add_argument('--seed',type=int,choices=[7,19,43],required=True);p.add_argument('--stage',default='move');p.add_argument('--split',choices=['validation','test'],default='test');p.add_argument('--episodes',type=int,default=30);p.add_argument('--record-first',action='store_true');a=p.parse_args()
     cfg=json.loads((ROOT/'config/learning.json').read_text());store=Store('heldout-'+str(int(time.time())));guard=ResourceGuard(store,cfg)
     b=LearningBrain();env=FlyOperatorEnv(b,condition=a.condition,seed=a.seed,stage=a.stage,split=a.split,guard=guard,on_episode=store.episode);model=make_model(env,cfg,a.seed)
-    counters=load_checkpoint(a.checkpoint,b,model,env);env.train_plasticity=False;live=LiveState(b);rows=[]
+    counters=load_checkpoint(a.checkpoint,b,model,env);env.train_plasticity=False;live=LiveState(b,store.run);rows=[]
     missions=[m for m in env.scenarios if m['stage']==a.stage and m['split']==a.split]
     if a.episodes>30 or a.episodes<1:raise ValueError('1..30 episodes per seed')
     for i in range(a.episodes):

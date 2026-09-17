@@ -1,0 +1,24 @@
+import React,{useEffect,useState} from 'react';
+import {Activity,AlertTriangle,CheckCircle,Clock3, Cpu,Database,MemoryStick} from 'lucide-react';
+import {withRun} from './Provenance.jsx';
+
+const api=async path=>{const response=await fetch('/api/'+path);if(!response.ok)throw Error(await response.text());return response.json()};
+const number=(value,digits=1)=>value==null?'—':Number(value).toLocaleString('es-MX',{maximumFractionDigits:digits});
+const age=value=>value==null?'sin dato':value<1?'ahora':`${number(value,1)} s`;
+
+function Metric({icon:Icon,label,value,note,alarm=false}){
+ return <div className={'health-metric'+(alarm?' alarm':'')}><Icon size={17}/><span>{label}</span><strong>{value}</strong><small>{note}</small></div>;
+}
+
+export default function Health({run}){
+ const [data,setData]=useState(null),[error,setError]=useState('');
+ useEffect(()=>{let active=true,timer;const poll=async()=>{try{const next=await api(withRun('observatory',run));if(active){setData(next);setError('')}}catch(e){if(active)setError('No se pudo leer el estado del observatorio')}if(active)timer=setTimeout(poll,3000)};poll();return()=>{active=false;clearTimeout(timer)}},[run]);
+ if(error)return <div className="notice" role="alert">{error}</div>;
+ if(!data)return <div className="panel"><div className="empty">Consultando salud del observatorio…</div></div>;
+ const current=data.context?.freshness==='live',memoryAlarm=data.runtime.ram_used_percent>=90,stale=current&&data.snapshot.age_seconds!=null&&data.snapshot.age_seconds>10,collapse=data.learning.collapse_alarm==='critical';
+ const alerts=[memoryAlarm&&'Memoria global por encima del 90%',stale&&'El snapshot neuronal está desactualizado',current&&!data.snapshot.coherent&&'Lectura neuronal en escritura',collapse&&'Colapso de política detectado'].filter(Boolean);
+ return <div className="health-view">
+  <article className="panel"><div className="panel-heading"><div><span className="eyebrow">SUPERVISIÓN OPERATIVA</span><h2>Salud del observatorio</h2><p>Snapshot #{data.snapshot.revision??'—'} · actualizado {age(data.snapshot.age_seconds)} · estado {data.runtime.state}</p></div><span className={'status '+(alerts.length?'error':'running')}><span className="dot"/>{alerts.length?`${alerts.length} alerta${alerts.length===1?'':'s'}`:(current?'Estable':'Sin telemetría viva')}</span></div><div className="health-grid"><Metric icon={MemoryStick} label="RAM del sistema" value={`${number(data.runtime.ram_used_percent)}%`} note={`${number(data.runtime.available_ram_gb,2)} GB disponibles`} alarm={memoryAlarm}/><Metric icon={Cpu} label="Proceso API" value={`${number(data.runtime.process_ram_gb,2)} GB`} note={`${number(data.runtime.cpu_percent)}% CPU`}/><Metric icon={Database} label="Snapshot neuronal" value={current?(data.snapshot.coherent?'Coherente':'Escribiendo'):'No disponible'} note={`revisión ${data.snapshot.revision??'—'} · ${age(data.snapshot.age_seconds)}`} alarm={current&&(!data.snapshot.coherent||stale)}/><Metric icon={Clock3} label="Último paso" value={current?age(data.latest.age_seconds):'Archivado'} note={`episodio ${data.latest.episode??'—'} · paso ${data.latest.sequence??'—'}`} alarm={stale}/></div></article>
+  <div className="health-columns"><article className="panel"><div className="panel-heading"><div><h2>Actividad neuronal</h2><p>{current?'Última ventana publicada por el motor.':'Actividad no disponible para este contexto.'}</p></div><Activity size={19}/></div><div className="health-activity"><div><span>Impulsos</span><strong>{current?number(data.activity.latest?.spikes,0):'—'}</strong></div><div><span>Neuronas activas</span><strong>{current?number(data.activity.latest?.active,0):'—'}</strong></div><div><span>Tiempo de cálculo</span><strong>{current&&data.activity.latest?.wall!=null?`${number(data.activity.latest.wall,2)} s`:'—'}</strong></div></div><p className="padding muted">{current?`${data.activity.series_count} pasos disponibles para las curvas de actividad del panel.`:'La telemetría no se reconstruye desde otra campaña o un snapshot detenido.'}</p></article><article className="panel"><div className="panel-heading"><div><h2>Alertas y aprendizaje</h2><p>Señales que requieren supervisión.</p></div>{alerts.length?<AlertTriangle size={19}/>:<CheckCircle size={19}/>}</div>{alerts.length?<ul className="health-alerts">{alerts.map(alert=><li key={alert}>{alert}</li>)}</ul>:<div className="health-ok"><CheckCircle size={21}/>{current?'Sin alertas críticas':'La campaña no publica actividad neuronal actual'}</div>}<dl className="health-details"><div><dt>Condición</dt><dd>{data.condition||'—'}</dd></div><div><dt>Semilla</dt><dd>{data.seed??'—'}</dd></div><div><dt>Etapa</dt><dd>{data.stage||'—'}</dd></div><div><dt>Alarma de política</dt><dd>{data.learning.collapse_alarm||'—'}</dd></div></dl></article></div>
+ </div>;
+}

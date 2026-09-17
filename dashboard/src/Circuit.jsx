@@ -1,5 +1,6 @@
 import React,{useEffect,useMemo,useState} from 'react';
 import {FAMILY_COLORS,FAMILY_SHORT,SIGN_COLORS,ACCENT,INK,BLUE_RAMP,fmt,compact,pct,useVisiblePoll,useTip,TipRow,Sparkline,Legend} from './viz.jsx';
+import {withRun} from './Provenance.jsx';
 
 const api=async path=>{const r=await fetch('/api/'+path);if(!r.ok)throw Error(await r.text());return r.json()};
 const TOTAL_NEURONS=166700;
@@ -91,20 +92,20 @@ function FamilyActivity({structure,live}){
  return <div className="viz-wrap family-bars">{rows.map(r=><div className="fbar" key={r.key} tabIndex="0" onPointerMove={e=>show(e,<><TipRow value={pct(r.share)} label={`${r.label} activas`}/><TipRow value={compact(r.spikes)} label="impulsos en 50 ms"/><div className="tip-meta">{fmt(r.active)} de {fmt(r.neurons)} neuronas</div></>)} onPointerLeave={hide}>
   <label><i style={{background:FAMILY_COLORS[r.key]}}/>{r.label}</label><div className="track"><b style={{width:`${Math.max(1.5,100*r.share/max)}%`}}/></div><span>{pct(r.share)}</span></div>)}{tip}</div>}
 
-export default function Circuit({data}){
+export default function Circuit({data,run}){
  const [structure,setStructure]=useState(null),[live,setLive]=useState(null),[error,setError]=useState('');
  useEffect(()=>{api('circuit/structure').then(setStructure).catch(e=>setError('No se pudo cargar la estructura: '+e.message))},[]);
- useVisiblePoll(async alive=>{const next=await api('circuit/live');if(alive()&&(next.coherent||!live))setLive(next)},2500,[]);
- const s=data?.status||{};
+ useVisiblePoll(async alive=>{const next=await api(withRun('circuit/live',run));if(alive())setLive(next)},2500,[run]);
+ const s=data?.status||{},liveNow=live?.context?.freshness==='live'&&live?.coherent;
  return <div className="circuit-view">
   {error&&<div className="notice" role="alert">{error}</div>}
   <Kpis data={data}/>
-  <article className="panel"><div className="panel-heading"><div><h2>Del juego a la acción, en vivo</h2><p>{s.stage?`Etapa ${s.stage} · ${s.condition||'—'} · semilla ${s.seed??'—'}`:'Esperando el entrenador'} · toca o pasa el cursor sobre nodos y conexiones</p></div><span className="tag">Actualiza cada 2.5 s</span></div>
-   {structure?<Flow structure={structure} live={live}/>:<div className="empty">Calculando conectividad de 25.6 millones de aristas…</div>}
-   <div className="flow-notes"><span><b>Entradas → compuertas:</b> estímulo real enviado a la red.</span><span><b>Entre familias:</b> grosor = sinapsis anatómicas; opacidad = fracción activa del origen ahora.</span><span><b>Salida → acción:</b> probabilidad del actor.</span><span className="muted">Las conexiones internas recurrentes no se dibujan aquí; están en la matriz.</span></div>
+  <article className="panel"><div className="panel-heading"><div><h2>{liveNow?'Del juego a la acción, en vivo':'Circuito anatómico y última decisión registrada'}</h2><p>{liveNow?(s.stage?`Etapa ${s.stage} · ${s.condition||'—'} · semilla ${s.seed??'—'}`:'Esperando el entrenador'):'La anatomía se conserva; no se presentan tasas, gains ni probabilidades como actividad actual.'}</p></div><span className="tag">{liveNow?'Actualiza cada 2.5 s':'Solo lectura'}</span></div>
+   {structure&&liveNow?<Flow structure={structure} live={live}/>:<div className="circuit-archive"><strong>{live?.action_label?<>Última decisión: {live.action_label}</>:'Actividad neuronal no disponible'}</strong><span>La anatomía y la última decisión durable siguen disponibles; no se dibuja telemetría como actual.</span></div>}
+   <div className="flow-notes"><span><b>La matriz:</b> conserva la anatomía agrupada del conectoma.</span><span className="muted">Actividad, gains y probabilidades sólo aparecen para un snapshot actual y coherente.</span></div>
   </article>
   <div className="circuit-grid">
-   <article className="panel"><div className="panel-heading"><div><h2>Actividad por familia</h2><p>Fracción de neuronas que dispararon en los últimos 50 ms</p></div></div>{structure&&<FamilyActivity structure={structure} live={live}/>}</article>
+   <article className="panel"><div className="panel-heading"><div><h2>Actividad por familia</h2><p>{liveNow?'Fracción de neuronas que dispararon en los últimos 50 ms':'No se reconstruye actividad para campañas archivadas u obsoletas.'}</p></div></div>{structure&&(liveNow?<FamilyActivity structure={structure} live={live}/>:<div className="empty">Actividad neuronal no disponible para este contexto.</div>)}</article>
    <article className="panel"><div className="panel-heading"><div><h2>Matriz de conectividad</h2><p>25,582,938 conexiones agrupadas en 8 familias · signo según neurotransmisor predicho</p></div></div>{structure?<Matrix structure={structure}/>:<div className="empty">Cargando…</div>}</article>
   </div>
  </div>}

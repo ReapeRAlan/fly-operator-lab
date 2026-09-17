@@ -6,15 +6,15 @@ Investigación del 17 de septiembre de 2026 para el plan v4. Pregunta: ¿cómo h
 
 ## Conclusión
 
-1. **Nadie muestra que la plasticidad por arista, ni el RL sobre un conectoma completo, mejore la conducta en un juego.**
-   - DOOMFLY usa el mismo MaleCNS que nosotros y una regla dopaminérgica: falló sus validaciones.
-   - nfly usa nuestra misma lectura (1,314 DN → cabeza lineal): con PPO no alcanzó lo que la clonación supervisada logra en pocos pasos.
+1. **Entre los trabajos revisados no encontramos una demostración comparable y controlada de que la plasticidad por arista, o el RL sobre un conectoma completo, mejore la conducta en un juego.**
+   - DOOMFLY usa el mismo MaleCNS que nosotros y una regla dopaminérgica: según su README, falló sus validaciones.
+   - nfly usa nuestra misma lectura de 1,314 DN. Con RL no llegó a lo que alcanzó una cabeza **MLP** clonada de una CNN (+8.0 en 3 episodios); la cabeza **lineal** clonada se quedó en −9.7.
 2. **Lo que sí funciona:**
    - conectoma **congelado** con lectura o encoder/decoder entrenados;
    - **imitación primero** y después PPO con tasas bajas y crítico separado;
    - **jerarquía**: pocos comandos de alto nivel sobre controladores de bajo nivel congelados;
    - cuando se aprende "dentro" del conectoma, **parámetros compartidos por tipo celular entrenados con gradientes** sobre un modelo diferenciable.
-3. **Nuestro colapso de PPO tiene causas conocidas:**
+3. **Nuestro colapso de PPO tiene causas probables** (más los errores de implementación de la [sección 6](#6-revisión-externa-17-sep)):
    - crítico sin entrenar;
    - normalización de la ventaja en lotes diminutos;
    - nada que ancle la política al clon;
@@ -38,10 +38,14 @@ Investigación del 17 de septiembre de 2026 para el plan v4. Pregunta: ¿cómo h
 
 ### FlyGM — conectoma completo como política (2026)
 - https://arxiv.org/abs/2602.17997
-- Conectoma FlyWire como red de mensajes con pesos firmados **congelados**. Se entrenan descriptores por neurona, encoder, decoder y compuertas de entrada.
-- Entrenamiento: **imitación (KL al experto) → PPO** con crítico MLP separado, AdamW y lr 1e-4 (caminar) a 1e-5 (vuelo).
-- Error de giro: 8.29° con el conectoma, 13.55° recableado y 125.36° con grafo aleatorio.
-- La **línea base LIF de espigas fracasó**: no logró una marcha estable.
+- Conectoma FlyWire como red de paso de mensajes con la matriz de pesos firmados **congelada**.
+- **Lo que se entrena no es solo la lectura:**
+  - un descriptor intrínseco por neurona (η_v);
+  - una función de actualización MLP compartida, condicionada por esos descriptores;
+  - encoder, decoder y compuertas aferentes.
+- Entrenamiento: **imitación** (KL al experto más un MSE que se atenúa) **→ PPO**, con lr 1e-4 (caminar) y 1e-5 (vuelo) y `ReduceLROnPlateau`.
+- Error de giro: 8.29° con el conectoma, 13.55° recableado con grados preservados y 125.36° con grafo Erdős-Rényi.
+- **Su línea base "SNN" no es un simulador LIF como el nuestro:** es la misma arquitectura con activaciones LIF (τ = 2.0) y gradiente sustituto. Nunca logró una marcha estable (retorno medio 34.64 contra ≥ 334). No dice nada general sobre modelos LIF con conectoma.
 
 ### Eon Systems (2026)
 - https://eon.systems/updates/embodied-brain-emulation
@@ -57,7 +61,7 @@ Lista comunitaria: https://github.com/cobanov/awesome-fly · https://github.com/
 
 | Proyecto | Cerebro y lectura | Entrenamiento | Resultado reportado |
 |---|---|---|---|
-| **nfly** https://github.com/zhengxuyu/nfly | MaleCNS (166,700), encoder de retina hexagonal, **1,314 DN → cabeza lineal** | PPO / RLlib APPO sobre ganancias por arista, sesgos, τ y cabeza | En Pong, RL llegó a −20.5 tras 916 K pasos; la cabeza clonada de una CNN, a +8.0. "RL has not yet found the head that supervision finds in 6,000 steps." |
+| **nfly** https://github.com/zhengxuyu/nfly | MaleCNS (166,700), encoder de retina hexagonal, **1,314 DN → cabeza** | PPO / RLlib APPO sobre ganancias por arista, sesgos, τ y cabeza | Pong: RL −20.5 tras hasta 916 K pasos; desde una cabeza MLP clonada, −14 a −16 tras 200 K. Cabeza **MLP** clonada de una CNN: +8.0 (episodios 19, 20 y −15); cabeza **lineal** clonada: −9.7. "RL has not yet found the head that supervision finds in 6,000 steps." |
 | **DOOMFLY** https://github.com/nftechie/doomfly | Mismo grafo (25,582,938 aristas); lectura manual DNp20 (giro), DNpe017 (avanzar/disparar) | Plasticidad dopaminérgica en 4,184 aristas KC→MBON11 | v6 "failed its visual, conditioning and survival validation gates" |
 | **fly-craftax** https://github.com/liuzihe02/fly-craftax | Cerebro congelado, **lectura lineal sobre DN** y cabeza de valor lineal | PPO: 8 entornos × 64 pasos (512 por actualización), 4 épocas | Sin ancla BC/KL |
 | **FlyDoom** https://github.com/eganeganegan/flydoom | RNN de tasas sobre MaleCNS, con modos solo-lectura / pesos fijos / pesos entrenables | PPO 3–5 M pasos; controles con grafo aleatorio, recableado, MLP, GRU y LSTM | Sin resultados cuantitativos publicados |
@@ -71,7 +75,8 @@ Lista comunitaria: https://github.com/cobanov/awesome-fly · https://github.com/
 
 - **flyvis** (Lappalainen et al., *Nature* 2024)
   - Enlaces: https://github.com/TuragaLab/flyvis · https://pmc.ncbi.nlm.nih.gov/articles/PMC11525180/
-  - Conteos y signos fijos; se entrenan **734 parámetros** para 45,669 neuronas: 65 potenciales de reposo, 65 constantes de tiempo y 604 escalares por par de tipos celulares.
+  - Conteos y signos fijos; el modelo de la red tiene **734 parámetros libres** para 45,669 neuronas: 65 potenciales de reposo, 65 constantes de tiempo y 604 escalares por par de tipos celulares.
+  - Aparte se entrena el **decodificador** convolucional hexagonal de flujo óptico (34 → 8 → 3 canales, núcleo 5): **7,427 parámetros**, calculados a partir del código de `DecoderGAVP` porque el artículo no da la cifra. El decodificador tiene 10 veces más parámetros que la red.
   - Neuronas graduadas (sin espigas), entrenadas con **BPTT** a dt = 20 ms sobre flujo óptico.
   - Ensamble de 50 modelos (se analizan los 10 mejores). A mejor tarea, tuning más realista.
 - **Circuito de dirección de la cabeza** (Duan, Dong, Fiete 2025)
@@ -97,8 +102,12 @@ Lista comunitaria: https://github.com/cobanov/awesome-fly · https://github.com/
   - Solo funciona si la señal es recompensa − predicción **por estímulo**, lo que exige un crítico; si no, domina el término no supervisado.
 - **e-prop** (Bellec et al. 2020): trazas de elegibilidad más señales de aprendizaje, cerca de BPTT. https://www.nature.com/articles/s41467-020-17236-y
 - **Ports a GPU del modelo completo**
-  - flybrain: MaleCNS a 2.4× tiempo real en una RTX 3060. Nota que ~57 % de las neuronas, incluido el lóbulo óptico, no producen espigas. https://github.com/annel0/flybrain
-  - fly-survivors (Triton): 1.2× en una RTX 4080S. Nota que un LIF con retardos fijos no computa movimiento (T4/T5). https://github.com/arisson2001rojas-design/fly-survivors
+  - flybrain: MaleCNS v1.0 a 2.4× tiempo real en una RTX 3060 (8.9× en lote fp16). https://github.com/annel0/flybrain
+    - Entre sus límites, el autor anota que la vía del lóbulo óptico (95,501 de 166,700 neuronas en su modelo) señaliza con potenciales graduados y queda modelada con espigas.
+    - Es una advertencia sobre **su** modelo, no verificada por nosotros. No la usamos como afirmación general.
+  - fly-survivors (Triton): **FlyWire v783** (no MaleCNS) a 1.2× tiempo real en una RTX 4080 SUPER. https://github.com/arisson2001rojas-design/fly-survivors
+    - Su README observa que en **su** red LIF de retardos fijos T4/T5 no llegan a disparar desde etapas previas, y por eso inyecta contraste en Tm1/Tm2/Tm4/Tm9.
+    - Es una observación de ese modelo, no un resultado general sobre LIF.
   - Loihi 2: https://arxiv.org/html/2508.16792v1 · banco de pruebas: https://github.com/eonsystemspbc/fly-brain
 
 ## 4. Afinar con RL una política clonada sin colapso
@@ -136,6 +145,33 @@ Lista comunitaria: https://github.com/cobanov/awesome-fly · https://github.com/
 | 4 | Acciones jerárquicas (habilidades congeladas + pocos comandos) | 100 acciones planas; RL explora mal | NeuroMechFly, flybody, Eon |
 | 5 | Dejar la R-STDP por arista como control, no como vía principal | Calibración negativa | DOOMFLY, Frémaux 2010 |
 | 6 | Aprender dentro del cerebro con parámetros por tipo celular y gradientes | Plasticidad por arista inerte | flyvis, circuito de dirección de la cabeza, BrainTrace |
-| 7 | Más muestras: replay offline de features y GPU | ~0.2× tiempo real en CPU | flybody (10^8+ pasos), flybrain, fly-survivors |
+| 7 | Más muestras: replay offline de features; GPU solo si el perfil muestra que el cerebro domina | 0.116× tiempo real de extremo a extremo (96,255 ticks × 50 ms en 11.5 h) | flybody (10^8+ pasos), flybrain, fly-survivors |
 
-El plan concreto está en [PLAN_MEJORA_V4.md](PLAN_MEJORA_V4.md).
+## 6. Revisión externa (17-sep)
+
+Una revisión externa del plan v4 señaló problemas. Estos se confirmaron leyendo el código de v3.2:
+
+| Hallazgo | Dónde | Efecto |
+|---|---|---|
+| `aim_target i` indexa objetivos por **ID ordenado**, mientras el encoder representa **sectores** | `ActionCatalog.targets` en `src/learning_adapter.py` | Con las mismas entradas, la misma acción apunta a lugares distintos |
+| La máscara habilita `stop` solo cerca del objetivo | `ActionCatalog.mask` | La máscara resuelve parte de la tarea en lugar del agente |
+| `shoot` cuenta como éxito cualquier disparo aceptado | `skill_success` en `src/learning_env.py` | No mide si disparar correspondía |
+| El kit de `loadout` sale de `seed % 3` | `ExerciseTeacher` | La etiqueta no depende de nada observable |
+| El buffer PPO dura un episodio | `train_adapter_episode` en `src/learning_curriculum.py` | Lotes diminutos y ventajas mal normalizadas |
+| `MaskablePPO.train()` → `_update_learning_rate` sobrescribe la tasa de **todos** los grupos | SB3 | No existen tasas separadas de actor y crítico |
+| Imitación y PPO comparten el optimizador Adam | `imitate` y el modelo PPO | Los momentos de BC contaminan los primeros pasos de PPO |
+| La lista `needed` fija a mano adapter, internal y combined | `scripts/train_curriculum.py` | La puerta no se puede configurar |
+| `combined` recibe la mitad de actualizaciones PPO y sus episodios internos entrenan el crítico | `scripts/train_curriculum.py` | Hipótesis: su mejor retención frente a `adapter` sería un "calentamiento implícito", no un efecto de la plasticidad |
+
+Otras correcciones de la revisión, aplicadas arriba:
+- las cifras de nfly (MLP contra lineal);
+- lo que entrena FlyGM y qué es su línea base SNN;
+- el decodificador de flyvis;
+- el conectoma de fly-survivors;
+- el tono de las conclusiones generales.
+
+Otras dos precisiones:
+- `.gitignore` no limpia el historial: este repositorio se publicó desde cero con esas exclusiones ya aplicadas.
+- Sin archivo `LICENSE`, el código es visible pero **no** es de código abierto (ver [THIRD_PARTY.md](../THIRD_PARTY.md)).
+
+El plan concreto está en [PLAN_MEJORA_V4.md](PLAN_MEJORA_V4.md) (versión 4.1, con la fase A0 de auditoría).

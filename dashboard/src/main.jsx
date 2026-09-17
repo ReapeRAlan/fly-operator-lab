@@ -1,39 +1,1316 @@
-import React,{useState,useEffect} from 'react';import{createRoot}from'react-dom/client';
-import{Activity,Eye,Network,GraduationCap,ChartNoAxesColumn,Pause,Play,Download,Settings,Info,Search,ArrowUpRight,Brain,FlaskConical,ChevronRight,Square,ScanLine,Workflow}from'lucide-react';
-import './style.css';
-import Perception from './Perception.jsx';
-import Circuit from './Circuit.jsx';
-import NeuronGraph from './NeuronGraph.jsx';
-import {MoveCompass,ContributionBars} from './Decision.jsx';
-import {LineChart as SeriesChart} from './viz.jsx';
-const api=async path=>{const r=await fetch('/api/'+path);if(!r.ok)throw Error(await r.text());return r.json()};
-const names={frozen:'Referencia congelada',adapter:'Adaptador',internal:'Plasticidad interna',combined:'Combinada',common_teaching:'Enseñanza común'};
-const fmt=(x,d=0)=>x==null?'—':Number(x).toLocaleString('es-MX',{maximumFractionDigits:d});const sec=x=>x==null?'—':`${fmt(x/1000,2)} s`;
-const tabs=[['Circuito',Workflow],['Percepción',Eye],['Actividad',Activity],['Conectividad',Network],['Aprendizaje',GraduationCap],['Decisión',ChartNoAxesColumn]];
-function Empty({children='Esperando datos de la simulación'}){return <div className="empty"><Activity size={27}/><span>{children}</span></div>}
-function Json({value}){return <pre>{JSON.stringify(value,null,2)}</pre>}
-function Table({headers,rows}){return <div className="table-scroll"><table><thead><tr>{headers.map(h=><th key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((r,i)=><tr key={i}>{r.map((v,j)=><td key={j}>{v}</td>)}</tr>)}</tbody></table>{!rows.length&&<Empty>No hay registros todavía</Empty>}</div>}
-function LineChart({episodes}){const values=episodes.map(e=>e.reward);if(!values.length)return <Empty>Esperando episodios completos. Las curvas mostrarán resultados medidos.</Empty>;const min=Math.min(-.1,...values),max=Math.max(.1,...values);const pts=values.map((v,i)=>`${65+i*660/Math.max(1,values.length-1)},${230-(v-min)/(max-min)*180}`).join(' ');return <svg className="chart" viewBox="0 0 760 280" role="img" aria-label="Recompensa registrada por episodio">{[0,1,2,3,4].map(i=><g key={i}><line x1="65" x2="725" y1={50+i*45} y2={50+i*45} stroke="#e7edf1"/><text x="48" y={54+i*45} textAnchor="end">{fmt(max-i*(max-min)/4,2)}</text></g>)}<polyline points={pts} fill="none" stroke="#208e89" strokeWidth="2.5"/>{values.map((v,i)=><circle key={i} cx={65+i*660/Math.max(1,values.length-1)} cy={230-(v-min)/(max-min)*180} r="3" fill="#208e89"/>)}<text x="65" y="258">1</text><text x="725" y="258" textAnchor="end">{values.length} episodios</text></svg>}
-function AutonomyChart({episodes}){const palette={frozen:'#98a6b5',adapter:'#23958d',internal:'#688eb8',combined:'#a27caf'},series=Object.keys(palette).map(condition=>({condition,values:episodes.filter(e=>e.condition===condition&&e.split==='train')})).filter(s=>s.values.length);const all=series.flatMap(s=>s.values.map(e=>e.reward));if(!all.length)return <Empty>Esperando episodios autónomos completos. La enseñanza no se dibuja en esta curva.</Empty>;const min=Math.min(-.1,...all),max=Math.max(.1,...all),longest=Math.max(...series.map(s=>s.values.length));return <><svg className="chart" viewBox="0 0 760 280" role="img" aria-label="Recompensa autónoma separada por condición">{[0,1,2,3,4].map(i=><g key={i}><line x1="65" x2="725" y1={50+i*45} y2={50+i*45} stroke="#e7edf1"/><text x="48" y={54+i*45} textAnchor="end">{fmt(max-i*(max-min)/4,2)}</text></g>)}{series.map(s=><polyline key={s.condition} points={s.values.map((e,i)=>`${65+i*660/Math.max(1,longest-1)},${230-(e.reward-min)/(max-min)*180}`).join(' ')} fill="none" stroke={palette[s.condition]} strokeWidth="2.3"/>)}<text x="65" y="258">1</text><text x="725" y="258" textAnchor="end">{longest} episodios por condición</text></svg><div className="series-legend">{series.map(s=><span key={s.condition}><i style={{background:palette[s.condition]}}/>{names[s.condition]} · {s.values.length}</span>)}</div></>}
-function PotentialChart({history}){if(!history?.length)return <p className="padding muted">La serie se registra al consultar esta neurona. Actualiza después de unos pasos para ver su evolución.</p>;const lo=Math.min(-53,...history.map(h=>h.v)),hi=Math.max(-44,...history.map(h=>h.v));return <div className="padding"><h3>Potencial de membrana · mV</h3><svg className="chart" viewBox="0 0 760 240" role="img" aria-label="Evolución del potencial de membrana">{[0,1,2,3,4].map(i=><g key={i}><line x1="65" x2="725" y1={25+i*42} y2={25+i*42} stroke="#e7edf1"/><text x="52" y={29+i*42} textAnchor="end">{fmt(hi-i*(hi-lo)/4,1)}</text></g>)}<polyline fill="none" stroke="#208e89" strokeWidth="2" points={history.map((h,i)=>`${65+i*660/Math.max(1,history.length-1)},${193-(h.v-lo)/(hi-lo)*168}`).join(' ')}/><text x="65" y="222">{fmt(history[0].clock_ms)} ms</text><text x="725" y="222" textAnchor="end">{fmt(history.at(-1).clock_ms)} ms</text></svg></div>}
-function App(){const[tab,setTab]=useState('Circuito'),[data,setData]=useState(null),[error,setError]=useState(''),[notice,setNotice]=useState(''),[bottom,setBottom]=useState('Parámetros'),[params,setParams]=useState([]),[filter,setFilter]=useState(''),[query,setQuery]=useState('DNp01'),[neurons,setNeurons]=useState([]),[neuron,setNeuron]=useState(null),[dir,setDir]=useState('out'),[equipment,setEquipment]=useState(null),[eqquery,setEqquery]=useState('');
-useEffect(()=>{let active=true,timeout;async function poll(){if(!document.hidden){try{const next=await api('state');if(active){setData(next);setError('')}}catch(e){if(active)setError('Sin conexión con el observatorio')}}if(active)timeout=setTimeout(poll,3000)}const wake=()=>{if(!document.hidden){clearTimeout(timeout);poll()}};poll();document.addEventListener('visibilitychange',wake);api('parameters').then(setParams).catch(()=>{});return()=>{active=false;clearTimeout(timeout);document.removeEventListener('visibilitychange',wake)}},[]);
-useEffect(()=>{if(tab==='Conectividad'&&!neuron&&data?.latest?.neurons_readout?.[0])inspect(data.latest.neurons_readout[0].body_id)},[tab,data?.latest?.record_id]);
-const control=async action=>{try{const r=await fetch('/api/control/'+action,{method:'POST'});if(r.status===403)throw Error('Los controles solo funcionan desde la PC del laboratorio (127.0.0.1). Desde el teléfono el panel es de solo lectura.');if(!r.ok)throw Error(await r.text());setNotice(action==='probe'?'Ventana neuronal solicitada para el próximo paso.':'Orden enviada; se aplicará al terminar el paso actual.')}catch(e){setNotice(e.message)}};
-const search=async()=>{try{setNeurons(await api('neurons?q='+encodeURIComponent(query)));setNotice('')}catch(e){setNotice(e.message)}};
-const inspect=async(id,d=dir)=>{try{setNeuron(await api(`neuron/${id}?direction=${d}`));setNotice('')}catch(e){setNotice(e.message)}};
-const s=data?.status||{},l=data?.latest||{},obs=l.observation||{},groups=data?.groups||[],eps=data?.episodes||[],lm=data?.learning_metrics||{},displayMode=s.display_mode||data?.runtime_config?.display_mode,displayLabel=displayMode==='single_monitor'?'Un monitor':displayMode==='secondary_monitor'?'Monitor secundario':'—';const stateLabel={running:'En ejecución',preparing:'Preparando',paused:'En pausa',saving:'Guardando',stopped:'Detenido',paused_by_user:'En pausa',needs_calibration:'Requiere calibración',curriculum_complete:'Currículo completo',error:'Revisión requerida'}[s.state]||'Preparando';
-return <div className="app"><aside><a className="brand" href="/" aria-label="Fly Operator inicio"><Brain size={28}/><span>Fly Operator<small>OBSERVATORIO · V3.2</small></span></a><div className="section-label">EXPLORAR</div><nav>{tabs.map(([name,Icon])=><button key={name} className={tab===name?'active':''} onClick={()=>setTab(name)}><Icon size={19}/>{name}</button>)}</nav><div className="aside-bottom"><div className="network-status"><span className="dot"/>MaleCNS v1.0<small>Red clasificada completa</small></div><button onClick={()=>{setTab('Configuración');setBottom('Parámetros')}}><Settings size={18}/>Configuración</button><button onClick={()=>setTab('Acerca del experimento')}><Info size={18}/>Acerca del experimento</button></div></aside>
-<main><header><div><div className="eyebrow">FLY OPERATOR / {tab.toUpperCase()}</div><h1>Observatorio neuronal</h1><p>MaleCNS v1.0 <b>·</b> 166,700 neuronas <b>·</b> 25,582,938 conexiones</p></div><div className="actions"><button className="btn" disabled={!['running','paused','saving','preparing'].includes(s.state)} title={s.state==='stopped'?'Abre INICIAR APRENDIZAJE.cmd para iniciar el entrenador':undefined} onClick={()=>control(s.state==='paused'?'resume':'pause')}>{s.state==='paused'?<Play size={16}/>:<Pause size={16}/>} {s.state==='paused'?'Reanudar':'Pausar'}</button><details className="export"><summary className="btn primary"><Download size={16}/>Exportar</summary><div className="export-menu">{[['svg','Gráfico SVG'],['png','Gráfico PNG'],['csv','Tabla de episodios'],['bundle','Paquete de evidencia'],['video','Clip técnico MP4']].map(([k,label])=><a key={k} href={'/api/export/'+k}>{label}<ArrowUpRight size={14}/></a>)}</div></details></div></header>
-{(error||notice)&&<div className="notice" role="status">{error||notice}<button onClick={()=>setNotice('')}>Cerrar</button></div>}
-<div className="workspace"><section className="content">
-{tab==='Aprendizaje'&&<><article className="panel"><div className="panel-heading"><div><h2>Diagnóstico de decisiones</h2><p>Ventana móvil de {fmt(lm.window_steps)} pasos · las esperas obligatorias no cuentan como decisiones</p></div><span className={'tag alarm-'+(lm.collapse_alarm||'insufficient_data')}>{lm.collapse_alarm==='healthy'?'Sin colapso':lm.collapse_alarm==='warning'?'Advertencia':lm.collapse_alarm==='critical'?'Colapso detectado':'Muestra insuficiente'}</span></div><div className="learning-kpis"><div><span>Espera libre</span><strong>{lm.free_wait_rate==null?'—':fmt(lm.free_wait_rate*100,1)+'%'}</strong><small>{fmt(lm.free_waits)} / {fmt(lm.free_decisions)} decisiones</small></div><div><span>Esperas mecánicas</span><strong>{fmt(lm.forced_waits)}</strong><small>avance de órdenes nativas</small></div><div><span>P(esperar) mediana</span><strong>{lm.median_wait_probability==null?'—':fmt(lm.median_wait_probability*100,1)+'%'}</strong><small>solo estados libres</small></div><div><span>Entropía media</span><strong>{fmt(lm.mean_action_entropy,3)}</strong><small>exploración del actor</small></div></div></article><article className="panel"><div className="panel-heading"><div><h2>Recompensa autónoma por condición</h2><p>Solo práctica sin instructor · cada línea conserva su propia secuencia de episodios</p></div><span className="tag">{fmt(eps.filter(e=>e.condition!=='common_teaching'&&e.split==='train').length)} episodios</span></div><AutonomyChart episodes={eps}/><div className="chart-caption"><span>La enseñanza y la validación quedan fuera de estas líneas.</span><span>Validación reservada en la tabla siguiente.</span></div></article><article className="panel"><div className="panel-heading"><div><h2>Comparación experimental</h2><p>Cuatro condiciones · tres semillas · éxito reservado a evaluación</p></div></div><Table headers={['Condición','Episodios','Éxito en validación','Tiempo medio']} rows={['frozen','adapter','internal','combined'].map(c=>{const all=groups.filter(g=>g.condition===c),v=all.find(g=>g.split==='validation');return [<span className="condition"><span className={'condition-dot '+c}/>{names[c]}</span>,fmt(all.reduce((n,g)=>n+g.n,0)),v?`${fmt(v.successes/v.n*100,1)}% (${v.successes}/${v.n})`:'Pendiente',v?sec(v.seconds*1000):'—']})}/></article></>}
-{tab==='Circuito'&&<Circuit data={data}/>}
-{tab==='Percepción'&&<Perception latest={l} status={s} onInspect={id=>{setTab('Conectividad');inspect(id)}}/>}
-{tab==='Actividad'&&<><article className="panel"><div className="panel-heading"><div><h2>Actividad de la red completa</h2><p>Ventana de {l.activity?.simulated_ms||50} ms simulados</p></div><button className="btn" onClick={()=>control('probe')}><ScanLine size={16}/>Capturar ventana</button></div><div className="metric-grid"><div><span>Impulsos</span><strong>{fmt(l.activity?.spikes)}</strong></div><div><span>Neuronas activas</span><strong>{fmt(l.activity?.active_neurons)}</strong></div><div><span>Cálculo por paso</span><strong>{fmt(l.activity?.wall_seconds,2)} s</strong></div></div><p className="padding muted">La captura detallada conserva impulsos y checkpoint de inicio. El registro continuo guarda resúmenes para limitar espacio.</p></article><article className="panel"><div className="panel-heading"><div><h2>Impulsos por paso</h2><p>Últimos {data?.activity_series?.length||0} pasos registrados · toca la gráfica para leer cada paso</p></div></div><div className="chart-pad"><SeriesChart label="impulsos en 50 ms" points={(data?.activity_series||[]).map(p=>({...p,y:p.spikes}))}/></div></article><article className="panel"><div className="panel-heading"><div><h2>Neuronas activas por paso</h2><p>Neuronas con al menos un impulso en la ventana de 50 ms</p></div></div><div className="chart-pad"><SeriesChart label="neuronas activas" points={(data?.activity_series||[]).map(p=>({...p,y:p.active}))}/></div></article><article className="panel"><div className="panel-heading"><div><h2>Segundos de cálculo por paso</h2><p>Tiempo real de CPU para simular 50 ms de red</p></div></div><div className="chart-pad"><SeriesChart label="segundos de cálculo" format={v=>v==null?'—':v.toFixed(2)+' s'} zeroBased points={(data?.activity_series||[]).map(p=>({...p,y:p.wall}))}/></div></article><article className="panel"><div className="panel-heading"><h2>Neuronas descendentes más activas</h2><span className="tag">Lectura completa: 1,314</span></div><Table headers={['bodyId','Impulsos / 50 ms','Filtro 100 ms','Explorar']} rows={(l.neurons_readout||[]).map(n=>[n.body_id,n.spikes,`${fmt(n.rate_hz,2)} Hz`,<button className="text-button" onClick={()=>{setTab('Conectividad');inspect(n.body_id)}}>Conexiones →</button>])}/></article></>}
-{tab==='Conectividad'&&<><article className="panel"><div className="panel-heading"><div><h2>Explorador de conexiones</h2><p>Consulta local por bodyId, tipo o región. Toda la red permanece en la simulación.</p></div></div><form className="search" onSubmit={e=>{e.preventDefault();search()}}><Search size={18}/><input aria-label="Buscar neurona" value={query} onChange={e=>setQuery(e.target.value)} placeholder="bodyId, tipo o región"/><button>Buscar</button></form><div className="results">{neurons.map(n=><button key={n.bodyId} onClick={()=>inspect(n.bodyId)}><strong>{n.bodyId}</strong> {n.type||n.superclass}<ChevronRight size={14}/></button>)}</div></article>{neuron&&<article className="panel"><div className="panel-heading"><div><h2>{neuron.neuron.type||'Neurona'} <span className="muted">/ {neuron.neuron.bodyId}</span></h2><p>{neuron.neuron.superclass} · {neuron.total} conexiones {dir==='out'?'salientes':'entrantes'}</p></div><select aria-label="Dirección de conexiones" value={dir} onChange={e=>{setDir(e.target.value);inspect(neuron.neuron.bodyId,e.target.value)}}><option value="out">Salientes</option><option value="in">Entrantes</option></select></div><NeuronGraph bodyId={neuron.neuron.bodyId} onSelect={id=>inspect(id)}/>{neuron.live&&<div className="stat-strip"><span>Potencial <strong>{fmt(neuron.live.membrane_mv,3)} mV</strong></span><span>Impulsos <strong>{neuron.live.spikes_last_50ms}</strong></span><span>Reloj neuronal <strong>{sec(neuron.live.brain_clock_ms)}</strong></span></div>}<PotentialChart history={neuron.history}/><div className="padding"><button className="btn" onClick={()=>inspect(neuron.neuron.bodyId)}>Actualizar estado neuronal</button></div><details className="raw"><summary>Ver las {neuron.connections.length} conexiones {dir==='out'?'salientes':'entrantes'} más fuertes como tabla</summary><Table headers={['Origen → destino','Sinapsis','Eficacia ×','Peso simulado']} rows={neuron.connections.map(e=>[<button className="text-button" onClick={()=>inspect(dir==='out'?e.post:e.pre)}>{e.pre} → {e.post}</button>,e.anatomical_count,fmt(e.gain,5),fmt(e.effective_weight,4)])}/></details><details className="raw"><summary>Procedencia, neurotransmisor y detalle de cada conexión</summary><Json value={neuron.connections}/></details><p className="padding muted">Anatomía publicada y eficacia simulada se guardan por separado. {neuron.snapshot_coherent?'Instantánea coherente del estado actual.':'La red está actualizándose; vuelve a consultar para leer su eficacia.'}</p></article>}</>}
-{tab==='Decisión'&&(()=>{const dl=data?.last_decision||l;return <><article className="panel"><div className="panel-heading"><div><h2>Brújula de movimiento</h2><p>Última decisión libre · paso #{dl.record_id??'—'}{dl.recorded_at?` · hace ${fmt(Math.max(0,Date.now()/1000-dl.recorded_at))} s`:''} · los pasos intermedios solo esperan a que termine la orden</p></div><span className="tag">{dl.decision?.controller==='instructor'?'Instructor':'Actor neuronal'}</span></div><MoveCompass latest={dl}/></article><article className="panel"><div className="panel-heading"><div><h2>De actividad a acción</h2><p>Actor lineal sobre 1,314 neuronas × tres filtros temporales</p></div><span className="tag">{dl.decision?.controller==='instructor'?'Instructor activo':'Actor neuronal'}</span></div>{dl.decision?<><div className="decision-summary"><span>Orden enviada</span><h3>{dl.action_label}</h3><p>{dl.action_receipt?.status||'—'} · {dl.action_receipt?.reason||'Sin motivo de rechazo'}</p></div><div className="bars">{dl.decision.probabilities.map((v,i)=>({v,i})).filter(x=>x.v>.001).sort((a,b)=>b.v-a.v).slice(0,15).map(({v,i})=><div className="bar-row" key={i}><label>{dl.decision.action_labels[i]}</label><div><i style={{width:v*100+'%'}}/></div><span>{fmt(v*100,2)}%</span></div>)}</div><details className="raw"><summary>Catálogo, probabilidades y restricciones completas</summary><Json value={{probabilities:dl.decision.probabilities,labels:dl.decision.action_labels,mask:dl.decision.mask}}/></details></>:<Empty/>}</article><article className="panel"><div className="panel-heading"><div><h2>Contribuciones a la decisión</h2><p>Propuesta del actor: {dl.decision?.action_labels?.[dl.decision?.contributions_for_action??dl.decision?.selected]||'—'}. Durante la enseñanza, la orden enviada puede ser distinta. Estas contribuciones no demuestran causalidad.</p></div></div><ContributionBars latest={dl} onInspect={id=>{setTab('Conectividad');inspect(id)}}/><details className="raw"><summary>Ver contribuciones como tabla</summary><Table headers={['bodyId','Filtro','Actividad','Peso','Contribución']} rows={(dl.decision?.contributions||[]).map(c=>[c.body_id,`${c.filter_ms} ms`,fmt(c.feature,4),fmt(c.weight,5),fmt(c.logit_contribution,5)])}/></details><details className="raw"><summary>Recompensa, error de predicción y plasticidad</summary><Json value={l.learning||{}}/></details></article></>})()}
-{tab==='Acerca del experimento'&&<article className="panel prose"><FlaskConical size={30}/><h2>Un experimento verificable</h2><p>MaleCNS aporta conectividad anatómica. La dinámica LIF, los puertos sensoriales, las acciones y el aprendizaje son adaptaciones de ingeniería.</p><p>La simulación incluye 166,700 neuronas clasificadas y todas las 25,582,938 conexiones publicadas entre ellas. Los segmentos sin clasificación permanecen en los datos originales y fuera de este inventario neuronal.</p><h3>Qué cuenta como aprendizaje</h3><p>Mejorar en episodios reservados, sin instructor, frente a una referencia congelada y con tres semillas independientes. Completar una prueba técnica no demuestra aprender una misión.</p><h3>Fuentes y versiones</h3>{Object.entries(data?.config?.sources||{}).map(([k,v])=><p key={k}><a href={v} target="_blank" rel="noreferrer">{k} ↗</a></p>)}</article>}
-{(tab==='Aprendizaje'||tab==='Configuración')&&<article className="panel lower"><div className="subtabs">{['Parámetros','Eventos','Checkpoints'].map(k=><button key={k} className={bottom===k?'selected':''} onClick={()=>setBottom(k)}>{k}</button>)}</div>{bottom==='Parámetros'?<><div className="search"><Search size={16}/><input aria-label="Filtrar parámetros" placeholder="Filtrar parámetros…" value={filter} onChange={e=>setFilter(e.target.value)}/></div><Table headers={['Parámetro','Valor','Unidad','Origen']} rows={params.filter(p=>p.name.includes(filter)).map(p=>[p.name,typeof p.value==='object'?JSON.stringify(p.value):String(p.value),p.unit,p.classification==='published'?'Publicado':`Supuesto · v${data?.config?.semantic_protocol_version||data?.config?.version||'—'}`])}/></>:bottom==='Eventos'?<><div className="padding"><p>Última orden: <strong>{l.action_receipt?.action||'—'}</strong> · {l.action_receipt?.status||'—'}</p><Json value={{receipt:l.action_receipt,learning:l.learning,reason:s.reason,rollout:s.last_rollout}}/></div></>:<Table headers={['Fecha','Condición','Semilla','Pasos']} rows={(data?.checkpoints||[]).map(c=>[new Date(c.created*1000).toLocaleString('es-MX'),names[c.condition]||c.condition,c.seed,c.metadata?.counters?.steps])}/>}</article>}
-</section><aside className="rail"><article className="panel"><div className="panel-heading"><h2>Estado de la simulación</h2></div><div className="status-block"><span className={'status '+(s.state||'preparing')}><span className="dot"/>{stateLabel}</span>{s.reason&&<p>{s.reason}</p>}{l.evaluation_preview&&<p>Validación en vivo; el bloque aún no entra en las métricas.</p>}</div><dl>{[['Campaña',s.run||data?.config?.experiment_id||'—'],['Condición',names[s.condition]||s.condition||'—'],['Semilla',s.seed??'—'],['Etapa',s.stage||'—'],['Fase',s.phase||'—'],['Pantalla',displayLabel],['Tiempo simulado',sec(s.simulated_ms)],['Tiempo real',s.wall_seconds==null?'—':sec(s.wall_seconds*1000)],['RAM disponible',s.available_ram_gb==null?'—':`${fmt(s.available_ram_gb,2)} GB`],['Último paso',l.sequence??'—']].map(([k,v])=><div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl><div className="rail-footer"><span className="dot"/>Avance por pasos · CPU</div></article><article className="panel note"><FlaskConical size={20}/><h3>Validación técnica</h3><p>{data?.sensory_transfer?.passed?'Los ocho sectores de objetivo alteraron la salida descendente en tres semillas.':`La transferencia sensorial v${data?.config?.semantic_protocol_version||'—'} requiere revisión.`} Los resultados de desempeño se validan sin instructor.</p><div className="mini-stat"><strong>{data?.sensory_transfer?.distinct_goal_signatures??'—'}</strong><span>firmas espaciales distinguibles de 8</span></div><details><summary>Capacidades pendientes</summary><p>{data?.capabilities?.pending?.join(', ')||'Consultando…'}</p></details></article><button className="btn stop" onClick={()=>control('stop')}><Square size={13}/>Guardar y detener piloto</button><div className="local-note">{window.location.host==='127.0.0.1:8766'||window.location.host==='localhost:8766'?'LOCAL · 127.0.0.1':`REMOTO · ${window.location.host} · solo lectura`}<br/>{displayMode==='single_monitor'?'Juego en la pantalla disponible':'Juego en el monitor secundario'}</div></aside></div><footer>Fly Operator / Laboratorio reproducible <span>Conectividad anatómica ≠ modelo fisiológico completo</span></footer></main></div>}
-createRoot(document.getElementById('root')).render(<App/>);
+import React, { Suspense, lazy, useState, useEffect } from "react";
+import { createRoot } from "react-dom/client";
+import {
+  Activity,
+  Eye,
+  Network,
+  GraduationCap,
+  ChartNoAxesColumn,
+  Pause,
+  Play,
+  Download,
+  Settings,
+  Info,
+  Search,
+  ArrowUpRight,
+  Brain,
+  FlaskConical,
+  ChevronRight,
+  Square,
+  ScanLine,
+  Workflow,
+} from "lucide-react";
+import "./style.css";
+import Perception from "./Perception.jsx";
+import Circuit from "./Circuit.jsx";
+import NeuronGraph from "./NeuronGraph.jsx";
+import Health from "./Health.jsx";
+import Plasticity from "./Plasticity.jsx";
+import { Provenance, withRun, contextLabel } from "./Provenance.jsx";
+const Brain3D = lazy(() => import("./Brain3D.jsx"));
+import { MoveCompass, ContributionBars } from "./Decision.jsx";
+import { LineChart as SeriesChart } from "./viz.jsx";
+const api = async (path) => {
+  const r = await fetch("/api/" + path);
+  if (!r.ok) throw Error(await r.text());
+  return r.json();
+};
+const names = {
+  ppo_anchored: "PPO anclado",
+  frozen_bc: "BC congelado",
+  adapter_half_updates: "Adaptador · media actualización",
+  sensor_only: "Solo sensorial",
+  bias_only: "Solo sesgo",
+  frozen: "Referencia congelada",
+  adapter: "Adaptador",
+  internal: "Plasticidad interna",
+  combined: "Combinada",
+  common_teaching: "Enseñanza común",
+};
+const fmt = (x, d = 0) =>
+  x == null
+    ? "—"
+    : Number(x).toLocaleString("es-MX", { maximumFractionDigits: d });
+const sec = (x) => (x == null ? "—" : `${fmt(x / 1000, 2)} s`);
+const tabs = [
+  ["Agente en curso", Brain],
+  ["Salud", Activity],
+  ["Plasticidad", Network],
+  ["Cerebro 3D", Brain],
+  ["Circuito", Workflow],
+  ["Percepción", Eye],
+  ["Actividad", Activity],
+  ["Conectividad", Network],
+  ["Aprendizaje", GraduationCap],
+  ["Decisión", ChartNoAxesColumn],
+];
+function Empty({ children = "Esperando datos de la simulación" }) {
+  return (
+    <div className="empty">
+      <Activity size={27} />
+      <span>{children}</span>
+    </div>
+  );
+}
+function Json({ value }) {
+  return <pre>{JSON.stringify(value, null, 2)}</pre>;
+}
+function Table({ headers, rows }) {
+  return (
+    <div className="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            {headers.map((h) => (
+              <th key={h}>{h}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r, i) => (
+            <tr key={i}>
+              {r.map((v, j) => (
+                <td key={j}>{v}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {!rows.length && <Empty>No hay registros todavía</Empty>}
+    </div>
+  );
+}
+function LineChart({ episodes }) {
+  const values = episodes.map((e) => e.reward);
+  if (!values.length)
+    return (
+      <Empty>
+        Esperando episodios completos. Las curvas mostrarán resultados medidos.
+      </Empty>
+    );
+  const min = Math.min(-0.1, ...values),
+    max = Math.max(0.1, ...values);
+  const pts = values
+    .map(
+      (v, i) =>
+        `${65 + (i * 660) / Math.max(1, values.length - 1)},${230 - ((v - min) / (max - min)) * 180}`,
+    )
+    .join(" ");
+  return (
+    <svg
+      className="chart"
+      viewBox="0 0 760 280"
+      role="img"
+      aria-label="Recompensa registrada por episodio"
+    >
+      {[0, 1, 2, 3, 4].map((i) => (
+        <g key={i}>
+          <line
+            x1="65"
+            x2="725"
+            y1={50 + i * 45}
+            y2={50 + i * 45}
+            stroke="#e7edf1"
+          />
+          <text x="48" y={54 + i * 45} textAnchor="end">
+            {fmt(max - (i * (max - min)) / 4, 2)}
+          </text>
+        </g>
+      ))}
+      <polyline points={pts} fill="none" stroke="#208e89" strokeWidth="2.5" />
+      {values.map((v, i) => (
+        <circle
+          key={i}
+          cx={65 + (i * 660) / Math.max(1, values.length - 1)}
+          cy={230 - ((v - min) / (max - min)) * 180}
+          r="3"
+          fill="#208e89"
+        />
+      ))}
+      <text x="65" y="258">
+        1
+      </text>
+      <text x="725" y="258" textAnchor="end">
+        {values.length} episodios
+      </text>
+    </svg>
+  );
+}
+function AutonomyChart({ episodes }) {
+  const palette = {
+      ppo_anchored: "#23958d",
+        frozen_bc: "#98a6b5",
+        adapter_half_updates: "#688eb8",
+        sensor_only: "#d68b45",
+        bias_only: "#a27caf",
+    },
+    series = Object.keys(palette)
+      .map((condition) => ({
+        condition,
+        values: episodes.filter(
+          (e) => e.condition === condition && e.split === "train",
+        ),
+      }))
+      .filter((s) => s.values.length);
+  const all = series.flatMap((s) => s.values.map((e) => e.reward));
+  if (!all.length)
+    return (
+      <Empty>
+        Esperando episodios autónomos completos. La enseñanza no se dibuja en
+        esta curva.
+      </Empty>
+    );
+  const min = Math.min(-0.1, ...all),
+    max = Math.max(0.1, ...all),
+    longest = Math.max(...series.map((s) => s.values.length));
+  return (
+    <>
+      <svg
+        className="chart"
+        viewBox="0 0 760 280"
+        role="img"
+        aria-label="Recompensa autónoma separada por condición"
+      >
+        {[0, 1, 2, 3, 4].map((i) => (
+          <g key={i}>
+            <line
+              x1="65"
+              x2="725"
+              y1={50 + i * 45}
+              y2={50 + i * 45}
+              stroke="#e7edf1"
+            />
+            <text x="48" y={54 + i * 45} textAnchor="end">
+              {fmt(max - (i * (max - min)) / 4, 2)}
+            </text>
+          </g>
+        ))}
+        {series.map((s) => (
+          <polyline
+            key={s.condition}
+            points={s.values
+              .map(
+                (e, i) =>
+                  `${65 + (i * 660) / Math.max(1, longest - 1)},${230 - ((e.reward - min) / (max - min)) * 180}`,
+              )
+              .join(" ")}
+            fill="none"
+            stroke={palette[s.condition]}
+            strokeWidth="2.3"
+          />
+        ))}
+        <text x="65" y="258">
+          1
+        </text>
+        <text x="725" y="258" textAnchor="end">
+          {longest} episodios por condición
+        </text>
+      </svg>
+      <div className="series-legend">
+        {series.map((s) => (
+          <span key={s.condition}>
+            <i style={{ background: palette[s.condition] }} />
+            {names[s.condition]} · {s.values.length}
+          </span>
+        ))}
+      </div>
+    </>
+  );
+}
+function PotentialChart({ history }) {
+  if (!history?.length)
+    return (
+      <p className="padding muted">
+        La serie se registra al consultar esta neurona. Actualiza después de
+        unos pasos para ver su evolución.
+      </p>
+    );
+  const lo = Math.min(-53, ...history.map((h) => h.v)),
+    hi = Math.max(-44, ...history.map((h) => h.v));
+  return (
+    <div className="padding">
+      <h3>Potencial de membrana · mV</h3>
+      <svg
+        className="chart"
+        viewBox="0 0 760 240"
+        role="img"
+        aria-label="Evolución del potencial de membrana"
+      >
+        {[0, 1, 2, 3, 4].map((i) => (
+          <g key={i}>
+            <line
+              x1="65"
+              x2="725"
+              y1={25 + i * 42}
+              y2={25 + i * 42}
+              stroke="#e7edf1"
+            />
+            <text x="52" y={29 + i * 42} textAnchor="end">
+              {fmt(hi - (i * (hi - lo)) / 4, 1)}
+            </text>
+          </g>
+        ))}
+        <polyline
+          fill="none"
+          stroke="#208e89"
+          strokeWidth="2"
+          points={history
+            .map(
+              (h, i) =>
+                `${65 + (i * 660) / Math.max(1, history.length - 1)},${193 - ((h.v - lo) / (hi - lo)) * 168}`,
+            )
+            .join(" ")}
+        />
+        <text x="65" y="222">
+          {fmt(history[0].clock_ms)} ms
+        </text>
+        <text x="725" y="222" textAnchor="end">
+          {fmt(history.at(-1).clock_ms)} ms
+        </text>
+      </svg>
+    </div>
+  );
+}
+function App() {
+  const [tab, setTab] = useState("Agente en curso"),
+    [data, setData] = useState(null),
+    [campaigns, setCampaigns] = useState([]),
+    [selectedRun, setSelectedRun] = useState(() => new URLSearchParams(window.location.search).get("run") || ""),
+    [error, setError] = useState(""),
+    [notice, setNotice] = useState(""),
+    [bottom, setBottom] = useState("Parámetros"),
+    [params, setParams] = useState([]),
+    [filter, setFilter] = useState(""),
+    [query, setQuery] = useState("DNp01"),
+    [neurons, setNeurons] = useState([]),
+    [neuron, setNeuron] = useState(null),
+    [dir, setDir] = useState("out"),
+    [equipment, setEquipment] = useState(null),
+    [eqquery, setEqquery] = useState("");
+  useEffect(() => {
+    let active = true,
+      timeout;
+    async function poll(force = false) {
+      if (force || !document.hidden) {
+        try {
+          const next = await api(withRun("state", selectedRun));
+          if (active) {
+            setData(next);
+            setError("");
+          }
+        } catch (e) {
+          if (active) setError("Sin conexión con el observatorio");
+        }
+      }
+      if (active) timeout = setTimeout(poll, 3000);
+    }
+    const wake = () => {
+      if (!document.hidden) {
+        clearTimeout(timeout);
+        poll(true);
+      }
+    };
+    poll(true);
+    document.addEventListener("visibilitychange", wake);
+    api("parameters")
+      .then(setParams)
+      .catch(() => {});
+    return () => {
+      active = false;
+      clearTimeout(timeout);
+      document.removeEventListener("visibilitychange", wake);
+    };
+  }, [selectedRun]);
+  useEffect(() => {
+    let active = true;
+    const load = () => api("campaigns").then((result) => active && setCampaigns(result.campaigns || [])).catch(() => {});
+    load();
+    const timer = setInterval(load, 15000);
+    return () => { active = false; clearInterval(timer); };
+  }, []);
+  useEffect(() => {
+    if (tab === "Conectividad" && !neuron && data?.latest?.neurons_readout?.[0])
+      inspect(data.latest.neurons_readout[0].body_id);
+  }, [tab, data?.latest?.record_id]);
+  const chooseCampaign = async (run) => {
+    setSelectedRun(run);
+    setNeuron(null);
+    setEquipment(null);
+    try {
+      const next = await api(withRun("state", run));
+      setData(next);
+      setError("");
+    } catch (e) {
+      setError("No se pudo cargar la campaña seleccionada");
+    }
+  };
+  const control = async (action) => {
+    if (!data?.context?.control_allowed) {
+      setNotice("La campaña histórica es de solo lectura. Selecciona la campaña configurada para controlar el entrenador.");
+      return;
+    }
+    try {
+      const r = await fetch("/api/control/" + action, { method: "POST" });
+      if (r.status === 403)
+        throw Error(
+          "Los controles solo funcionan desde la PC del laboratorio (127.0.0.1). Desde el teléfono el panel es de solo lectura.",
+        );
+      if (!r.ok) throw Error(await r.text());
+      setNotice(
+        action === "probe"
+          ? "Ventana neuronal solicitada para el próximo paso."
+          : "Orden enviada; se aplicará al terminar el paso actual.",
+      );
+    } catch (e) {
+      setNotice(e.message);
+    }
+  };
+  const search = async () => {
+    try {
+      setNeurons(await api("neurons?q=" + encodeURIComponent(query)));
+      setNotice("");
+    } catch (e) {
+      setNotice(e.message);
+    }
+  };
+  const inspect = async (id, d = dir) => {
+    try {
+      setNeuron(await api(withRun(`neuron/${id}?direction=${d}`, selectedRun)));
+      setNotice("");
+    } catch (e) {
+      setNotice(e.message);
+    }
+  };
+  const context = data?.context || {},
+    s = data?.status || {},
+    l = data?.latest || {},
+    obs = l.observation || {},
+    groups = data?.groups || [],
+    eps = data?.episodes || [],
+    lm = data?.learning_metrics || {},
+    runtime = data?.runtime || {},
+    displayMode = s.display_mode || data?.runtime_config?.display_mode,
+    displayLabel =
+      displayMode === "single_monitor"
+        ? "Un monitor"
+        : displayMode === "secondary_monitor"
+          ? "Monitor secundario"
+          : "—";
+  const stateLabel =
+    {
+      running: "En ejecución",
+      preparing: "Preparando",
+      paused: "En pausa",
+      saving: "Guardando",
+      stopped: "Detenido",
+      paused_by_user: "En pausa",
+      needs_calibration: "Requiere calibración",
+      curriculum_complete: "Currículo completo",
+      historical: "Histórico",
+      error: "Revisión requerida",
+    }[s.state] || "Preparando";
+  return (
+    <div className="app">
+      <aside>
+        <a className="brand" href="/" aria-label="Fly Operator inicio">
+          <Brain size={28} />
+          <span>
+            Fly Operator<small>OBSERVATORIO · V{data?.config?.version ?? "—"} · P{data?.config?.semantic_protocol_version ?? "—"}</small>
+          </span>
+        </a>
+        <div className="section-label">EXPLORAR</div>
+        <nav>
+          {tabs.map(([name, Icon]) => (
+            <button
+              key={name}
+              className={tab === name ? "active" : ""}
+              onClick={() => setTab(name)}
+            >
+              <Icon size={19} />
+              {name}
+            </button>
+          ))}
+        </nav>
+        <div className="aside-bottom">
+          <div className="network-status">
+            <span className="dot" />
+            MaleCNS v1.0<small>Red clasificada completa</small>
+          </div>
+          <button
+            onClick={() => {
+              setTab("Configuración");
+              setBottom("Parámetros");
+            }}
+          >
+            <Settings size={18} />
+            Configuración
+          </button>
+          <button onClick={() => setTab("Acerca del experimento")}>
+            <Info size={18} />
+            Acerca del experimento
+          </button>
+        </div>
+      </aside>
+      <main>
+        <header>
+          <div>
+            <div className="eyebrow">FLY OPERATOR / {tab.toUpperCase()}</div>
+            <h1>Observatorio neuronal</h1>
+            <p>
+              MaleCNS v1.0 <b>·</b> 166,700 neuronas <b>·</b> 25,582,938
+              conexiones
+            </p>
+          </div>
+          <div className="actions">
+            <label className="campaign-select">
+              <span>Campaña</span>
+              <select aria-label="Seleccionar campaña" value={selectedRun || context.selected_run || ""} onChange={(event) => chooseCampaign(event.target.value)}>
+                {campaigns.map((campaign) => <option key={campaign.run} value={campaign.run}>{campaign.configured ? `En vivo: ${campaign.run}` : `${campaign.run} · ${campaign.episodes} ep · ${campaign.steps} pasos · ${campaign.last_activity ? new Date(campaign.last_activity * 1000).toLocaleDateString('es-MX') : 'sin actividad'}`}</option>)}
+              </select>
+            </label>
+            <button
+              className="btn"
+              disabled={
+                !context.control_allowed || !["running", "paused", "saving", "preparing"].includes(s.state)
+              }
+              title={
+                s.state === "stopped"
+                  ? "Abre INICIAR APRENDIZAJE.cmd para iniciar el entrenador"
+                  : undefined
+              }
+              onClick={() => control(s.state === "paused" ? "resume" : "pause")}
+            >
+              {s.state === "paused" ? <Play size={16} /> : <Pause size={16} />}{" "}
+              {s.state === "paused" ? "Reanudar" : "Pausar"}
+            </button>
+            <details className="export">
+              <summary className="btn primary">
+                <Download size={16} />
+                Exportar
+              </summary>
+              <div className="export-menu">
+                {[
+                  ["svg", "Gráfico SVG"],
+                  ["png", "Gráfico PNG"],
+                  ["csv", "Tabla de episodios"],
+                  ["bundle", "Paquete de evidencia"],
+                  ["video", "Clip técnico MP4"],
+                ].map(([k, label]) => (
+                  <a key={k} href={withRun("/api/export/" + k, selectedRun || context.selected_run)}>
+                    {label}
+                    <ArrowUpRight size={14} />
+                  </a>
+                ))}
+              </div>
+            </details>
+          </div>
+        </header>
+        {(error || notice) && (
+          <div className="notice" role="status">
+            {error || notice}
+            <button onClick={() => setNotice("")}>Cerrar</button>
+          </div>
+        )}
+        <div className="workspace">
+          <section className="content">
+            <Provenance context={context} />
+            {tab === "Salud" && <Health run={selectedRun || context.selected_run} />}
+            {tab === "Plasticidad" && <Plasticity run={selectedRun || context.selected_run} />}
+            {tab === "Cerebro 3D" && <Suspense fallback={<div className="panel"><div className="empty">Cargando escena 3D…</div></div>}><Brain3D run={selectedRun || context.selected_run} context={context} /></Suspense>}
+            {tab === "Agente en curso" && (
+              <>
+                <article className="panel">
+                  <div className="panel-heading">
+                    <div>
+                      <span className="eyebrow">{context.live ? 'OPERACIÓN ACTUAL' : 'REGISTRO DE CAMPAÑA'}</span>
+                      <h2>Agente en curso</h2>
+                      <p>{contextLabel(context)} · estado operativo, último evento, recursos y avance de validación.</p>
+                    </div>
+                    <span className={"status " + (s.state || "preparing")}>
+                      <span className="dot" />
+                      {stateLabel}
+                    </span>
+                  </div>
+                  <div className="metric-grid">
+                    <div><span>Campaña</span><strong>{context.selected_run || s.run || data?.config?.experiment_id || "—"}</strong></div>
+                    <div><span>Estado de datos</span><strong>{context.freshness || "sin datos"}</strong></div>
+                    <div><span>Último evento</span><strong>{l.recorded_at ? new Date(l.recorded_at * 1000).toLocaleString('es-MX',{dateStyle:'short',timeStyle:'short'}) : '—'}</strong></div>
+                    <div><span>Recursos API</span><strong>{runtime.process_ram_gb == null ? '—' : `${fmt(runtime.process_ram_gb,2)} GB`}</strong><small>{runtime.cpu_percent == null ? 'sin lectura de CPU' : `${fmt(runtime.cpu_percent,1)}% CPU`}</small></div>
+                    <div><span>Avance científico</span><strong>{fmt(eps.length)} episodios</strong><small>{fmt(data?.summary?.steps)} pasos persistidos</small></div>
+                    <div><span>Validación</span><strong>{fmt(groups.filter(g=>g.split==='validation').reduce((n,g)=>n+(g.successes||0),0))}/{fmt(groups.filter(g=>g.split==='validation').reduce((n,g)=>n+(g.n||0),0))}</strong><small>éxitos / episodios reservados</small></div>
+                  </div>
+                </article>
+                <article className="panel">
+                  <div className="panel-heading">
+                    <div><h2>Decisión actual</h2><p>Propuesta del agente frente a la orden ejecutada.</p></div>
+                    <span className="tag">{(l.decision || data?.last_decision?.decision)?.controller === "instructor" ? "Instructor" : "Actor neuronal"}</span>
+                  </div>
+                  {(l.decision || data?.last_decision?.decision) ? <div className="metric-grid">
+                    <div><span>Orden ejecutada</span><strong>{l.action_label || data?.last_decision?.action_label || "—"}</strong><small>{l.action_receipt?.status || "—"}</small></div>
+                    <div><span>Entropía</span><strong>{fmt((l.decision || data?.last_decision?.decision).entropy, 3)}</strong><small>exploración de la política</small></div>
+                    <div><span>P(esperar)</span><strong>{fmt(((l.decision || data?.last_decision?.decision).wait_probability || 0) * 100, 1)}%</strong><small>decisión libre</small></div>
+                    <div><span>Último paso</span><strong>{l.sequence ?? "—"}</strong><small>{sec(l.simulated_ms)}</small></div>
+                  </div> : <Empty>Esperando la primera decisión del agente.</Empty>}
+                </article>
+                <article className="panel">
+                  <div className="panel-heading"><div><h2>Última observación</h2><p>Datos que alimentaron el paso más reciente.</p></div></div>
+                  <div className="padding"><Json value={{ episode: l.episode, mission: l.mission, stage: l.stage, condition: l.condition, seed: l.seed, observation: l.observation }} /></div>
+                </article>
+              </>
+            )}
+            {tab === "Aprendizaje" && (
+              <>
+                <article className="panel">
+                  <div className="panel-heading">
+                    <div>
+                      <h2>Diagnóstico de decisiones</h2>
+                      <p>
+                        Ventana móvil de {fmt(lm.window_steps)} pasos · las
+                        esperas obligatorias no cuentan como decisiones
+                      </p>
+                    </div>
+                    <span
+                      className={
+                        "tag alarm-" +
+                        (lm.collapse_alarm || "insufficient_data")
+                      }
+                    >
+                      {lm.collapse_alarm === "healthy"
+                        ? "Sin colapso"
+                        : lm.collapse_alarm === "warning"
+                          ? "Advertencia"
+                          : lm.collapse_alarm === "critical"
+                            ? "Colapso detectado"
+                            : "Muestra insuficiente"}
+                    </span>
+                  </div>
+                  <div className="learning-kpis">
+                    <div>
+                      <span>Espera libre</span>
+                      <strong>
+                        {lm.free_wait_rate == null
+                          ? "—"
+                          : fmt(lm.free_wait_rate * 100, 1) + "%"}
+                      </strong>
+                      <small>
+                        {fmt(lm.free_waits)} / {fmt(lm.free_decisions)}{" "}
+                        decisiones
+                      </small>
+                    </div>
+                    <div>
+                      <span>Esperas mecánicas</span>
+                      <strong>{fmt(lm.forced_waits)}</strong>
+                      <small>avance de órdenes nativas</small>
+                    </div>
+                    <div>
+                      <span>P(esperar) mediana</span>
+                      <strong>
+                        {lm.median_wait_probability == null
+                          ? "—"
+                          : fmt(lm.median_wait_probability * 100, 1) + "%"}
+                      </strong>
+                      <small>solo estados libres</small>
+                    </div>
+                    <div>
+                      <span>Entropía media</span>
+                      <strong>{fmt(lm.mean_action_entropy, 3)}</strong>
+                      <small>exploración del actor</small>
+                    </div>
+                  </div>
+                </article>
+                <article className="panel">
+                  <div className="panel-heading">
+                    <div>
+                      <h2>Recompensa autónoma por condición</h2>
+                      <p>
+                        Solo práctica sin instructor · cada línea conserva su
+                        propia secuencia de episodios
+                      </p>
+                    </div>
+                    <span className="tag">
+                      {fmt(
+                        eps.filter(
+                          (e) =>
+                            e.condition !== "common_teaching" &&
+                            e.split === "train",
+                        ).length,
+                      )}{" "}
+                      episodios
+                    </span>
+                  </div>
+                  <AutonomyChart episodes={eps} />
+                  <div className="chart-caption">
+                    <span>
+                      La enseñanza y la validación quedan fuera de estas líneas.
+                    </span>
+                    <span>Validación reservada en la tabla siguiente.</span>
+                  </div>
+                </article>
+                <article className="panel">
+                  <div className="panel-heading">
+                    <div>
+                      <h2>Comparación experimental</h2>
+                      <p>
+                        Cinco condiciones · tres semillas · éxito reservado a
+                        evaluación
+                      </p>
+                    </div>
+                  </div>
+                  <Table
+                    headers={[
+                      "Condición",
+                      "Episodios",
+                      "Éxito en validación",
+                      "Tiempo medio",
+                    ]}
+                    rows={["ppo_anchored", "frozen_bc", "adapter_half_updates", "sensor_only", "bias_only"].map(
+                      (c) => {
+                        const all = groups.filter((g) => g.condition === c),
+                          v = all.find((g) => g.split === "validation");
+                        return [
+                          <span className="condition">
+                            <span className={"condition-dot " + c} />
+                            {names[c]}
+                          </span>,
+                          fmt(all.reduce((n, g) => n + g.n, 0)),
+                          v
+                            ? `${fmt((v.successes / v.n) * 100, 1)}% (${v.successes}/${v.n})`
+                            : "Pendiente",
+                          v ? sec(v.seconds * 1000) : "—",
+                        ];
+                      },
+                    )}
+                  />
+                </article>
+              </>
+            )}
+            {tab === "Circuito" && <Circuit data={data} run={selectedRun || context.selected_run} />}
+            {tab === "Percepción" && (
+              <Perception
+                latest={l}
+                status={s}
+                run={selectedRun || context.selected_run}
+                onInspect={(id) => {
+                  setTab("Conectividad");
+                  inspect(id);
+                }}
+              />
+            )}
+            {tab === "Actividad" && (
+              <>
+                <article className="panel">
+                  <div className="panel-heading">
+                    <div>
+                      <h2>Actividad de la red completa</h2>
+                      <p>
+                        Ventana de {l.activity?.simulated_ms || 50} ms simulados
+                      </p>
+                    </div>
+                    <button className="btn" disabled={!context.live || !context.control_allowed} onClick={() => control("probe")}>
+                      <ScanLine size={16} />
+                      Capturar ventana
+                    </button>
+                  </div>
+                  <div className="metric-grid">
+                    <div>
+                      <span>Impulsos</span>
+                      <strong>{fmt(l.activity?.spikes)}</strong>
+                    </div>
+                    <div>
+                      <span>Neuronas activas</span>
+                      <strong>{fmt(l.activity?.active_neurons)}</strong>
+                    </div>
+                    <div>
+                      <span>Cálculo por paso</span>
+                      <strong>{fmt(l.activity?.wall_seconds, 2)} s</strong>
+                    </div>
+                  </div>
+                  <p className="padding muted">
+                    La captura detallada conserva impulsos y checkpoint de
+                    inicio. El registro continuo guarda resúmenes para limitar
+                    espacio.
+                  </p>
+                </article>
+                <article className="panel">
+                  <div className="panel-heading">
+                    <div>
+                      <h2>Impulsos por paso</h2>
+                      <p>
+                        Últimos {data?.activity_series?.length || 0} pasos
+                        registrados · toca la gráfica para leer cada paso
+                      </p>
+                    </div>
+                  </div>
+                  <div className="chart-pad">
+                    <SeriesChart
+                      label="impulsos en 50 ms"
+                      points={(data?.activity_series || []).map((p) => ({
+                        ...p,
+                        y: p.spikes,
+                      }))}
+                    />
+                  </div>
+                </article>
+                <article className="panel">
+                  <div className="panel-heading">
+                    <div>
+                      <h2>Neuronas activas por paso</h2>
+                      <p>
+                        Neuronas con al menos un impulso en la ventana de 50 ms
+                      </p>
+                    </div>
+                  </div>
+                  <div className="chart-pad">
+                    <SeriesChart
+                      label="neuronas activas"
+                      points={(data?.activity_series || []).map((p) => ({
+                        ...p,
+                        y: p.active,
+                      }))}
+                    />
+                  </div>
+                </article>
+                <article className="panel">
+                  <div className="panel-heading">
+                    <div>
+                      <h2>Segundos de cálculo por paso</h2>
+                      <p>Tiempo real de CPU para simular 50 ms de red</p>
+                    </div>
+                  </div>
+                  <div className="chart-pad">
+                    <SeriesChart
+                      label="segundos de cálculo"
+                      format={(v) => (v == null ? "—" : v.toFixed(2) + " s")}
+                      zeroBased
+                      points={(data?.activity_series || []).map((p) => ({
+                        ...p,
+                        y: p.wall,
+                      }))}
+                    />
+                  </div>
+                </article>
+                <article className="panel">
+                  <div className="panel-heading">
+                    <h2>Neuronas descendentes más activas</h2>
+                    <span className="tag">Lectura completa: 1,314</span>
+                  </div>
+                  <Table
+                    headers={[
+                      "bodyId",
+                      "Impulsos / 50 ms",
+                      "Filtro 100 ms",
+                      "Explorar",
+                    ]}
+                    rows={(l.neurons_readout || []).map((n) => [
+                      n.body_id,
+                      n.spikes,
+                      `${fmt(n.rate_hz, 2)} Hz`,
+                      <button
+                        className="text-button"
+                        onClick={() => {
+                          setTab("Conectividad");
+                          inspect(n.body_id);
+                        }}
+                      >
+                        Conexiones →
+                      </button>,
+                    ])}
+                  />
+                </article>
+              </>
+            )}
+            {tab === "Conectividad" && (
+              <>
+                <article className="panel">
+                  <div className="panel-heading">
+                    <div>
+                      <h2>Explorador de conexiones</h2>
+                      <p>
+                        Consulta local por bodyId, tipo o región. Toda la red
+                        permanece en la simulación.
+                      </p>
+                    </div>
+                  </div>
+                  <form
+                    className="search"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      search();
+                    }}
+                  >
+                    <Search size={18} />
+                    <input
+                      aria-label="Buscar neurona"
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                      placeholder="bodyId, tipo o región"
+                    />
+                    <button>Buscar</button>
+                  </form>
+                  <div className="results">
+                    {neurons.map((n) => (
+                      <button key={n.bodyId} onClick={() => inspect(n.bodyId)}>
+                        <strong>{n.bodyId}</strong> {n.type || n.superclass}
+                        <ChevronRight size={14} />
+                      </button>
+                    ))}
+                  </div>
+                </article>
+                {neuron && (
+                  <article className="panel">
+                    <div className="panel-heading">
+                      <div>
+                        <h2>
+                          {neuron.neuron.type || "Neurona"}{" "}
+                          <span className="muted">
+                            / {neuron.neuron.bodyId}
+                          </span>
+                        </h2>
+                        <p>
+                          {neuron.neuron.superclass} · {neuron.total} conexiones{" "}
+                          {dir === "out" ? "salientes" : "entrantes"}
+                        </p>
+                      </div>
+                      <select
+                        aria-label="Dirección de conexiones"
+                        value={dir}
+                        onChange={(e) => {
+                          setDir(e.target.value);
+                          inspect(neuron.neuron.bodyId, e.target.value);
+                        }}
+                      >
+                        <option value="out">Salientes</option>
+                        <option value="in">Entrantes</option>
+                      </select>
+                    </div>
+                    <NeuronGraph
+                      bodyId={neuron.neuron.bodyId}
+                      run={selectedRun || context.selected_run}
+                      onSelect={(id) => inspect(id)}
+                    />
+                    {neuron.live && (
+                      <div className="stat-strip">
+                        <span>
+                          Potencial{" "}
+                          <strong>{fmt(neuron.live.membrane_mv, 3)} mV</strong>
+                        </span>
+                        <span>
+                          Impulsos{" "}
+                          <strong>{neuron.live.spikes_last_50ms}</strong>
+                        </span>
+                        <span>
+                          Reloj neuronal{" "}
+                          <strong>{sec(neuron.live.brain_clock_ms)}</strong>
+                        </span>
+                      </div>
+                    )}
+                    <PotentialChart history={neuron.history} />
+                    <div className="padding">
+                      <button
+                        className="btn"
+                        onClick={() => inspect(neuron.neuron.bodyId)}
+                      >
+                        Actualizar estado neuronal
+                      </button>
+                    </div>
+                    <details className="raw">
+                      <summary>
+                        Ver las {neuron.connections.length} conexiones{" "}
+                        {dir === "out" ? "salientes" : "entrantes"} más fuertes
+                        como tabla
+                      </summary>
+                      <Table
+                        headers={[
+                          "Origen → destino",
+                          "Sinapsis",
+                          "Eficacia ×",
+                          "Peso simulado",
+                        ]}
+                        rows={neuron.connections.map((e) => [
+                          <button
+                            className="text-button"
+                            onClick={() =>
+                              inspect(dir === "out" ? e.post : e.pre)
+                            }
+                          >
+                            {e.pre} → {e.post}
+                          </button>,
+                          e.anatomical_count,
+                          fmt(e.gain, 5),
+                          fmt(e.effective_weight, 4),
+                        ])}
+                      />
+                    </details>
+                    <details className="raw">
+                      <summary>
+                        Procedencia, neurotransmisor y detalle de cada conexión
+                      </summary>
+                      <Json value={neuron.connections} />
+                    </details>
+                    <p className="padding muted">
+                      Anatomía publicada y eficacia simulada se guardan por
+                      separado.{" "}
+                      {neuron.snapshot_coherent
+                        ? "Instantánea coherente del estado actual."
+                        : "La red está actualizándose; vuelve a consultar para leer su eficacia."}
+                    </p>
+                  </article>
+                )}
+              </>
+            )}
+            {tab === "Decisión" &&
+              (() => {
+                const dl = data?.last_decision || l;
+                return (
+                  <>
+                    <article className="panel">
+                      <div className="panel-heading">
+                        <div>
+                          <h2>Brújula de movimiento</h2>
+                          <p>
+                            Última decisión libre · paso #{dl.record_id ?? "—"}
+                            {dl.recorded_at
+                              ? ` · hace ${fmt(Math.max(0, Date.now() / 1000 - dl.recorded_at))} s`
+                              : ""}{" "}
+                            · los pasos intermedios solo esperan a que termine
+                            la orden
+                          </p>
+                        </div>
+                        <span className="tag">
+                          {dl.decision?.controller === "instructor"
+                            ? "Instructor"
+                            : "Actor neuronal"}
+                        </span>
+                      </div>
+                      <MoveCompass latest={dl} />
+                    </article>
+                    <article className="panel">
+                      <div className="panel-heading">
+                        <div>
+                          <h2>De actividad a acción</h2>
+                          <p>
+                            Actor lineal sobre 1,314 neuronas × tres filtros
+                            temporales
+                          </p>
+                        </div>
+                        <span className="tag">
+                          {dl.decision?.controller === "instructor"
+                            ? "Instructor activo"
+                            : "Actor neuronal"}
+                        </span>
+                      </div>
+                      {dl.decision ? (
+                        <>
+                          <div className="decision-summary">
+                            <span>Orden enviada</span>
+                            <h3>{dl.action_label}</h3>
+                            <p>
+                              {dl.action_receipt?.status || "—"} ·{" "}
+                              {dl.action_receipt?.reason ||
+                                "Sin motivo de rechazo"}
+                            </p>
+                          </div>
+                          <div className="bars">
+                            {dl.decision.probabilities
+                              .map((v, i) => ({ v, i }))
+                              .filter((x) => x.v > 0.001)
+                              .sort((a, b) => b.v - a.v)
+                              .slice(0, 15)
+                              .map(({ v, i }) => (
+                                <div className="bar-row" key={i}>
+                                  <label>{dl.decision.action_labels[i]}</label>
+                                  <div>
+                                    <i style={{ width: v * 100 + "%" }} />
+                                  </div>
+                                  <span>{fmt(v * 100, 2)}%</span>
+                                </div>
+                              ))}
+                          </div>
+                          <details className="raw">
+                            <summary>
+                              Catálogo, probabilidades y restricciones completas
+                            </summary>
+                            <Json
+                              value={{
+                                probabilities: dl.decision.probabilities,
+                                labels: dl.decision.action_labels,
+                                mask: dl.decision.mask,
+                              }}
+                            />
+                          </details>
+                        </>
+                      ) : (
+                        <Empty />
+                      )}
+                    </article>
+                    <article className="panel">
+                      <div className="panel-heading">
+                        <div>
+                          <h2>Contribuciones a la decisión</h2>
+                          <p>
+                            Propuesta del actor:{" "}
+                            {dl.decision?.action_labels?.[
+                              dl.decision?.contributions_for_action ??
+                                dl.decision?.selected
+                            ] || "—"}
+                            . Durante la enseñanza, la orden enviada puede ser
+                            distinta. Estas contribuciones no demuestran
+                            causalidad.
+                          </p>
+                        </div>
+                      </div>
+                      <ContributionBars
+                        latest={dl}
+                        onInspect={(id) => {
+                          setTab("Conectividad");
+                          inspect(id);
+                        }}
+                      />
+                      <details className="raw">
+                        <summary>Ver contribuciones como tabla</summary>
+                        <Table
+                          headers={[
+                            "bodyId",
+                            "Filtro",
+                            "Actividad",
+                            "Peso",
+                            "Contribución",
+                          ]}
+                          rows={(dl.decision?.contributions || []).map((c) => [
+                            c.body_id,
+                            `${c.filter_ms} ms`,
+                            fmt(c.feature, 4),
+                            fmt(c.weight, 5),
+                            fmt(c.logit_contribution, 5),
+                          ])}
+                        />
+                      </details>
+                      <details className="raw">
+                        <summary>
+                          Recompensa, error de predicción y plasticidad
+                        </summary>
+                        <Json value={l.learning || {}} />
+                      </details>
+                    </article>
+                  </>
+                );
+              })()}
+            {tab === "Acerca del experimento" && (
+              <article className="panel prose">
+                <FlaskConical size={30} />
+                <h2>Un experimento verificable</h2>
+                <p>
+                  MaleCNS aporta conectividad anatómica. La dinámica LIF, los
+                  puertos sensoriales, las acciones y el aprendizaje son
+                  adaptaciones de ingeniería.
+                </p>
+                <p>
+                  La simulación incluye 166,700 neuronas clasificadas y todas
+                  las 25,582,938 conexiones publicadas entre ellas. Los
+                  segmentos sin clasificación permanecen en los datos originales
+                  y fuera de este inventario neuronal.
+                </p>
+                <h3>Qué cuenta como aprendizaje</h3>
+                <p>
+                  Mejorar en episodios reservados, sin instructor, frente a una
+                  referencia congelada y con tres semillas independientes.
+                  Completar una prueba técnica no demuestra aprender una misión.
+                </p>
+                <h3>Fuentes y versiones</h3>
+                {Object.entries(data?.config?.sources || {}).map(([k, v]) => (
+                  <p key={k}>
+                    <a href={v} target="_blank" rel="noreferrer">
+                      {k} ↗
+                    </a>
+                  </p>
+                ))}
+              </article>
+            )}
+            {(tab === "Aprendizaje" || tab === "Configuración") && (
+              <article className="panel lower">
+                <div className="subtabs">
+                  {["Parámetros", "Eventos", "Checkpoints"].map((k) => (
+                    <button
+                      key={k}
+                      className={bottom === k ? "selected" : ""}
+                      onClick={() => setBottom(k)}
+                    >
+                      {k}
+                    </button>
+                  ))}
+                </div>
+                {bottom === "Parámetros" ? (
+                  <>
+                    <div className="search">
+                      <Search size={16} />
+                      <input
+                        aria-label="Filtrar parámetros"
+                        placeholder="Filtrar parámetros…"
+                        value={filter}
+                        onChange={(e) => setFilter(e.target.value)}
+                      />
+                    </div>
+                    <Table
+                      headers={["Parámetro", "Valor", "Unidad", "Origen"]}
+                      rows={params
+                        .filter((p) => p.name.includes(filter))
+                        .map((p) => [
+                          p.name,
+                          typeof p.value === "object"
+                            ? JSON.stringify(p.value)
+                            : String(p.value),
+                          p.unit,
+                          p.classification === "published"
+                            ? "Publicado"
+                            : `Supuesto · v${data?.config?.semantic_protocol_version || data?.config?.version || "—"}`,
+                        ])}
+                    />
+                  </>
+                ) : bottom === "Eventos" ? (
+                  <>
+                    <div className="padding">
+                      <p>
+                        Última orden:{" "}
+                        <strong>{l.action_receipt?.action || "—"}</strong> ·{" "}
+                        {l.action_receipt?.status || "—"}
+                      </p>
+                      <Json
+                        value={{
+                          receipt: l.action_receipt,
+                          learning: l.learning,
+                          reason: s.reason,
+                          rollout: s.last_rollout,
+                        }}
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <Table
+                    headers={["Fecha", "Condición", "Semilla", "Pasos"]}
+                    rows={(data?.checkpoints || []).map((c) => [
+                      new Date(c.created * 1000).toLocaleString("es-MX"),
+                      names[c.condition] || c.condition,
+                      c.seed,
+                      c.metadata?.counters?.steps,
+                    ])}
+                  />
+                )}
+              </article>
+            )}
+          </section>
+          <aside className="rail">
+            <article className="panel">
+              <div className="panel-heading">
+                <h2>Estado de la simulación</h2>
+              </div>
+              <div className="status-block">
+                <span className={"status " + (s.state || "preparing")}>
+                  <span className="dot" />
+                  {stateLabel}
+                </span>
+                {s.reason && <p>{s.reason}</p>}
+                {l.evaluation_preview && (
+                  <p>
+                    Validación en vivo; el bloque aún no entra en las métricas.
+                  </p>
+                )}
+              </div>
+              <dl>
+                {[
+                  ["Campaña", s.run || data?.config?.experiment_id || "—"],
+                  ["Condición", names[s.condition] || s.condition || "—"],
+                  ["Semilla", s.seed ?? "—"],
+                  ["Etapa", s.stage || "—"],
+                  ["Fase", s.phase || "—"],
+                  ["Pantalla", displayLabel],
+                  ["Tiempo simulado", sec(s.simulated_ms)],
+                  [
+                    "Tiempo real",
+                    s.wall_seconds == null ? "—" : sec(s.wall_seconds * 1000),
+                  ],
+                  [
+                    "RAM disponible",
+                    s.available_ram_gb == null
+                      ? "—"
+                      : `${fmt(s.available_ram_gb, 2)} GB`,
+                  ],
+                  ["Último paso", l.sequence ?? "—"],
+                ].map(([k, v]) => (
+                  <div key={k}>
+                    <dt>{k}</dt>
+                    <dd>{v}</dd>
+                  </div>
+                ))}
+              </dl>
+              <div className="rail-footer">
+                <span className="dot" />
+                Avance por pasos · CPU
+              </div>
+            </article>
+            <article className="panel note">
+              <FlaskConical size={20} />
+              <h3>Validación técnica</h3>
+              <p>
+                {data?.sensory_transfer?.passed
+                  ? "Los ocho sectores de objetivo alteraron la salida descendente en tres semillas."
+                  : `La transferencia sensorial v${data?.config?.semantic_protocol_version || "—"} requiere revisión.`}{" "}
+                Los resultados de desempeño se validan sin instructor.
+              </p>
+              <div className="mini-stat">
+                <strong>
+                  {data?.sensory_transfer?.distinct_goal_signatures ?? "—"}
+                </strong>
+                <span>firmas espaciales distinguibles de 8</span>
+              </div>
+              <details>
+                <summary>Capacidades pendientes</summary>
+                <p>
+                  {data?.capabilities?.pending?.join(", ") || "Consultando…"}
+                </p>
+              </details>
+            </article>
+            <button className="btn stop" disabled={!context.control_allowed || !context.live} onClick={() => { if (window.confirm("¿Guardar checkpoint y detener el piloto?")) control("stop"); }}>
+              <Square size={13} />
+              Guardar y detener piloto
+            </button>
+            <div className="local-note">
+              {window.location.host === "127.0.0.1:8766" ||
+              window.location.host === "localhost:8766"
+                ? "LOCAL · 127.0.0.1"
+                : `REMOTO · ${window.location.host} · solo lectura`}
+              <br />
+              {displayMode === "single_monitor"
+                ? "Juego en la pantalla disponible"
+                : "Juego en el monitor secundario"}
+            </div>
+          </aside>
+        </div>
+        <footer>
+          Fly Operator / Laboratorio reproducible{" "}
+          <span>Conectividad anatómica ≠ modelo fisiológico completo</span>
+        </footer>
+      </main>
+    </div>
+  );
+}
+createRoot(document.getElementById("root")).render(<App />);

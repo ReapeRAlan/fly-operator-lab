@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import {FAMILY_COLORS,FAMILY_SHORT,SIGN_COLORS,INK,fmt,compact,pct,useWidth,useVisiblePoll,useTip,TipRow,Legend} from './viz.jsx';
+import {withRun} from './Provenance.jsx';
 
 const api=async path=>{const r=await fetch('/api/'+path);if(!r.ok)throw Error(await r.text());return r.json()};
 const name=n=>n.type||`bodyId ${n.body_id}`;
@@ -13,9 +14,9 @@ function Composition({title,totals,families}){
   {totals.excitatory_synapses!=null&&<div className="ei"><span><i className="line" style={{background:SIGN_COLORS.excitatory}}/>Excitatorias {pct(totals.excitatory_synapses/totals.synapses,0)}</span><span><i className="line" style={{background:SIGN_COLORS.inhibitory}}/>Inhibitorias {pct(totals.inhibitory_synapses/totals.synapses,0)}</span></div>}
   {tip}</div>}
 
-export default function NeuronGraph({bodyId,onSelect}){
+export default function NeuronGraph({bodyId,onSelect,run}){
  const [graph,setGraph]=useState(null),[error,setError]=useState('');const [ref,width]=useWidth();const [tip,show,hide]=useTip();
- useVisiblePoll(async alive=>{try{const next=await api(`neuron/${bodyId}/graph?limit=8`);if(alive()){setGraph(next);setError('')}}catch(e){if(alive())setError(e.message)}},5000,[bodyId]);
+ useVisiblePoll(async alive=>{try{const next=await api(withRun(`neuron/${bodyId}/graph?limit=8`,run));if(alive()){setGraph(next);setError('')}}catch(e){if(alive())setError(e.message)}},5000,[bodyId,run]);
  // The observed wrapper stays mounted across loading states so its width is always measured.
  if(error||!graph||graph.neuron.body_id!==bodyId)return <div ref={ref} className="viz-wrap neuron-graph"><div className="empty">{error||`Cargando conexiones de ${bodyId}…`}</div></div>;
  const {neuron,inputs,outputs}=graph,vertical=width>0&&width<620,maxSyn=Math.max(1,...inputs.map(x=>x.synapses),...outputs.map(x=>x.synapses));

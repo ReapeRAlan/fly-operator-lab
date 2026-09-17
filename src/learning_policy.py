@@ -9,7 +9,12 @@ def make_model(env,config,seed):
     torch.set_num_threads(config.get('max_cpu_threads',2))
     model=MaskablePPO('MlpPolicy',env,seed=seed,device='cpu',verbose=0,
       policy_kwargs={'net_arch':dict(pi=[],vf=[64,64]),'activation_fn':torch.nn.Tanh},**config['ppo'])
-    model.set_logger(configure(None,[]));return model
+    model.set_logger(configure(None,[]))
+    if 'ppo_v33' in config:
+        # Protocol 3.3: named actor/critic groups; imitation never touches this optimizer.
+        from learning_ppo import install_group_optimizer
+        install_group_optimizer(model,0.,config['ppo_v33']['critic_learning_rate'])
+    return model
 
 def actor_hash(model):
     h=hashlib.sha256()
@@ -115,9 +120,17 @@ def _imitate_v32(model,examples,settings,catalog):
       'validation_episodes':len(held),'validation_examples':len(validation),'validation_at_selected_epoch':selected,
       'training_prediction_wait_fraction':float((prediction==0).float().mean()),'settings':settings}
 
-def imitate(model,examples,epochs=20,settings=None,catalog=None):
+def imitate(model,examples,epochs=20,settings=None,catalog=None,own_optimizer=True,learning_rate=3e-4):
+    """Behaviour cloning of the linear actor.
+
+    own_optimizer (protocol 3.3, the default) fits action_net with a fresh Adam per call, so
+    PPO's optimizer moments never mix with imitation gradients and the actor group's PPO
+    learning rate (zero during the critic warm-up) cannot silence cloning.
+    """
     if not examples:return {}
     if settings is not None:return _imitate_v32(model,examples,settings,catalog)
+    optimizer=torch.optim.Adam(model.policy.action_net.parameters(),lr=learning_rate) if own_optimizer else model.policy.optimizer
+    clipped=list(model.policy.action_net.parameters()) if own_optimizer else list(model.policy.parameters())
     x=torch.from_numpy(np.stack([e[0] for e in examples]));y=torch.tensor([e[1] for e in examples])
     masks=torch.from_numpy(np.stack([e[2] for e in examples]));counts=torch.bincount(y,minlength=masks.shape[1]).float()
     stages=[e[3] if len(e)>3 else 'unknown' for e in examples]
@@ -131,14 +144,14 @@ def imitate(model,examples,epochs=20,settings=None,catalog=None):
             ix=order[start:start+64];logits=model.policy.action_net(x[ix]).masked_fill(~masks[ix],-1e8)
             per_example=torch.nn.functional.cross_entropy(logits,y[ix],reduction='none')
             loss=(per_example*sample_weights[ix]).sum()/sample_weights[ix].sum().clamp(min=1e-8)
-            model.policy.optimizer.zero_grad();loss.backward();torch.nn.utils.clip_grad_norm_(model.policy.parameters(),.5);model.policy.optimizer.step()
+            optimizer.zero_grad();loss.backward();torch.nn.utils.clip_grad_norm_(clipped,.5);optimizer.step()
             losses.append(float(loss.detach()))
     with torch.no_grad():
         logits=model.policy.action_net(x).masked_fill(~masks,-1e8);prediction=logits.argmax(1)
         accuracy=float((prediction==y).float().mean());nonwait=y!=0
         nonwait_accuracy=float((prediction[nonwait]==y[nonwait]).float().mean()) if nonwait.any() else None
     stage_counts={stage:stages.count(stage) for stage in sorted(set(stages))}
-    return {'examples':len(y),'epochs':epochs,'loss_last':losses[-1],'class_counts':counts.int().tolist(),
+    return {'examples':len(y),'epochs':epochs,'loss_last':losses[-1],'class_counts':counts.int().tolist(),'own_optimizer':bool(own_optimizer),
       'stage_counts':stage_counts,'accuracy':accuracy,'nonwait_accuracy':nonwait_accuracy,
       'training_prediction_wait_fraction':float((prediction==0).float().mean())}
 

@@ -168,6 +168,31 @@ class NeuralReadout:
         order=np.argsort(counts[self.indices])[-24:][::-1]
         return [{'body_id':int(self.body_ids[i]),'index':int(self.indices[i]),'spikes':int(counts[self.indices[i]]),'rate_hz':float(self.filters[0,i])} for i in order]
 
+class SensorReadout:
+    """Brain-free control features: the injected channel rates through the DN readout filters.
+
+    Same three time constants, log1p and per-filter population z-score as NeuralReadout,
+    applied to 98 channel rates instead of 1,314 descending neurons (294 features).
+    """
+    def __init__(self,channels):
+        self.channels=len(channels);self.taus=np.array([100.,500.,2000.],np.float32);self.reset()
+    def reset(self):self.filters=np.zeros((3,self.channels),np.float32)
+    def update(self,rates_hz,dt=50.):
+        rate=np.asarray(rates_hz,np.float32)
+        decay=np.exp(-dt/self.taus)[:,None];self.filters[:]=self.filters*decay+rate[None,:]*(1-decay)
+        logged=np.log1p(self.filters)
+        normalized=(logged-logged.mean(axis=1,keepdims=True))/np.maximum(logged.std(axis=1,keepdims=True),1e-4)
+        return np.clip(normalized,-5.,5.).astype(np.float32).reshape(-1).copy()
+
+def sector_of(angle,bins):
+    """Egocentric sector index with the encoder's convention (sector i centred at -pi+(i+.5)*2pi/bins)."""
+    return int(((angle+math.pi)/(2*math.pi))*bins)%bins
+
+# Protocol 3.3: targeted actions address the egocentric sector the sensors represent,
+# not the n-th object by sorted engine ID (which the actor cannot observe).
+TARGET_SECTORS={'aim_target':16,'door_open':8,'door_breach':8,'defuse':8,'follow':8,'use':8,'clear_obstacle':8,'arrest':8,'spy_camera':8}
+INTERVENTIONS=('stop','cancel')
+
 class ActionCatalog:
     def __init__(self):
         self.entries=[{'action':x} for x in ('wait','stop','cancel','reload','fire')]
@@ -175,37 +200,53 @@ class ActionCatalog:
         self.entries +=[{'action':'crouch','value':v} for v in (True,False)]
         self.entries +=[{'action':'move','angle':i*math.pi/4,'distance':.75} for i in range(8)]
         self.entries +=[{'action':'turn','angle':i*math.pi/8} for i in range(-8,8) if i]
-        self.entries +=[{'action':'aim_target','target_index':i} for i in range(8)]
-        self.entries +=[{'action':'door_open','target_index':i} for i in range(4)]
-        self.entries +=[{'action':'door_breach','target_index':i,'slot':s} for i in range(4) for s in (14,15,16)]
+        self.entries +=[{'action':'aim_target','sector':i,'bins':16} for i in range(16)]
+        self.entries +=[{'action':'door_open','sector':i,'bins':8} for i in range(8)]
+        self.entries +=[{'action':'door_breach','sector':i,'bins':8,'slot':s} for i in range(8) for s in (14,15,16)]
         self.entries +=[{'action':'throw','slot':s,'angle':i*math.pi/4,'distance':8.} for s in (12,13) for i in range(8)]
-        self.entries +=[{'action':a,'target_index':i} for a in ('defuse','follow','use','clear_obstacle','arrest') for i in range(4)]
-        self.entries +=[{'action':'spy_camera','target_index':i,'slot':14} for i in range(4)]
+        self.entries +=[{'action':a,'sector':i,'bins':8} for a in ('defuse','follow','use','clear_obstacle','arrest') for i in range(8)]
+        self.entries +=[{'action':'spy_camera','sector':i,'bins':8,'slot':14} for i in range(8)]
         self.entries +=[{'action':'evacuate'}]
         self.entries +=[{'action':'loadout','kit':i} for i in range(3)]
     def targets(self,entry,obs):
+        """All candidate objects for a targeted action family, in no meaningful order."""
         a=entry['action']
-        if a in ('aim_target','arrest'):items=[x for x in obs['visible_enemies'] if x.get('alive',True)]
-        elif a=='follow':items=obs['visible_friendlies']
-        elif a in ('door_open','door_breach','spy_camera'):items=[x for x in obs['objects'] if x['kind']=='door']
-        elif a=='defuse':items=[x for x in obs['objects'] if 'bomb' in x['template'].lower()]
-        else:items=[x for x in obs['objects'] if x['kind']!='door' and 'bomb' not in x['template'].lower()]
-        return sorted(items,key=lambda x:x['id'])
-    def mask(self,obs,capabilities=None):
+        if a in ('aim_target','arrest'):return [x for x in obs['visible_enemies'] if x.get('alive',True)]
+        if a=='follow':return list(obs['visible_friendlies'])
+        if a in ('door_open','door_breach','spy_camera'):return [x for x in obs['objects'] if x['kind']=='door']
+        if a=='defuse':return [x for x in obs['objects'] if 'bomb' in x['template'].lower()]
+        return [x for x in obs['objects'] if x['kind']!='door' and 'bomb' not in x['template'].lower()]
+    def target(self,entry,obs):
+        """Nearest candidate inside the entry's egocentric sector, located as the encoder locates it."""
+        actor=obs['operator'];best=None
+        for item in self.targets(entry,obs):
+            angle,distance=bearing(actor,item.get('initial_position',item['position']))
+            if sector_of(angle,entry['bins'])!=entry['sector']:continue
+            if best is None or distance<best[0]:best=(distance,item)
+        return None if best is None else best[1]
+    def sector_entry(self,action,obs,point,**attributes):
+        """Index of the targeted entry whose sector contains point (used by the instructor)."""
+        angle,_=bearing(obs['operator'],point)
+        for i,e in enumerate(self.entries):
+            if e['action']==action and 'sector' in e and e['sector']==sector_of(angle,e['bins']) and all(e.get(k)==v for k,v in attributes.items()):return i
+        return None
+    def family_mask(self,families=None):
+        """Curriculum help: which action families a stage exposes. Never depends on state."""
+        out=np.array([families is None or e['action'] in families for e in self.entries],bool);out[0]=True
+        return out
+    def legal_mask(self,obs,capabilities=None):
+        """What the engine permits now (restricted to natively validated actions), with no task hints."""
         out=np.zeros(len(self.entries),bool);out[0]=True
         if obs['operator'].get('health',0)<=0:return out
         actor=obs['operator'];inventory={x['slot']:x for x in obs['inventory']};pending=obs.get('action_receipt',{}).get('status')=='in_progress'
         queue=actor.get('commands',0)>0
-        # Native progress is an environment transition. Wait remains mechanical,
-        # while stop/cancel stay available as explicit interventions.
+        # The first visibility tick is an engine transition: nothing can be issued yet.
         if obs.get('sim_time_ms',0)==0 and obs.get('stage')!='loadout':return out
         if queue or pending:
-            interventions=set()
-            receipt=obs.get('action_receipt',{})
-            if obs.get('stage')=='move' and bearing(actor,obs.get('goal',actor.get('position',[0,0,0])))[1]<.5:interventions.add('stop')
-            if obs.get('stage') in ('cancel','breach') and receipt.get('action')=='door_breach':interventions.add('cancel')
+            # While a native command runs, continuing (wait), stopping and cancelling are all
+            # legal whenever the engine allows them; the mask no longer decides when to stop.
             for i,e in enumerate(self.entries):
-                if e['action'] in interventions and (capabilities is None or e['action'] in capabilities):out[i]=True
+                if e['action'] in INTERVENTIONS and (capabilities is None or e['action'] in capabilities):out[i]=True
             return out
         for i,e in enumerate(self.entries):
             a=e['action'];valid=True
@@ -214,12 +255,11 @@ class ActionCatalog:
             elif a=='reload':valid=0<=actor.get('ammo',-1)<actor.get('capacity',0) and not queue and actor.get('weapon_state')!=10
             elif a=='cancel':valid=queue or pending
             elif a=='equip':valid=e['slot'] in inventory
-            elif a=='crouch' and obs.get('stage')=='stance':valid=e.get('value') is True
             elif a=='throw':valid=inventory.get(e['slot'],{}).get('type')==3 and inventory[e['slot']]['quantity']>0
-            if 'target_index' in e:
-                targets=self.targets(e,obs);valid=valid and len(targets)>e['target_index']
+            if 'sector' in e:
+                target=self.target(e,obs);valid=valid and target is not None
                 if valid and a!='aim_target':
-                    valid=bearing(actor,targets[e['target_index']].get('initial_position',targets[e['target_index']]['position']))[1]<=3.
+                    valid=bearing(actor,target.get('initial_position',target['position']))[1]<=3.
             if a=='door_breach':valid=valid and inventory.get(e['slot'],{}).get('type') in (6,7,8,9,10,11,15,20)
             if a=='spy_camera':valid=valid and inventory.get(e['slot'],{}).get('type')==4
             if a=='evacuate':valid=False # requires an explicit native evacuation-zone proof before enabling
@@ -227,16 +267,20 @@ class ActionCatalog:
             if obs['stage']=='loadout' and obs['sim_time_ms']==0 and a not in ('loadout','wait'):valid=False
             out[i]=valid
         out[0]=True;return out
+    def mask(self,obs,capabilities=None,families=None):
+        return self.legal_mask(obs,capabilities)&self.family_mask(families)
     def decode(self,index,obs):
         e=self.entries[int(index)];a=e['action'];actor=obs['operator'];heading=math.atan2(actor['aim'][2],actor['aim'][0])
-        result={k:v for k,v in e.items() if k not in ('angle','distance','target_index')}
+        result={k:v for k,v in e.items() if k not in ('angle','distance','sector','bins')}
         if a in ('move','turn','throw'):
             angle=heading+e['angle'];direction=[math.cos(angle),0.,math.sin(angle)]
             result['direction']=direction
             if a=='turn':result['action']='turn_left' if e['angle']<0 else 'turn_right'
             else:result['destination']=[actor['position'][0]+e['distance']*direction[0],actor['position'][1],actor['position'][2]+e['distance']*direction[2]]
-        if 'target_index' in e:
-            target=self.targets(e,obs)[e['target_index']];result['target_id']=target['id']
+        if 'sector' in e:
+            target=self.target(e,obs)
+            if target is None:raise ValueError('Targeted action without a target in its sector')
+            result['target_id']=target['id']
             if a=='aim_target':
                 dx=target['position'][0]-actor['position'][0];dz=target['position'][2]-actor['position'][2];norm=max(1e-8,math.hypot(dx,dz))
                 result={'action':'aim','direction':[dx/norm,0.,dz/norm]}
@@ -246,6 +290,6 @@ class ActionCatalog:
         e=self.entries[int(i)];parts=[e['action']]
         if 'slot' in e:parts.append('slot '+str(e['slot']))
         if 'kit' in e:parts.append('kit '+str(e['kit']))
-        if 'target_index' in e:parts.append('target '+str(e['target_index']))
+        if 'sector' in e:parts.append(f"sector {e['sector']}/{e['bins']}")
         if 'angle' in e:parts.append(str(round(math.degrees(e['angle'])))+'°')
         return ' · '.join(parts)

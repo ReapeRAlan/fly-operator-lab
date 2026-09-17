@@ -38,15 +38,55 @@ def forced_wait(mask):
     return bool(len(mask) and mask[0] and np.count_nonzero(mask)==1)
 
 
-def add_demonstration(examples,features,teacher_action,mask,stage,episode=None):
-    """Store cognitive choices only; native progress ticks are not wait labels.
+def add_demonstration(examples,features,teacher_action,mask,stage,episode=None,sensor_features=None):
+    """Store cognitive choices only; forced native-progress ticks are not wait labels.
 
     The optional episode id lets imitation hold out whole episodes for early stopping.
+    Protocol 3.3 also stores the brain-free sensor features of the same tick, so the
+    sensor_only and bias_only controls imitate exactly the same labelled states.
     """
     if forced_wait(mask):return False
+    if sensor_features is not None and episode is None:raise ValueError('Sensor features require an episode id')
     item=(np.asarray(features,np.float32).copy(),int(teacher_action),np.asarray(mask,bool).copy(),str(stage))
-    examples.append(item if episode is None else item+(int(episode),))
+    if episode is not None:item+=(int(episode),)
+    if sensor_features is not None:item+=(np.asarray(sensor_features,np.float32).copy(),)
+    examples.append(item)
     return True
+
+
+def block_passed(results,promotion,stage):
+    """A fixed validation block passes when the current stage reaches required_successes out of
+    block_episodes and every earlier stage reaches its retention bar. Nothing is decided mid-block."""
+    if stage not in results:return False
+    for tested,result in results.items():
+        current=tested==stage
+        episodes=int(promotion['block_episodes'] if current else promotion['retention_episodes'])
+        needed=int(promotion['required_successes'] if current else promotion['retention_successes'])
+        if int(result['episodes'])<episodes or int(result['successes'])<needed:return False
+    return True
+
+
+def promotion_ready(blocks,stage,conditions,seeds):
+    """Promote only when the most recent block of every main-track learner at this stage passed."""
+    stage_blocks=blocks.get(stage,{})
+    for condition in conditions:
+        for seed in seeds:
+            history=stage_blocks.get(f'{condition}_{seed}',[])
+            if not history or not history[-1]['passed']:return False
+    return bool(conditions and seeds)
+
+
+def training_stage(stages,stage,episodes,retention_period=4):
+    """One in retention_period episodes revisits an earlier stage, round-robin (balanced)."""
+    index=stages.index(stage)
+    if index and episodes%retention_period==0:return stages[(episodes//retention_period)%index]
+    return stage
+
+
+def wilson_lower(successes,episodes,z=1.96):
+    if episodes<=0:return 0.
+    p=successes/episodes;den=1+z*z/episodes
+    return (p+z*z/(2*episodes)-z*((p*(1-p)+z*z/(4*episodes))/episodes)**.5)/den
 
 
 def rollout_metrics(transitions):

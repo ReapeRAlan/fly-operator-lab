@@ -1,7 +1,73 @@
-# Plan de mejora v4
+# Plan de mejora v4 → v4.1
 
-**Estado:** propuesto el 17 de septiembre de 2026; no está implementado.
-**Base:** resultados de la campaña `pilot-v3.2-curriculum` ([RESULTADOS.md](RESULTADOS.md)) e investigación externa ([INVESTIGACION_REFERENCIAS.md](INVESTIGACION_REFERENCIAS.md)).
+**Estado:** v4.1 **implementado** el 17 de septiembre de 2026 como **protocolo 3.3**; en marcha desde la campaña `v4.1-night1`.
+**Base:** resultados de `pilot-v3.2-curriculum` ([RESULTADOS.md](RESULTADOS.md)), investigación externa ([INVESTIGACION_REFERENCIAS.md](INVESTIGACION_REFERENCIAS.md)) y una revisión externa del plan v4 (sección 6 de ese documento).
+**Calendario y lanzadores:** [CALENDARIO_CAMPANAS.md](CALENDARIO_CAMPANAS.md).
+
+## v4.1: qué cambió respecto al plan v4
+
+La revisión externa mostró que antes de medir aprendizaje hacía falta una **fase A0 de auditoría**:
+si la máscara, el instructor o la identidad de los objetivos deciden por el agente, cualquier
+resultado es ambiguo. Lo implementado:
+
+### A0 — que decida el agente, y que quede registrado (protocolo 3.3)
+1. **Máscara legal separada de la ayuda del currículo** ([`src/learning_adapter.py`](../src/learning_adapter.py)):
+   `legal_mask` es lo que permite el motor —`stop` y `cancel` quedan disponibles durante cualquier
+   orden nativa, no solo cerca del objetivo— y `family_mask` es la ayuda por etapa, que nunca
+   depende del estado. Se retiró la restricción de `crouch` a `value=True`.
+   Efecto medido: un episodio de `move` pasa de ~7 a ~35 decisiones cognitivas.
+2. **Objetivos por sector, no por ID ordenado:** `aim_target` usa 16 sectores egocéntricos y
+   `door_open`, `door_breach`, `follow`, `defuse`, `spy_camera`, `use`, `clear_obstacle` y `arrest`
+   usan 8, con la misma convención que los canales sensoriales. Prueba: permutar los IDs de los
+   objetos no cambia el objetivo espacial. El catálogo pasa de 100 a 149 acciones.
+3. **Traza por decisión** ([`src/learning_env.py`](../src/learning_env.py)): `episode_uid`, tick,
+   `decision_id`, acción solicitada y ejecutada, controlador, etiqueta del instructor, recibo del
+   puente, máscaras legal y de currículo usadas, `sim_time` antes y después, hashes de esquema
+   sensorial y grafo, y perfil de tiempo por tick.
+4. **Incidencias de infraestructura:** si el tiempo del motor no avanza o la observación se repite,
+   el tick se marca y **el episodio entero queda fuera del aprendizaje** (ni PPO ni demostraciones).
+5. **Recompensa descompuesta** por tick (`success`, `failure`, `time`, `shaping`, `mask_penalty`,
+   `rejection_penalty`, `wait_penalty`), con prueba de orden: completar > deambular, y una orden
+   rechazada nunca gana. La penalización por esperar solo se aplica a esperas **ociosas**.
+6. **Autoridad de disparo:** [`scripts/validate_fire_authority.py`](../scripts/validate_fire_authority.py)
+   comprueba contra el juego que sin orden `fire` no hay disparos ni consumo de munición.
+
+### A1 — PPO correcto ([`src/learning_ppo.py`](../src/learning_ppo.py), nuevo)
+- Recolector de **varios episodios** medido en decisiones cognitivas (512 por defecto).
+- **GAE cortado por episodio**; solo el truncamiento arrastra `V(s_final)`; `γ^k` por macroacción.
+- **Prueba de identidad** antes de cada actualización: se recalcula la log-probabilidad con las
+  features y máscaras guardadas; si el cociente no es 1 (±1e-5) o el KL no es 0, no se actualiza.
+- **Tasas por grupo** (`actor`, `critic`) en un optimizador propio: nunca se llama a `train()` de
+  SB3, así que su `_update_learning_rate` no puede sobrescribirlas. Optimizador **nuevo** al pasar
+  de imitación a PPO, e imitación con optimizador propio.
+- **Calentamiento del crítico** con el actor a lr 0 (se verifica que el actor no cambia), con más
+  épocas y minilotes pequeños, hasta que su error en cada rollout nuevo deja de bajar; después
+  rampa del actor de 0 a 1e-5, crítico 1e-4, 2 épocas, minilote 128, clip 0.15, `target_kl` 0.015.
+- **Ancla al instructor:** CE enmascarada contra su etiqueta en los estados visitados, β = 1.0 con
+  semivida de 20 K decisiones **de la etapa** y piso 0.05. El instructor nunca toma el control.
+- Diagnósticos por actualización en `campaigns/<id>/ppo_updates.jsonl` y **reversión** al mejor
+  checkpoint completo si un bloque cae más de 20 pp.
+
+### A2 — evaluación honesta
+- **Bloques fijos de 25 episodios** de validación sobre un checkpoint congelado, promoción con
+  **≥ 24/25** (Wilson inferior 0.805) más retención de las etapas previas; nada se decide a mitad.
+- La lista de aprendices que deben aprobar sale de **`tracks.main` × semillas** en la configuración.
+- **Dos pistas:** principal (promueve) y científica (`frozen_bc`, `adapter_half_updates`,
+  `sensor_only`, `bias_only`) con presupuesto de ~1/3 del tiempo, siempre en `move`.
+- Retención: 1 de cada 4 episodios repite una etapa anterior, en rotación equilibrada.
+
+### A3 — controles sin cerebro (parcial)
+- `sensor_only` (98 canales por **los mismos 3 filtros temporales**, log y z-score) y `bias_only`
+  (entrada constante) entrenan con **las mismas demostraciones etiquetadas**, que ahora guardan las
+  features sensoriales de cada tick.
+- Falta el grafo recableado (`scripts/build_rewired_graph.py`), previsto para el viernes.
+
+### Lo que sigue pendiente del plan original
+A4 (plasticidad interna como control histórico: apagada en v4.1), B (acciones jerárquicas y replay
+completo), C (parámetros por tipo celular) y D (GPU, solo si el perfil de tiempo lo justifica: hoy
+el cerebro son 0.29 s de los 0.33 s por tick).
+
+---
 
 ## Por qué hace falta
 

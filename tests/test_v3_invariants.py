@@ -343,27 +343,24 @@ def test_macro_action_duration_controls_discount_and_time_limit_bootstrap():
     assert result["environment_ticks"] == 5
 
 
-def test_promotion_gate_requires_all_trainable_conditions_and_three_seeds():
-    """Read the production comprehension so this test follows its real gate definition."""
-    cfg = learning_config()
-    source = (ROOT / "scripts" / "train_curriculum.py").read_text(encoding="utf-8")
-    tree = ast.parse(source)
-    needed_expression = next(
-        node.value
-        for node in ast.walk(tree)
-        if isinstance(node, ast.Assign)
-        and any(isinstance(target, ast.Name) and target.id == "needed" for target in node.targets)
-    )
-    needed = eval(compile(ast.Expression(needed_expression), "<promotion-gate>", "eval"), {"cfg": cfg})
+def test_promotion_gate_is_built_from_the_configured_main_track():
+    """Protocol 3.3: the gate comes from config (main track x seeds), never from a hardcoded list."""
+    from learning_curriculum import promotion_ready
 
-    expected = {
-        f"{condition}_{seed}"
-        for condition in ("adapter", "internal", "combined")
-        for seed in (7, 19, 43)
-    }
-    assert set(needed) == expected
-    assert not any(name.startswith("frozen_") for name in needed)
-    assert cfg["promotion_evaluation_episodes"] >= 5
+    cfg = learning_config()
+    main = cfg["tracks"]["main"]
+    seeds = cfg["seeds"]
+    assert main and len(seeds) >= 3
+    assert not set(main) & set(cfg["tracks"]["science"])
+    assert "train_curriculum" not in str(promotion_ready.__module__)  # the gate is a library function
+
+    blocks = {"move": {f"{condition}_{seed}": [{"passed": True}] for condition in main for seed in seeds}}
+    assert promotion_ready(blocks, "move", main, seeds)
+    # A science control passing its block cannot promote anything on its own.
+    blocks["move"]["sensor_only_7"] = [{"passed": True}]
+    del blocks["move"][f"{main[0]}_{seeds[0]}"]
+    assert not promotion_ready(blocks, "move", main, seeds)
+    assert cfg["promotion"]["block_episodes"] >= 25 and cfg["promotion"]["required_successes"] >= 24
     assert cfg["acceptance_evaluation_episodes_per_seed"] >= 30
 
 
@@ -508,25 +505,23 @@ def busy_observation(*, commands=0, pending=False):
 
 
 @pytest.mark.parametrize("observation", [busy_observation(commands=1), busy_observation(pending=True)])
-def test_busy_native_action_exposes_only_context_valid_interventions(observation):
+def test_busy_native_action_exposes_the_interventions_the_engine_allows(observation):
+    """Protocol 3.3: while a native command runs, continuing, stopping and cancelling are all the
+    agent's choice; the mask no longer encodes the distance at which stopping is the right answer."""
     catalog = ActionCatalog()
+    enabled = lambda mask: {entry["action"] for entry, allowed in zip(catalog.entries, mask) if allowed}
     observation['goal']=[4,0,0]
-    mask = catalog.mask(observation, {"wait", "move", "stop", "cancel"})
-    enabled = {entry["action"] for entry, allowed in zip(catalog.entries, mask) if allowed}
-    assert enabled == {"wait"}
-    assert not decision_required(observation, mask)
+    far = catalog.mask(observation, {"wait", "move", "stop", "cancel"})
+    assert enabled(far) == {"wait", "stop", "cancel"}
+    assert decision_required(observation, far)
     observation['goal']=[.1,0,0]
-    mask=catalog.mask(observation,{"wait","move","stop","cancel"})
-    assert {entry['action'] for entry,allowed in zip(catalog.entries,mask) if allowed}=={'wait','stop'}
-    assert decision_required(observation,mask)
+    near=catalog.mask(observation,{"wait","move","stop","cancel"})
+    assert np.array_equal(near, far)
+    # The curriculum decides which families exist at all; that never depends on the situation.
+    only_stop=catalog.mask(observation,{"wait","move","stop"},{"wait","move","stop"})
+    assert enabled(only_stop)=={'wait','stop'}
     observation['stage']='cancel';observation['action_receipt']={'status':'in_progress','action':'door_breach'}
-    mask=catalog.mask(observation,{"wait","move","stop","cancel"})
-    assert {entry['action'] for entry,allowed in zip(catalog.entries,mask) if allowed}=={'wait','cancel'}
-    assert decision_required(observation,mask)
-    observation['action_receipt']={'status':'in_progress','action':'cancel'}
-    mask=catalog.mask(observation,{"wait","move","stop","cancel"})
-    assert {entry['action'] for entry,allowed in zip(catalog.entries,mask) if allowed}=={'wait'}
-    assert not decision_required(observation,mask)
+    assert enabled(catalog.mask(observation,{"wait","cancel"}))=={'wait','cancel'}
 
 
 def test_move_curriculum_exposes_stop_and_cancel_interventions():
@@ -549,7 +544,8 @@ def test_stance_stage_only_allows_crouching_and_requires_physical_state():
     mask=catalog.mask(observation,{'wait','crouch'})
     crouch_values=[entry.get('value') for entry,enabled in zip(catalog.entries,mask)
                    if enabled and entry['action']=='crouch']
-    assert crouch_values==[True]
+    # Protocol 3.3: both crouch values are legal; choosing the right one is the agent's job.
+    assert crouch_values==[True,False]
 
     env=FlyOperatorEnv.__new__(FlyOperatorEnv)
     env.mission={'stage':'stance'}

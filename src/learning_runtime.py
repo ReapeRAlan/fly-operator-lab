@@ -97,12 +97,13 @@ class WorkerLock:
 
 class LiveState:
     """Read-only dashboard snapshots use a version marker; no shared game pointers."""
-    def __init__(self,brain):
-        self.brain=brain;self.revision=0;self.last_clock=-1;self.epoch=0
+    def __init__(self,brain,run=''):
+        self.brain=brain;self.run=str(run or '');self.revision=0;self.last_clock=-1;self.epoch=0
         self.neurons=np.lib.format.open_memmap(RUNTIME/'live_neurons.npy',mode='w+',dtype=np.float32,shape=(3,brain.n))
+        self.audit_path=(RUNTIME/'campaigns'/self.run/'gain_audit.jsonl') if self.run else RUNTIME/'gain_audit.jsonl';self.audit_path.parent.mkdir(parents=True,exist_ok=True);self.audit_every=10
         self.gains=np.lib.format.open_memmap(RUNTIME/'live_gains.npy',mode='w+',dtype=np.float32,shape=(brain.edges,))
         self.gains[:]=brain.gains;brain.gains=self.gains
-    def begin(self):atomic_json(RUNTIME/'live_version.json',{'writing':True,'revision':self.revision})
+    def begin(self):atomic_json(RUNTIME/'live_version.json',{'writing':True,'revision':self.revision,'run':self.run})
     def end(self,counts,condition,seed):
         self.neurons[0]=self.brain.v;self.neurons[1]=self.brain.g;self.neurons[2]=counts;self.revision+=1
         if self.brain.cursor<=self.last_clock:self.epoch+=1
@@ -112,7 +113,7 @@ class LiveState:
         trace_path=RUNTIME/'neuron_trace.jsonl'
         with trace_path.open('a',encoding='utf-8') as f:
             for index in watched_neurons[:16]:
-                if 0<=index<self.brain.n:f.write(json.dumps({'body_id':int(self.brain.ids[index]),'v':float(self.brain.v[index]),'g':float(self.brain.g[index]),'spikes':int(counts[index]),'clock_ms':self.brain.cursor*self.brain.dynamics.dt_ms,'condition':condition,'seed':seed,'epoch':self.epoch,'wall_time':time.time()})+'\n')
+                if 0<=index<self.brain.n:f.write(json.dumps({'run':self.run,'body_id':int(self.brain.ids[index]),'v':float(self.brain.v[index]),'g':float(self.brain.g[index]),'spikes':int(counts[index]),'clock_ms':self.brain.cursor*self.brain.dynamics.dt_ms,'condition':condition,'seed':seed,'epoch':self.epoch,'wall_time':time.time()})+'\n')
         if trace_path.stat().st_size>5_000_000:
             rows=trace_path.read_text().splitlines()[-4000:];trace_path.write_text('\n'.join(rows)+'\n')
         try:watched=json.loads((RUNTIME/'watch_edges.json').read_text())
@@ -124,6 +125,20 @@ class LiveState:
             traces.append({'edge_index':edge,'pre_trace':float(b.pretrace[pre]*np.exp(-(b.cursor-b.prelast[pre])*p.dt_ms/p.trace_ms)),
               'post_trace':float(b.posttrace[post]*np.exp(-(b.cursor-b.postlast[post])*p.dt_ms/p.trace_ms)),
               'eligibility':float(b.eligibility[edge]*np.exp(-(b.cursor-b.eligibility_last[edge])*p.dt_ms/p.eligibility_ms)),
-              'gain':float(b.gains[edge]),'clock_ms':b.cursor*p.dt_ms,'condition':condition,'seed':seed})
+              'gain':float(b.gains[edge]),'clock_ms':b.cursor*p.dt_ms,'condition':condition,'seed':seed,'run':self.run})
         atomic_json(RUNTIME/'live_edge_traces.json',traces)
-        atomic_json(RUNTIME/'live_version.json',{'writing':False,'revision':self.revision,'condition':condition,'seed':seed,'brain_clock_ms':self.brain.cursor*self.brain.dynamics.dt_ms,'updated':time.time()})
+        if self.revision==1 or self.revision%self.audit_every==0:
+            gains=np.asarray(b.gains[::max(1,b.edges//65536)],dtype=np.float64)
+            finite=gains[np.isfinite(gains)]
+            if finite.size:
+                stats={'run':self.run,'revision':self.revision,'epoch':self.epoch,'condition':condition,'seed':int(seed),'updated':time.time(),
+                  'sample_size':int(finite.size),'mean':float(np.mean(finite)),'std':float(np.std(finite)),
+                  'min':float(np.min(finite)),'p05':float(np.percentile(finite,5)),'median':float(np.median(finite)),
+                  'p95':float(np.percentile(finite,95)),'max':float(np.max(finite)),
+                  'below_floor':float(np.mean(finite<0.01)),'above_ceiling':float(np.mean(finite>10.0))}
+                histogram,edges=np.histogram(np.clip(finite,0,10),bins=10,range=(0,10));stats['histogram']=[{'from':float(edges[i]),'to':float(edges[i+1]),'count':int(histogram[i])} for i in range(len(histogram))]
+                with self.audit_path.open('a',encoding='utf-8') as f:f.write(json.dumps(stats,allow_nan=False)+'\n')
+                if self.audit_path.stat().st_size>2_000_000:
+                    rows=self.audit_path.read_text(encoding='utf-8').splitlines()[-2000:]
+                    self.audit_path.write_text('\n'.join(rows)+'\n',encoding='utf-8')
+        atomic_json(RUNTIME/'live_version.json',{'writing':False,'revision':self.revision,'run':self.run,'condition':condition,'seed':seed,'brain_clock_ms':self.brain.cursor*self.brain.dynamics.dt_ms,'updated':time.time()})

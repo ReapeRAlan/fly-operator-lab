@@ -1,13 +1,15 @@
 """Gymnasium interface to the local game and the complete classified MaleCNS."""
 from pathlib import Path
-import json,math,time
+import json,math,time,uuid,hashlib
 import numpy as np,psutil
 import gymnasium as gym
 from gymnasium import spaces
 from bridge_client import Bridge
-from learning_adapter import SensoryEncoder,NeuralReadout,ActionCatalog,clean_observation,bearing,native_progress,decision_required
+from learning_adapter import SensoryEncoder,NeuralReadout,SensorReadout,ActionCatalog,clean_observation,bearing,native_progress,decision_required
 ROOT=Path(__file__).resolve().parents[1]
 PROCESS=psutil.Process()
+BRAIN_MODES=('connectome','sensor_only','bias_only')
+GOAL_STAGES=('move','cancel','door','breach','rescue','defuse')
 
 def integrate(brain,ids,rates,record=False):
     """Step the brain and attach process page faults observed during integration."""
@@ -16,22 +18,59 @@ def integrate(brain,ids,rates,record=False):
     activity['page_faults']=PROCESS.memory_info().num_page_faults-faults
     return counts,activity
 
+def reward_terms(success,failure,phi,previous_phi,mask_valid,rejected,idle_wait,config):
+    """Decomposed per-tick reward. The sum is the scalar reward; each term is recorded separately."""
+    terms={'success':float(success),'failure':-float(failure),'time':-.001,'shaping':.999*phi-previous_phi,
+           'mask_penalty':0. if mask_valid else -.01,'rejection_penalty':-.01 if rejected else 0.,
+           'wait_penalty':-float(config.get('free_wait_penalty',0.)) if idle_wait else 0.}
+    return terms,float(sum(terms.values()))
+
 class FlyOperatorEnv(gym.Env):
     metadata={'render_modes':[]}
-    def __init__(self,brain,bridge=None,condition='adapter',seed=7,stage='move',split='train',on_step=None,on_episode=None,guard=None,sensory_schema=None):
+    def __init__(self,brain,bridge=None,condition='adapter',seed=7,stage='move',split='train',on_step=None,on_episode=None,guard=None,sensory_schema=None,brain_mode='connectome'):
         self.brain=brain;self.bridge=bridge or Bridge();self.condition=condition;self.seed_base=seed
         self.encoder=SensoryEncoder(ROOT/sensory_schema) if sensory_schema else SensoryEncoder()
-        self.readout=NeuralReadout();self.catalog=ActionCatalog()
-        self.action_space=spaces.Discrete(len(self.catalog.entries));self.observation_space=spaces.Box(-5.,5.,shape=(3942,),dtype=np.float32)
+        self.schema_sha256=hashlib.sha256(json.dumps(self.encoder.config,sort_keys=True).encode()).hexdigest()
+        self.readout=NeuralReadout();self.sensor_readout=SensorReadout(self.encoder.channels);self.catalog=ActionCatalog()
+        self.action_space=spaces.Discrete(len(self.catalog.entries))
+        self.set_brain_mode(brain_mode)
         self.stage=stage;self.split=split;self.on_step=on_step;self.on_episode=on_episode;self.guard=guard
         self.scenarios=json.loads((ROOT/'data/learning/scenarios.json').read_text())
-        self.episode_count=0;self.total_steps=0;self.last_features=np.zeros(3942,np.float32)
+        self.episode_count=0;self.total_steps=0
         self.train_plasticity=condition=='internal';self.record=False;self.last_info={};self.neural_record=False
         self.allowed=None;self.curriculum_allowed=None;self.pending_error=0.;self.last_plasticity={};self.total_simulated_ms=0
         self.free_wait_streak=0;self.forced_wait_steps=0;self.free_wait_steps=0;self.decision_steps=0
-        self.no_progress_decisions=0;self.best_goal_distance=float('inf')
+        self.no_progress_decisions=0;self.best_goal_distance=float('inf');self.incidents=[]
         cap=ROOT/'outputs/native_capabilities_v2.json'
         if cap.exists():self.allowed=set(json.loads(cap.read_text()).get('validated_actions',[]))|{'wait'}
+
+    def set_brain_mode(self,mode):
+        """connectome: DN features; sensor_only: channel rates through the same filters; bias_only: constant input."""
+        if mode not in BRAIN_MODES:raise ValueError(f'Unknown brain mode: {mode}')
+        self.brain_mode=mode
+        size=3942 if mode=='connectome' else 3*len(self.encoder.channels)
+        self.observation_space=spaces.Box(-5.,5.,shape=(size,),dtype=np.float32)
+        self.last_features=np.zeros(size,np.float32);self.last_sensor_features=np.zeros(3*len(self.encoder.channels),np.float32)
+        self.last_neural_features=np.zeros(3942,np.float32)
+
+    def features(self):
+        if self.brain_mode=='connectome':return self.last_neural_features
+        if self.brain_mode=='sensor_only':return self.last_sensor_features
+        return np.zeros_like(self.last_sensor_features)
+
+    def sense(self,obs,record=False):
+        """Encode, integrate (connectome only) and update both readouts; returns timing in seconds."""
+        started=time.perf_counter();ids,rates,self.channels=self.encoder.encode(obs);encoded=time.perf_counter()
+        self.last_sensor_features=self.sensor_readout.update(rates[::16])
+        if self.brain_mode=='connectome':
+            counts,self.activity=integrate(self.brain,ids,rates,record=record)
+            self.last_counts=counts;self.last_neural_features=self.readout.update(counts)
+        else:
+            self.last_counts=np.zeros(self.brain.n,np.int32);self.last_neural_features=np.zeros(3942,np.float32)
+            self.activity={'neurons':self.brain.n,'spikes':0,'active_neurons':0,'simulated_ms':50.,'wall_seconds':0.,
+                           'plasticity':False,'brain_mode':self.brain_mode,'page_faults':0}
+        self.last_features=self.features()
+        done=time.perf_counter();return {'encode':encoded-started,'brain':done-encoded}
 
     def reset(self,*,seed=None,options=None):
         super().reset(seed=seed);options=options or {}
@@ -44,27 +83,34 @@ class FlyOperatorEnv(gym.Env):
             self.mission=candidates[offset]
         self.record=options.get('record',False)
         self.raw=self.bridge.new_mission(self.mission['name'],self.record)
-        self.brain.reset(self.seed_base*100000+self.episode_count if seed is None else seed)
-        self.brain.plasticity=self.train_plasticity;self.readout.reset()
+        if self.brain_mode=='connectome':
+            self.brain.reset(self.seed_base*100000+self.episode_count if seed is None else seed)
+            self.brain.plasticity=self.train_plasticity
+        self.readout.reset();self.sensor_readout.reset()
         self.obs=clean_observation(self.raw,self.mission);self.start_raw=self.raw
+        self.episode_uid=uuid.uuid4().hex
         self.episode_reward=0.;self.steps=0;self.episode_wall=time.time();self.episode_start_ms=self.raw['sim_time_ms']
         self.initial_ammo=self.raw['operator']['ammo'];self.shot_ever=False;self.rescue_followed=False;self.reload_oriented=False;self.cancel_practiced=False
-        self.rejections=0;self.initial_people={h['id']:h for h in self.raw['humans']}
-        ids,rates,self.channels=self.encoder.encode(self.obs)
-        counts,self.activity=integrate(self.brain,ids,rates)
-        self.last_counts=counts;self.last_features=self.readout.update(counts)
+        self.rejections=0;self.initial_people={h['id']:h for h in self.raw['humans']};self.incidents=[]
+        self.reward_totals={}
+        self.sense(self.obs)
         self.previous_phi=self.potential(self.obs);self.done=False;self.truncate_next=False
         self.free_wait_streak=0;self.forced_wait_steps=0;self.free_wait_steps=0;self.decision_steps=0
         self.no_progress_decisions=0;self.best_goal_distance=bearing(self.obs['operator'],self.mission['goal'])[1]
-        return self.last_features.copy(),{'mission':self.mission,'neural_warmup_ms':50,'game_map_seed':self.raw.get('map_seed')}
+        return self.last_features.copy(),{'mission':self.mission,'neural_warmup_ms':50,'game_map_seed':self.raw.get('map_seed'),'episode_uid':self.episode_uid}
+
+    def masks(self):
+        """(legal, curriculum, used): engine legality, stage family help, and their conjunction."""
+        legal=self.catalog.legal_mask(self.obs,self.allowed)
+        curriculum=self.catalog.family_mask(self.curriculum_allowed)
+        return legal,curriculum,legal&curriculum
 
     def action_masks(self):
-        allowed=self.allowed if self.curriculum_allowed is None else self.allowed&set(self.curriculum_allowed)
-        return self.catalog.mask(self.obs,allowed)
+        return self.masks()[2]
 
     def potential(self,obs):
         stage=self.mission['stage'];a=obs['operator']
-        if stage in ('move','cancel','door','breach','rescue','defuse'):
+        if stage in GOAL_STAGES:
             return -min(bearing(a,self.mission['goal'])[1],20.)/20.
         if stage=='orient':
             yaw=math.atan2(a['aim'][2],a['aim'][0]);d=(self.mission['goal_angle']-yaw+math.pi)%(2*math.pi)-math.pi
@@ -88,64 +134,91 @@ class FlyOperatorEnv(gym.Env):
         if stage=='loadout':return raw.get('mission_result')==1 and raw.get('loadout_choice',-1)>=0
         return raw.get('mission_result')==1
 
+    def infrastructure_incident(self,before_raw,raw,terminal):
+        """Engine transitions that did not happen: excluded from learning and logged apart."""
+        if terminal:return None
+        if raw.get('sequence') is not None and raw.get('sequence')==before_raw.get('sequence'):return 'repeated_observation'
+        before_ms=before_raw.get('sim_time_ms',0);after_ms=raw.get('sim_time_ms',0)
+        if after_ms<=before_ms and not (self.mission['stage']=='loadout' and before_ms==0):return 'engine_time_stalled'
+        return None
+
     def step(self,action):
         if self.done:raise RuntimeError('reset required after episode completion')
         if self.guard:self.guard()
         if not self.action_space.contains(action):raise ValueError('Action index out of range')
-        action=int(action);mask=self.action_masks();before=self.obs;start=time.perf_counter()
+        action=int(action);legal,curriculum,mask=self.masks();before=self.obs;before_raw=self.raw;start=time.perf_counter()
         _,_,pre_channels=self.encoder.encode(before)
         if mask[action]:command=self.catalog.decode(action,before)
         else:command={'action':'wait'}
-        forced_wait=bool(not decision_required(before,mask))
-        raw=self.bridge.step(command,50);self.shot_ever |= raw.get('shots_accepted',0)>0
+        executed=action if mask[action] else 0
+        forced_wait=bool(not decision_required(before,mask));progress_before=native_progress(before)
+        bridge_started=time.perf_counter()
+        raw=self.bridge.step(command,50);bridge_seconds=time.perf_counter()-bridge_started
+        self.shot_ever |= raw.get('shots_accepted',0)>0
         if command['action']=='follow':self.rescue_followed=True
-        if raw.get('action_receipt',{}).get('action')=='cancel' and raw.get('action_receipt',{}).get('status')=='completed':self.cancel_practiced=True
+        receipt=raw.get('action_receipt',{})
+        if receipt.get('action')=='cancel' and receipt.get('status')=='completed':self.cancel_practiced=True
         self.obs=clean_observation(raw,self.mission);self.raw=raw;self.steps+=1;self.total_steps+=1;self.total_simulated_ms+=50
-        if forced_wait:self.forced_wait_steps+=1;self.free_wait_streak=0
-        else:
-            self.decision_steps+=1
+        # Waiting while a native command runs is a real choice (stop/cancel were legal), but only
+        # an idle wait counts toward collapse, no-progress and the wait penalty.
+        idle_decision=not forced_wait and not progress_before
+        idle_wait=idle_decision and command['action']=='wait'
+        if forced_wait:self.forced_wait_steps+=1
+        else:self.decision_steps+=1
+        if idle_decision:
             if command['action']=='wait':self.free_wait_steps+=1;self.free_wait_streak+=1
             else:self.free_wait_streak=0
-        if raw.get('action_receipt',{}).get('status')=='rejected' and command['action']!='wait':self.rejections+=1
+        elif not forced_wait and command['action']!='wait':self.free_wait_streak=0
+        rejected=receipt.get('status')=='rejected' and command['action']!='wait'
+        if rejected:self.rejections+=1
         success=self.skill_success(raw);native_result=raw.get('mission_result',0)
         failure=raw.get('operator',{}).get('health',0)<=0 or native_result==2
         # A terminal native victory also ends isolated tasks, but only the tested skill earns success.
         terminated=bool(success or failure or native_result==1 or raw.get('game_state')==2)
+        incident=self.infrastructure_incident(before_raw,raw,terminated)
+        if incident:self.incidents.append({'tick':self.steps-1,'reason':incident,'sequence':raw.get('sequence'),'sim_time_ms':raw.get('sim_time_ms')})
         collapse_limit=int(getattr(self,'config',{}).get('policy_collapse_free_wait_steps',0))
         policy_collapse=bool(collapse_limit and self.free_wait_streak>=collapse_limit)
         goal_distance=bearing(self.obs['operator'],self.mission['goal'])[1]
-        if not forced_wait and self.mission['stage'] in ('move','cancel','door','breach','rescue','defuse'):
+        if idle_decision and self.mission['stage'] in GOAL_STAGES:
             if goal_distance<self.best_goal_distance-.1:self.best_goal_distance=goal_distance;self.no_progress_decisions=0
             else:self.no_progress_decisions+=1
         progress_limit=int(getattr(self,'config',{}).get('policy_no_progress_decisions',0))
         no_progress=bool(progress_limit and self.no_progress_decisions>=progress_limit)
+        # no_progress and collapse are budget truncations (bootstrapped), never terminal failures.
         truncated=bool(not terminated and (self.steps*50>=self.mission['max_seconds']*1000 or self.truncate_next or policy_collapse or no_progress))
         phi=0. if terminated else self.potential(self.obs)
-        reward=float(success)-float(failure)-.001 + .999*phi-self.previous_phi
+        terms,reward=reward_terms(success,failure,phi,self.previous_phi,bool(mask[action]),rejected,idle_wait,getattr(self,'config',{}))
         self.previous_phi=phi
-        if not mask[action]:reward-=.01
-        if not forced_wait and command['action']=='wait':reward-=float(getattr(self,'config',{}).get('free_wait_penalty',0.))
+        for key,value in terms.items():self.reward_totals[key]=self.reward_totals.get(key,0.)+value
         self.episode_reward+=reward
-        ids,rates,self.channels=self.encoder.encode(self.obs)
         self.brain.plasticity=self.train_plasticity
-        counts,self.activity=integrate(self.brain,ids,rates,record=self.neural_record)
-        self.last_counts=counts;self.last_features=self.readout.update(counts)
+        timing=self.sense(self.obs,record=self.neural_record)
+        counts=self.last_counts
         self.done=terminated or truncated
+        timing.update(bridge=bridge_seconds,env_total=time.perf_counter()-start)
+        trace={'episode_uid':self.episode_uid,'tick':self.steps-1,'decision_id':None if forced_wait else self.decision_steps-1,
+          'requested_action':action,'executed_action':executed,'executed_command':command['action'],
+          'legal_mask':np.flatnonzero(legal).tolist(),'curriculum_mask':np.flatnonzero(curriculum).tolist(),'used_mask':np.flatnonzero(mask).tolist(),
+          'bridge_receipt':{k:receipt.get(k) for k in ('action','status')},'sim_time_before_ms':before_raw.get('sim_time_ms'),'sim_time_after_ms':raw.get('sim_time_ms'),
+          'sequence_before':before_raw.get('sequence'),'sequence_after':raw.get('sequence'),
+          'native_progress_before':progress_before,'idle_decision':idle_decision,'infrastructure_incident':incident,
+          'brain_mode':self.brain_mode,'sensory_schema_sha256':self.schema_sha256,'graph_hash':getattr(self.brain,'graph_hash',None)}
         info={'success':bool(success),'mission_result':native_result,'terminated':terminated,'truncated':truncated,
           'mission':self.mission['name'],'stage':self.mission['stage'],'split':self.mission['split'],'condition':self.condition,
           'seed':self.seed_base,'game_map_seed':raw.get('map_seed'),'episode':raw['episode'],'sequence':raw['sequence'],
           'game_session':f"{self.bridge.session.get('pid')}:{self.bridge.session.get('started_unix')}",
           'rendering':{'frames':raw.get('presentation_count'),'interval_ms':raw.get('presentation_interval_ms'),'client_view':raw.get('client_view'),'server_flags':raw.get('game_flags')},
           'simulated_ms':self.steps*50,'brain_simulated_ms':self.brain.cursor*self.brain.dynamics.dt_ms,
-          'reward':reward,'observation':self.obs,'action_index':action,'action_label':self.catalog.label(action),
+          'reward':reward,'reward_terms':terms,'observation':self.obs,'action_index':action,'action_label':self.catalog.label(action),
           'truncation_reason':('policy_collapse' if policy_collapse else 'no_progress' if no_progress else 'condition_switch_budget' if self.truncate_next else 'time_limit') if truncated else None,
-          'command':command,'mask_valid':bool(mask[action]),'action_receipt':raw.get('action_receipt',{}),
+          'command':command,'mask_valid':bool(mask[action]),'action_receipt':receipt,
           'forced_wait':forced_wait,'decision_required':not forced_wait,'free_wait_streak':self.free_wait_streak,
           'goal_distance':goal_distance,'best_goal_distance':self.best_goal_distance,'no_progress_decisions':self.no_progress_decisions,
           'pre_action':{'channels':pre_channels,'mask':mask.tolist(),'goal_distance':bearing(before['operator'],self.mission['goal'])[1],
                         'busy_reason':'command_queue' if before['operator'].get('commands',0)>0 else 'receipt_in_progress' if before.get('action_receipt',{}).get('status')=='in_progress' else 'initial_visibility' if before.get('sim_time_ms',0)==0 and before.get('stage')!='loadout' else 'free'},
-          'activity':self.activity,'channels':self.channels,'neurons_readout':self.readout.summary(counts),
-          'step_wall_seconds':time.perf_counter()-start}
+          'activity':self.activity,'channels':self.channels,'neurons_readout':self.readout.summary(counts) if self.brain_mode=='connectome' else [],
+          'trace':trace,'timing':timing,'step_wall_seconds':time.perf_counter()-start}
         if 'capture_directory' in raw:info['capture']={k:raw[k] for k in ('capture_directory','capture_frame','frame') if k in raw}
         self.last_info=info
         if self.on_step:self.on_step(info)
@@ -158,7 +231,9 @@ class FlyOperatorEnv(gym.Env):
                            protected_losses=sum(1 for h in raw['humans'] if h['kind']!=1 and h['health']<=0 and self.initial_people.get(h['id'],{}).get('health',0)>0),
                            forced_wait_steps=self.forced_wait_steps,free_wait_steps=self.free_wait_steps,decision_steps=self.decision_steps,
                            final_goal_distance=info['goal_distance'],best_goal_distance=self.best_goal_distance,
-                           no_progress_decisions=self.no_progress_decisions)
+                           no_progress_decisions=self.no_progress_decisions,episode_uid=self.episode_uid,brain_mode=self.brain_mode,
+                           reward_terms=dict(self.reward_totals),infrastructure_incidents=list(self.incidents),
+                           excluded_from_learning=bool(self.incidents))
             if self.on_episode:self.on_episode(summary)
         return self.last_features.copy(),reward,terminated,truncated,info
 
@@ -221,8 +296,11 @@ class ExerciseTeacher:
         if a.get('ammo',0)==0:return first('reload') or 0
         targets=self.catalog.targets({'action':'aim_target'},obs)
         if targets:
-            delta,dist=bearing(a,targets[0]['position'])
-            if abs(delta)>.03 or a.get('weapon_state')!=5:return first('aim_target',target_index=0) or 0
+            nearest=min(targets,key=lambda t:bearing(a,t['position'])[1])
+            delta,dist=bearing(a,nearest['position'])
+            if abs(delta)>.03 or a.get('weapon_state')!=5:
+                aim=self.catalog.sector_entry('aim_target',obs,nearest.get('initial_position',nearest['position']))
+                return aim if aim is not None and mask[aim] else 0
             return first('fire') or 0
         # Training-only search rule: scan from the present observation, without hidden coordinates.
         if stage in ('shoot','elimination','loadout'):return first('turn',angle=math.pi/8) or 0

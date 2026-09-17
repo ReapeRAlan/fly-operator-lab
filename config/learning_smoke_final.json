@@ -1,7 +1,7 @@
 {
   "version": 4,
   "semantic_protocol_version": "3.3",
-  "experiment_id": "v4.1-night1",
+  "experiment_id": "smoke-v4.1-final",
   "dataset": "male-cns:v1.0",
   "classified_neurons": 166700,
   "directed_edges": 25582938,
@@ -25,8 +25,8 @@
     "science_stages": [
       "move"
     ],
-    "science_fraction": 0.3333,
-    "control_blocks": 2
+    "science_fraction": 0.85,
+    "control_blocks": 1
   },
   "condition_settings": {
     "ppo_anchored": {
@@ -52,9 +52,7 @@
     }
   },
   "seeds": [
-    7,
-    19,
-    43
+    7
   ],
   "decision_ms": 50,
   "filters_ms": [
@@ -77,11 +75,11 @@
     "max_grad_norm": 0.5
   },
   "ppo_v33": {
-    "rollout_decisions": 512,
+    "rollout_decisions": 48,
     "gamma": 0.999,
     "gae_lambda": 0.95,
     "epochs": 2,
-    "minibatch_size": 128,
+    "minibatch_size": 32,
     "clip_range": 0.15,
     "target_kl": 0.015,
     "vf_coef": 0.5,
@@ -91,10 +89,10 @@
     "critic_learning_rate": 0.0001,
     "critic_warmup_learning_rate": 0.0003,
     "critic_warmup_epochs": 8,
-    "critic_warmup_minibatch_size": 64,
+    "critic_warmup_minibatch_size": 16,
     "actor_ramp_updates": 4,
-    "critic_warmup_min_rollouts": 3,
-    "critic_warmup_max_rollouts": 6,
+    "critic_warmup_min_rollouts": 1,
+    "critic_warmup_max_rollouts": 2,
     "critic_warmup_improvement": 0.95,
     "advantage_normalization": "rollout",
     "anchor_beta": 1.0,
@@ -104,24 +102,24 @@
     "identity_kl_tolerance": 1e-06
   },
   "promotion": {
-    "block_episodes": 25,
-    "required_successes": 24,
-    "retention_episodes": 10,
-    "retention_successes": 8,
-    "prescreen_window": 20,
+    "block_episodes": 3,
+    "required_successes": 3,
+    "retention_episodes": 2,
+    "retention_successes": 1,
+    "prescreen_window": 2,
     "prescreen_success": 0.9,
-    "min_decisions_between_blocks": 1024,
-    "block_every_decisions": 2048,
+    "min_decisions_between_blocks": 1000000000,
+    "block_every_decisions": 1000000000,
     "rollback_drop": 0.2
   },
-  "guided_episodes_per_stage": 6,
-  "dagger_episodes_per_stage": 6,
-  "bootstrap_evaluation_episodes": 5,
-  "max_extra_dagger_episodes": 12,
+  "guided_episodes_per_stage": 2,
+  "dagger_episodes_per_stage": 1,
+  "bootstrap_evaluation_episodes": 2,
+  "max_extra_dagger_episodes": 3,
   "dagger_teacher_beta": 0.25,
   "stage_transfer_imitation_epochs": 10,
   "imitation_epochs": 20,
-  "control_imitation_epochs": 120,
+  "control_imitation_epochs": 20,
   "acceptance_evaluation_episodes_per_seed": 30,
   "promotion_success": 0.8,
   "retention_fraction": 0.25,
@@ -130,7 +128,7 @@
   "free_wait_penalty": 0.005,
   "motor_plasticity_learning_rate": 0.0001,
   "sensory_schema": "data/learning/sensory_ports_v32.json",
-  "pilot_hours": 12,
+  "pilot_hours": 2,
   "max_cpu_threads": 2,
   "performance_profile": "performance_cpu_v1",
   "worker_priority": "below_normal",
@@ -142,11 +140,7 @@
   "artifact_quota_gb": 8,
   "maximum_worker_ram_gb": 4,
   "stage_order": [
-    "move",
-    "stance",
-    "cancel",
-    "orient",
-    "switch"
+    "move"
   ],
   "sources": {
     "dataset": "https://male-cns.janelia.org/download/",

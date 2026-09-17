@@ -21,11 +21,29 @@ def atomic_json(path,value):
     finally:
         if temporary.exists():temporary.unlink()
 
+def compact(value,digits=5):
+    """Round floats for storage. Five decimals keep probabilities, rates and metres exact enough
+    to re-read, and cut a stored tick by about a third."""
+    if isinstance(value,float):return round(value,digits)
+    if isinstance(value,dict):return {k:compact(v,digits) for k,v in value.items()}
+    if isinstance(value,(list,tuple)):return [compact(v,digits) for v in value]
+    return value
+
 def durable_row(info):
-    """Static action-catalog labels are served by lab_history, not repeated per stored step."""
-    decision=info.get('decision')
-    if not isinstance(decision,dict) or 'action_labels' not in decision:return info
-    row=dict(info);row['decision']={k:v for k,v in decision.items() if k!='action_labels'};return row
+    """Static action-catalog labels are served by lab_history, and the pre-action mask repeats
+    decision.mask, so neither is stored per tick. Floats are rounded for storage only; the live
+    snapshot in latest.json keeps full precision."""
+    row=dict(info)
+    decision=row.get('decision')
+    if isinstance(decision,dict) and 'action_labels' in decision:
+        row['decision']={k:v for k,v in decision.items() if k!='action_labels'}
+    pre=row.get('pre_action')
+    if isinstance(pre,dict) and 'mask' in pre:
+        row['pre_action']={k:v for k,v in pre.items() if k!='mask'}
+    trace=row.get('trace')
+    if isinstance(trace,dict) and 'used_mask' in trace:
+        row['trace']={k:v for k,v in trace.items() if k!='used_mask'}
+    return compact(row)
 
 def connect():
     db=sqlite3.connect(RUNTIME/'experiments.sqlite',timeout=15)

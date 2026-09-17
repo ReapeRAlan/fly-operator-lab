@@ -1,7 +1,8 @@
-param([int]$MaxRestarts=6,[int]$IntervalSeconds=60)
+param([int]$MaxRestarts=6,[int]$IntervalSeconds=60,[double]$ForgiveAfterHours=3)
 # Relaunch the trainer if it exits unexpectedly before the campaign deadline.
 # Intentional ends (panel stop, pilot finished, curriculum complete, calibration failure) are respected.
 # Restarts never reset the persisted deadline, and learning resumes from the last checkpoint.
+# After ForgiveAfterHours without a crash the restart budget is restored (long weekend campaigns).
 $ErrorActionPreference='Continue'
 $labRoot='D:\FlyOperatorLab'
 $runtime=Join-Path $labRoot 'work\learning'
@@ -18,7 +19,10 @@ while ($true) {
   $deadline=[DateTimeOffset]::FromUnixTimeMilliseconds([long]([double]$schedule.pilot_deadline*1000)).LocalDateTime
   if ((Get-Date) -ge $deadline) { Write-Log "deadline $deadline reached"; break }
   $alive=Get-CimInstance Win32_Process -Filter "Name like 'python%'" | Where-Object { $_.CommandLine -match 'train_curriculum' }
-  if ($alive) { continue }
+  if ($alive) {
+    if ($restarts -gt 0 -and $lastRestart -and ((Get-Date)-$lastRestart).TotalHours -ge $ForgiveAfterHours) { Write-Log "stable for $ForgiveAfterHours h; restart budget restored"; $restarts=0 }
+    continue
+  }
   try { $status=Get-Content -LiteralPath (Join-Path $runtime 'status.json') -Raw | ConvertFrom-Json } catch { $status=$null }
   if ($status -and $status.run -eq $cfg.experiment_id -and $status.state -in @('stopped','curriculum_complete','needs_calibration')) {
     Write-Log "trainer ended intentionally: state=$($status.state) reason=$($status.reason)"; break
@@ -29,7 +33,7 @@ while ($true) {
     $path=Join-Path $runtime $name
     if ((Test-Path -LiteralPath $path) -and (Get-Item -LiteralPath $path).Length -gt 0) { Copy-Item -LiteralPath $path -Destination (Join-Path $runtime "crash_${stamp}_$name") }
   }
-  $restarts++
+  $restarts++; $lastRestart=Get-Date
   Write-Log "trainer not running (last state=$($status.state), reason=$($status.reason)); restart $restarts of $MaxRestarts"
   & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $labRoot 'scripts\start_learning.ps1') -Hours 1 -NoSupervisor *>> $log
 }
