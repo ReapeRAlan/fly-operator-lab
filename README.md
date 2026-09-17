@@ -6,10 +6,13 @@ Las **166,700 neuronas** clasificadas y las **25,582,938 conexiones** del conect
 
 La anatomía es fija y publicada. La dinámica, la interfaz sensorial, el catálogo de acciones y el aprendizaje son **adaptaciones de ingeniería** y se documentan como tales.
 
-> Estado a 17-sep-2026:
+> Estado a 17-sep-2026 (tarde):
 > - **v3.2**, primera habilidad (`move`) resuelta con imitación: 100 % en validación.
 > - **Aprendizaje autónomo aún no demostrado:** el adaptador PPO colapsó y la plasticidad interna no tuvo efecto medible.
-> - **Siguiente paso:** [plan v4](docs/PLAN_MEJORA_V4.md), basado en los resultados y en [cómo lo hacen otros proyectos](docs/INVESTIGACION_REFERENCIAS.md).
+> - **v4.1 / protocolo 3.3 implementado** ([plan](docs/PLAN_MEJORA_V4.md)): la máscara ya no decide por el agente,
+>   los objetivos se indican por sector, cada decisión queda trazada, el PPO anclado pasa una prueba de identidad
+>   antes de cada actualización y la promoción exige bloques fijos de 25 episodios.
+> - **En curso:** campaña de diagnóstico `v4.1-night1` con controles sin cerebro ([calendario](docs/CALENDARIO_CAMPANAS.md)).
 
 ```mermaid
 flowchart LR

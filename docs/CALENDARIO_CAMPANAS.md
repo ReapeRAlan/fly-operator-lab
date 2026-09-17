@@ -51,6 +51,15 @@ Get-Content "D:\FlyOperatorLab\work\learning\campaigns\v4.1-night1\ppo_updates.j
 En el panel: pestaña **Circuito** para el flujo sensorimotor, **Decisión** para la última
 decisión con sus contribuciones, **Actividad** para las series.
 
+## Antes de dejarlo toda la noche
+
+- **Cerrar las aplicaciones pesadas** (navegador, VS Code, ChatGPT/Claude de escritorio): el
+  entrenador se **pausa** si la RAM disponible baja de 1.0 GB y solo reanuda con 1.5 GB. Con
+  todo abierto, este equipo se queda en ~0.6 GB libres y la noche se pierde en pausa.
+- Comprobar espacio en disco: una noche escribe ~1.7 GB de registros. Con menos de 8 GB libres
+  el entrenador también se pausa. `scripts/archive_runs.py --keep <campaña> --apply` mueve las
+  campañas terminadas a `archive/experiments/` comprimidas y verificadas.
+
 ## Reglas de la casa
 
 - Una sola campaña a la vez: el bloqueo del trabajador impide dos controladores.
