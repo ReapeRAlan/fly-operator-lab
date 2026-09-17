@@ -1,0 +1,20 @@
+{
+  "pid": 40376,
+  "display_mode": "single_monitor",
+  "require_secondary_monitor": false,
+  "windows": [
+    {
+      "window": 2556264,
+      "rect": [
+        -1526,
+        293,
+        -502,
+        893
+      ],
+      "monitor": "\\\\.\\DISPLAY1",
+      "primary": false,
+      "inside_monitor": true
+    }
+  ],
+  "passed": true
+}

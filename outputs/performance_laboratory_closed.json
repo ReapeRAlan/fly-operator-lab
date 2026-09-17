@@ -1,0 +1,417 @@
+{
+  "summary": {
+    "samples": 20,
+    "cpu_mean_pct": 8.545,
+    "cpu_max_pct": 14.2,
+    "ram_available_min_gb": 5.862596608,
+    "gpu_max_c": 45.0,
+    "gpu_mean_pct": 5.75,
+    "start_steps": 31,
+    "end_steps": 31,
+    "states": [
+      "stopped"
+    ]
+  },
+  "rows": [
+    {
+      "time": 1789518733.9995744,
+      "cpu_pct": 11.0,
+      "available_ram_gb": 5.862596608,
+      "committed_ram_pct": 65.2,
+      "gpu": {
+        "temperature_c": 45.0,
+        "utilization_pct": 0.0,
+        "memory_mib": 824.0,
+        "power_w": 16.42
+      },
+      "top_cpu": [],
+      "lab": [],
+      "state": "stopped",
+      "phase": "teaching",
+      "episode": 163,
+      "sequence": 32,
+      "steps": 31,
+      "step_wall_s": 0.39694950000011886
+    },
+    {
+      "time": 1789518735.0001802,
+      "cpu_pct": 10.8,
+      "available_ram_gb": 5.89049856,
+      "committed_ram_pct": 65.0,
+      "gpu": {
+        "temperature_c": 45.0,
+        "utilization_pct": 0.0,
+        "memory_mib": 824.0,
+        "power_w": 16.42
+      },
+      "top_cpu": [],
+      "lab": [],
+      "state": "stopped",
+      "phase": "teaching",
+      "episode": 163,
+      "sequence": 32,
+      "steps": 31,
+      "step_wall_s": 0.39694950000011886
+    },
+    {
+      "time": 1789518736.0010655,
+      "cpu_pct": 14.2,
+      "available_ram_gb": 5.874528256,
+      "committed_ram_pct": 65.1,
+      "gpu": {
+        "temperature_c": 45.0,
+        "utilization_pct": 0.0,
+        "memory_mib": 824.0,
+        "power_w": 16.42
+      },
+      "top_cpu": [],
+      "lab": [],
+      "state": "stopped",
+      "phase": "teaching",
+      "episode": 163,
+      "sequence": 32,
+      "steps": 31,
+      "step_wall_s": 0.39694950000011886
+    },
+    {
+      "time": 1789518737.002314,
+      "cpu_pct": 8.4,
+      "available_ram_gb": 5.868511232,
+      "committed_ram_pct": 65.2,
+      "gpu": {
+        "temperature_c": 45.0,
+        "utilization_pct": 0.0,
+        "memory_mib": 824.0,
+        "power_w": 16.42
+      },
+      "top_cpu": [],
+      "lab": [],
+      "state": "stopped",
+      "phase": "teaching",
+      "episode": 163,
+      "sequence": 32,
+      "steps": 31,
+      "step_wall_s": 0.39694950000011886
+    },
+    {
+      "time": 1789518738.003923,
+      "cpu_pct": 5.9,
+      "available_ram_gb": 5.864022016,
+      "committed_ram_pct": 65.2,
+      "gpu": {
+        "temperature_c": 45.0,
+        "utilization_pct": 0.0,
+        "memory_mib": 824.0,
+        "power_w": 16.42
+      },
+      "top_cpu": [],
+      "lab": [],
+      "state": "stopped",
+      "phase": "teaching",
+      "episode": 163,
+      "sequence": 32,
+      "steps": 31,
+      "step_wall_s": 0.39694950000011886
+    },
+    {
+      "time": 1789518739.073947,
+      "cpu_pct": 8.0,
+      "available_ram_gb": 5.878423552,
+      "committed_ram_pct": 65.1,
+      "gpu": {
+        "temperature_c": 42.0,
+        "utilization_pct": 7.0,
+        "memory_mib": 831.0,
+        "power_w": 7.97
+      },
+      "top_cpu": [],
+      "lab": [],
+      "state": "stopped",
+      "phase": "teaching",
+      "episode": 163,
+      "sequence": 32,
+      "steps": 31,
+      "step_wall_s": 0.39694950000011886
+    },
+    {
+      "time": 1789518740.0743005,
+      "cpu_pct": 9.1,
+      "available_ram_gb": 5.891530752,
+      "committed_ram_pct": 65.0,
+      "gpu": {
+        "temperature_c": 42.0,
+        "utilization_pct": 7.0,
+        "memory_mib": 831.0,
+        "power_w": 7.97
+      },
+      "top_cpu": [],
+      "lab": [],
+      "state": "stopped",
+      "phase": "teaching",
+      "episode": 163,
+      "sequence": 32,
+      "steps": 31,
+      "step_wall_s": 0.39694950000011886
+    },
+    {
+      "time": 1789518741.0754573,
+      "cpu_pct": 6.2,
+      "available_ram_gb": 5.895487488,
+      "committed_ram_pct": 65.0,
+      "gpu": {
+        "temperature_c": 42.0,
+        "utilization_pct": 7.0,
+        "memory_mib": 831.0,
+        "power_w": 7.97
+      },
+      "top_cpu": [],
+      "lab": [],
+      "state": "stopped",
+      "phase": "teaching",
+      "episode": 163,
+      "sequence": 32,
+      "steps": 31,
+      "step_wall_s": 0.39694950000011886
+    },
+    {
+      "time": 1789518742.0766962,
+      "cpu_pct": 10.2,
+      "available_ram_gb": 5.886369792,
+      "committed_ram_pct": 65.1,
+      "gpu": {
+        "temperature_c": 42.0,
+        "utilization_pct": 7.0,
+        "memory_mib": 831.0,
+        "power_w": 7.97
+      },
+      "top_cpu": [],
+      "lab": [],
+      "state": "stopped",
+      "phase": "teaching",
+      "episode": 163,
+      "sequence": 32,
+      "steps": 31,
+      "step_wall_s": 0.39694950000011886
+    },
+    {
+      "time": 1789518743.0776784,
+      "cpu_pct": 7.2,
+      "available_ram_gb": 5.882560512,
+      "committed_ram_pct": 65.1,
+      "gpu": {
+        "temperature_c": 42.0,
+        "utilization_pct": 7.0,
+        "memory_mib": 831.0,
+        "power_w": 7.97
+      },
+      "top_cpu": [],
+      "lab": [],
+      "state": "stopped",
+      "phase": "teaching",
+      "episode": 163,
+      "sequence": 32,
+      "steps": 31,
+      "step_wall_s": 0.39694950000011886
+    },
+    {
+      "time": 1789518744.1308227,
+      "cpu_pct": 7.0,
+      "available_ram_gb": 5.90770176,
+      "committed_ram_pct": 64.9,
+      "gpu": {
+        "temperature_c": 41.0,
+        "utilization_pct": 7.0,
+        "memory_mib": 803.0,
+        "power_w": 7.47
+      },
+      "top_cpu": [],
+      "lab": [],
+      "state": "stopped",
+      "phase": "teaching",
+      "episode": 163,
+      "sequence": 32,
+      "steps": 31,
+      "step_wall_s": 0.39694950000011886
+    },
+    {
+      "time": 1789518745.131834,
+      "cpu_pct": 6.1,
+      "available_ram_gb": 5.962887168,
+      "committed_ram_pct": 64.6,
+      "gpu": {
+        "temperature_c": 41.0,
+        "utilization_pct": 7.0,
+        "memory_mib": 803.0,
+        "power_w": 7.47
+      },
+      "top_cpu": [],
+      "lab": [],
+      "state": "stopped",
+      "phase": "teaching",
+      "episode": 163,
+      "sequence": 32,
+      "steps": 31,
+      "step_wall_s": 0.39694950000011886
+    },
+    {
+      "time": 1789518746.1329598,
+      "cpu_pct": 8.6,
+      "available_ram_gb": 5.921931264,
+      "committed_ram_pct": 64.9,
+      "gpu": {
+        "temperature_c": 41.0,
+        "utilization_pct": 7.0,
+        "memory_mib": 803.0,
+        "power_w": 7.47
+      },
+      "top_cpu": [],
+      "lab": [],
+      "state": "stopped",
+      "phase": "teaching",
+      "episode": 163,
+      "sequence": 32,
+      "steps": 31,
+      "step_wall_s": 0.39694950000011886
+    },
+    {
+      "time": 1789518747.133881,
+      "cpu_pct": 4.4,
+      "available_ram_gb": 5.922619392,
+      "committed_ram_pct": 64.8,
+      "gpu": {
+        "temperature_c": 41.0,
+        "utilization_pct": 7.0,
+        "memory_mib": 803.0,
+        "power_w": 7.47
+      },
+      "top_cpu": [],
+      "lab": [],
+      "state": "stopped",
+      "phase": "teaching",
+      "episode": 163,
+      "sequence": 32,
+      "steps": 31,
+      "step_wall_s": 0.39694950000011886
+    },
+    {
+      "time": 1789518748.135573,
+      "cpu_pct": 3.0,
+      "available_ram_gb": 5.909520384,
+      "committed_ram_pct": 64.9,
+      "gpu": {
+        "temperature_c": 41.0,
+        "utilization_pct": 7.0,
+        "memory_mib": 803.0,
+        "power_w": 7.47
+      },
+      "top_cpu": [],
+      "lab": [],
+      "state": "stopped",
+      "phase": "teaching",
+      "episode": 163,
+      "sequence": 32,
+      "steps": 31,
+      "step_wall_s": 0.39694950000011886
+    },
+    {
+      "time": 1789518749.1960292,
+      "cpu_pct": 10.8,
+      "available_ram_gb": 5.897527296,
+      "committed_ram_pct": 65.0,
+      "gpu": {
+        "temperature_c": 41.0,
+        "utilization_pct": 9.0,
+        "memory_mib": 842.0,
+        "power_w": 7.43
+      },
+      "top_cpu": [],
+      "lab": [],
+      "state": "stopped",
+      "phase": "teaching",
+      "episode": 163,
+      "sequence": 32,
+      "steps": 31,
+      "step_wall_s": 0.39694950000011886
+    },
+    {
+      "time": 1789518750.1971502,
+      "cpu_pct": 8.7,
+      "available_ram_gb": 5.874118656,
+      "committed_ram_pct": 65.1,
+      "gpu": {
+        "temperature_c": 41.0,
+        "utilization_pct": 9.0,
+        "memory_mib": 842.0,
+        "power_w": 7.43
+      },
+      "top_cpu": [],
+      "lab": [],
+      "state": "stopped",
+      "phase": "teaching",
+      "episode": 163,
+      "sequence": 32,
+      "steps": 31,
+      "step_wall_s": 0.39694950000011886
+    },
+    {
+      "time": 1789518751.1981442,
+      "cpu_pct": 8.6,
+      "available_ram_gb": 5.918437376,
+      "committed_ram_pct": 64.9,
+      "gpu": {
+        "temperature_c": 41.0,
+        "utilization_pct": 9.0,
+        "memory_mib": 842.0,
+        "power_w": 7.43
+      },
+      "top_cpu": [],
+      "lab": [],
+      "state": "stopped",
+      "phase": "teaching",
+      "episode": 163,
+      "sequence": 32,
+      "steps": 31,
+      "step_wall_s": 0.39694950000011886
+    },
+    {
+      "time": 1789518752.1991704,
+      "cpu_pct": 10.8,
+      "available_ram_gb": 5.907820544,
+      "committed_ram_pct": 64.9,
+      "gpu": {
+        "temperature_c": 41.0,
+        "utilization_pct": 9.0,
+        "memory_mib": 842.0,
+        "power_w": 7.43
+      },
+      "top_cpu": [],
+      "lab": [],
+      "state": "stopped",
+      "phase": "teaching",
+      "episode": 163,
+      "sequence": 32,
+      "steps": 31,
+      "step_wall_s": 0.39694950000011886
+    },
+    {
+      "time": 1789518753.200445,
+      "cpu_pct": 11.9,
+      "available_ram_gb": 5.902061568,
+      "committed_ram_pct": 65.0,
+      "gpu": {
+        "temperature_c": 41.0,
+        "utilization_pct": 9.0,
+        "memory_mib": 842.0,
+        "power_w": 7.43
+      },
+      "top_cpu": [],
+      "lab": [],
+      "state": "stopped",
+      "phase": "teaching",
+      "episode": 163,
+      "sequence": 32,
+      "steps": 31,
+      "step_wall_s": 0.39694950000011886
+    }
+  ]
+}

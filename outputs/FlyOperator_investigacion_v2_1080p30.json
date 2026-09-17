@@ -1,0 +1,17 @@
+{
+  "frames": 18,
+  "source_width": 1280,
+  "source_height": 750,
+  "source_decision_ms": 50,
+  "dimensions": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "simulated_duration_seconds": 0.9000000000000002,
+  "label": "Fly Operator | prueba combinada | semilla 7 | 53 pasos previos | cambio de arma completado | una muestra",
+  "decoded_without_errors": true,
+  "source_frames": "D:\\FlyOperatorLab\\work\\frames\\36892_14_23122437",
+  "output": "D:\\FlyOperatorLab\\outputs\\FlyOperator_investigacion_v2_1080p30.mp4",
+  "timing": "Frame holds at 30 fps; neural computation waiting time excluded. Native 20 fps decision captures, scaled to 1080p."
+}

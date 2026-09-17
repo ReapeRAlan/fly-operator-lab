@@ -1,0 +1,36 @@
+# Entornos y dependencias (se recrean con pip / npm)
+.venv/
+.venv-learning/
+__pycache__/
+*.pyc
+.pytest_cache/
+dashboard/node_modules/
+
+# Estado local: perfil del juego, checkpoints, SQLite, capturas, builds, descompilación
+work/
+archive/
+
+# Datos pesados (se regeneran con scripts/acquire.py y scripts/prepare_connectome.py)
+data/raw/
+data/processed/*
+!data/processed/audit.json
+
+# Derivado de las plantillas XML del juego (se regenera con scripts/prepare_learning.py)
+data/learning/equipment_catalog.json
+
+# Herramientas de terceros (se descargan con scripts/acquire.py toolchain)
+third_party/*
+!third_party/*.provenance.json
+
+# Videos, paquetes y evidencia con rutas del equipo local
+outputs/*.mp4
+outputs/*.zip
+outputs/perception_qa.json
+outputs/readiness_v2.json
+config/java_home.txt
+
+# Binarios del juego o del puente compilado: nunca se publican
+*.dll
+*.exe
+*.pdb
+*.dmp

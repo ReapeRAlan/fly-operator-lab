@@ -1,0 +1,261 @@
+{
+  "first": {
+    "active": true,
+    "automatic_thinks_blocked": 159,
+    "client0_state": 5,
+    "episode": 45,
+    "game_flags": 17,
+    "game_state": 1,
+    "humans": [
+      {
+        "aim": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "ammo": 30,
+        "capacity": 30,
+        "commands": 0,
+        "health": 100.0,
+        "id": 101,
+        "kind": 1,
+        "look": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          4.0,
+          0.0,
+          0.0
+        ],
+        "recent_damage": 0.0,
+        "speed": 0.0,
+        "weapon_state": 3
+      },
+      {
+        "aim": [
+          1.0,
+          0.0,
+          -1.9311904907226562e-05
+        ],
+        "ammo": 31,
+        "capacity": 31,
+        "commands": 0,
+        "health": 100.0,
+        "id": 103,
+        "kind": 0,
+        "look": [
+          1.0,
+          0.0,
+          -1.9311904907226562e-05
+        ],
+        "position": [
+          2.1952579021453857,
+          0.0,
+          0.0028796233236789703
+        ],
+        "recent_damage": 0.0,
+        "speed": 0.0,
+        "weapon_state": 5
+      }
+    ],
+    "map_load_id": 45,
+    "ok": true,
+    "operator": {
+      "aim": [
+        1.0,
+        0.0,
+        -1.9311904907226562e-05
+      ],
+      "ammo": 31,
+      "capacity": 31,
+      "commands": 0,
+      "health": 100.0,
+      "id": 103,
+      "kind": 0,
+      "look": [
+        1.0,
+        0.0,
+        -1.9311904907226562e-05
+      ],
+      "position": [
+        2.1952579021453857,
+        0.0,
+        0.0028796233236789703
+      ],
+      "recent_damage": 0.0,
+      "speed": 0.0,
+      "weapon_state": 5
+    },
+    "protocol": 1,
+    "reload_requests": 116,
+    "requested_dt_ms": 0,
+    "sequence": 159,
+    "shot_requests": 2,
+    "shots_accepted": 0,
+    "sim_time_ms": 5301,
+    "simulation_thread": 7184,
+    "visible_enemies": [
+      {
+        "aim": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "ammo": 30,
+        "capacity": 30,
+        "commands": 0,
+        "health": 100.0,
+        "id": 101,
+        "kind": 1,
+        "look": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          4.0,
+          0.0,
+          0.0
+        ],
+        "recent_damage": 0.0,
+        "speed": 0.0,
+        "weapon_state": 3
+      }
+    ],
+    "visible_ids": [
+      101
+    ]
+  },
+  "second": {
+    "active": true,
+    "automatic_thinks_blocked": 159,
+    "client0_state": 5,
+    "episode": 45,
+    "game_flags": 17,
+    "game_state": 1,
+    "humans": [
+      {
+        "aim": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "ammo": 30,
+        "capacity": 30,
+        "commands": 0,
+        "health": 100.0,
+        "id": 101,
+        "kind": 1,
+        "look": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          4.0,
+          0.0,
+          0.0
+        ],
+        "recent_damage": 0.0,
+        "speed": 0.0,
+        "weapon_state": 3
+      },
+      {
+        "aim": [
+          1.0,
+          0.0,
+          -1.9311904907226562e-05
+        ],
+        "ammo": 31,
+        "capacity": 31,
+        "commands": 0,
+        "health": 100.0,
+        "id": 103,
+        "kind": 0,
+        "look": [
+          1.0,
+          0.0,
+          -1.9311904907226562e-05
+        ],
+        "position": [
+          2.1952579021453857,
+          0.0,
+          0.0028796233236789703
+        ],
+        "recent_damage": 0.0,
+        "speed": 0.0,
+        "weapon_state": 5
+      }
+    ],
+    "map_load_id": 45,
+    "ok": true,
+    "operator": {
+      "aim": [
+        1.0,
+        0.0,
+        -1.9311904907226562e-05
+      ],
+      "ammo": 31,
+      "capacity": 31,
+      "commands": 0,
+      "health": 100.0,
+      "id": 103,
+      "kind": 0,
+      "look": [
+        1.0,
+        0.0,
+        -1.9311904907226562e-05
+      ],
+      "position": [
+        2.1952579021453857,
+        0.0,
+        0.0028796233236789703
+      ],
+      "recent_damage": 0.0,
+      "speed": 0.0,
+      "weapon_state": 5
+    },
+    "protocol": 1,
+    "reload_requests": 116,
+    "requested_dt_ms": 0,
+    "sequence": 159,
+    "shot_requests": 2,
+    "shots_accepted": 0,
+    "sim_time_ms": 5301,
+    "simulation_thread": 7184,
+    "visible_enemies": [
+      {
+        "aim": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "ammo": 30,
+        "capacity": 30,
+        "commands": 0,
+        "health": 100.0,
+        "id": 101,
+        "kind": 1,
+        "look": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          4.0,
+          0.0,
+          0.0
+        ],
+        "recent_damage": 0.0,
+        "speed": 0.0,
+        "weapon_state": 3
+      }
+    ],
+    "visible_ids": [
+      101
+    ]
+  },
+  "paused": true
+}

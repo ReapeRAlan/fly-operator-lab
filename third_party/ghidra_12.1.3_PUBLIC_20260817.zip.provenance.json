@@ -1,0 +1,8 @@
+{
+  "url": "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_12.1.3_build/ghidra_12.1.3_PUBLIC_20260817.zip",
+  "path": "third_party\\ghidra_12.1.3_PUBLIC_20260817.zip",
+  "bytes": 569445154,
+  "sha256": "93a5d11a9ad510622acaaf908c556a7b9b764d338e78a7567f3689bf5081fd54",
+  "upstream_md5": null,
+  "verified_at_unix": 1789496117.3812804
+}

@@ -1,0 +1,155 @@
+{
+  "evidence": {
+    "aim_target": {
+      "checks": [
+        "aim"
+      ],
+      "source": "control_validation.json"
+    },
+    "cancel": {
+      "source": "native_kits_v2.json"
+    },
+    "crouch": {
+      "source": "native_kits_v2.json"
+    },
+    "defuse": {
+      "source": "native_actions_v2.json",
+      "stage": "defuse"
+    },
+    "door_breach": {
+      "source": "native_actions_v2.json",
+      "stage": "breach"
+    },
+    "door_open": {
+      "source": "native_actions_v2.json",
+      "stage": "door"
+    },
+    "equip": {
+      "source": "native_actions_v2.json",
+      "stage": "switch"
+    },
+    "fire": {
+      "checks": [
+        "fire_uses_ammunition_and_native_cooldown"
+      ],
+      "source": "control_validation.json"
+    },
+    "follow": {
+      "source": "native_actions_v2.json",
+      "stage": "rescue"
+    },
+    "loadout": {
+      "kits": [
+        0,
+        1,
+        2
+      ],
+      "source": "native_kits_v2.json"
+    },
+    "move": {
+      "source": "native_actions_v2.json",
+      "stage": "move"
+    },
+    "reload": {
+      "checks": [
+        "reload_not_instant",
+        "native_reload_completed"
+      ],
+      "source": "control_validation.json"
+    },
+    "stop": {
+      "checks": [
+        "stop_mid_path"
+      ],
+      "source": "control_validation.json"
+    },
+    "throw": {
+      "source": "native_actions_v2.json",
+      "stage": "grenade"
+    },
+    "turn": {
+      "checks": [
+        "turn_left",
+        "turn_right"
+      ],
+      "source": "control_validation.json"
+    },
+    "wait": {
+      "checks": [
+        "no_firing_without_order"
+      ],
+      "source": "control_validation.json"
+    }
+  },
+  "generator": {
+    "file": "scripts/build_native_capabilities.py",
+    "sha256": "e7f94a82de9ab7a67a089fd7cfbc0ce5ccd683fd5e4ed28ec92cb9323858ed42"
+  },
+  "manifest_version": 1,
+  "pending": [
+    "arrest",
+    "clear_obstacle",
+    "evacuate",
+    "spy_camera",
+    "use"
+  ],
+  "sources": [
+    {
+      "file": "control_validation.json",
+      "session": {
+        "dll_sha256": "9c3f1b1d79018d17508c4f10c9e27df718084a730b394c2da4218a1d76eee3b2",
+        "exe_sha256": "7f873f34dfe37dfe40840140baf42352ea8f6b8e144d652a261a3dbddf83d747",
+        "pid": 40376,
+        "started_unix": 1789591124.4340482
+      },
+      "sha256": "9209d8e92978a7d3976e87fba705303cffb87534942e9a2ed15a693e894c42b1"
+    },
+    {
+      "file": "native_actions_v2.json",
+      "metadata": {
+        "file": "native_actions_v2.meta.json",
+        "sha256": "8df260e57cf8c04518fce2b62f7f509fa41d79fd9b3e006cfbf67d27b1f1e0af"
+      },
+      "session": {
+        "dll_sha256": "9c3f1b1d79018d17508c4f10c9e27df718084a730b394c2da4218a1d76eee3b2",
+        "exe_sha256": "7f873f34dfe37dfe40840140baf42352ea8f6b8e144d652a261a3dbddf83d747",
+        "pid": 40376,
+        "started_unix": 1789591124.4340482
+      },
+      "sha256": "23a62be008e96fc868313ff0219a7fcc21c4b22a878a59cf70c3edf135a5e6e6"
+    },
+    {
+      "file": "native_kits_v2.json",
+      "metadata": {
+        "file": "native_kits_v2.meta.json",
+        "sha256": "8df260e57cf8c04518fce2b62f7f509fa41d79fd9b3e006cfbf67d27b1f1e0af"
+      },
+      "session": {
+        "dll_sha256": "9c3f1b1d79018d17508c4f10c9e27df718084a730b394c2da4218a1d76eee3b2",
+        "exe_sha256": "7f873f34dfe37dfe40840140baf42352ea8f6b8e144d652a261a3dbddf83d747",
+        "pid": 40376,
+        "started_unix": 1789591124.4340482
+      },
+      "sha256": "ecbf51d4856136a1c18a55fa2aab9436a1a9689c56d90befd21bdd9faee902f1"
+    }
+  ],
+  "validated_actions": [
+    "aim_target",
+    "cancel",
+    "crouch",
+    "defuse",
+    "door_breach",
+    "door_open",
+    "equip",
+    "fire",
+    "follow",
+    "loadout",
+    "move",
+    "reload",
+    "stop",
+    "throw",
+    "turn",
+    "wait"
+  ],
+  "version": 2
+}

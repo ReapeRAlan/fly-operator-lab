@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "scope": "Full classified-neuron MaleCNS v1.0 inventory, not all unclassified segments",
+  "control_checks": 16,
+  "live_episodes": 20,
+  "live_steps": 1200,
+  "recorded_episodes": 20,
+  "recorded_steps": 1641,
+  "supplemental_episodes": 1,
+  "all_trace_rows_checked": 3000,
+  "causality": [
+    {
+      "mode": "normal",
+      "spikes": 5875070,
+      "distance_m": 2.3587932591068532,
+      "actions": {
+        "reload": 49,
+        "move": 9,
+        "stop": 2
+      }
+    },
+    {
+      "mode": "altered_inputs",
+      "spikes": 5907633,
+      "distance_m": 3.1781218653883374,
+      "actions": {
+        "reload": 19,
+        "move": 35,
+        "stop": 6
+      }
+    },
+    {
+      "mode": "disconnected_outputs",
+      "spikes": 5840748,
+      "distance_m": 0.0,
+      "actions": {
+        "stop": 60
+      }
+    }
+  ],
+  "recorded_arena_victories": 3,
+  "video_decoded_frames": 1800,
+  "video_decoded_seconds": 60,
+  "all_original_profile_hashes_match": true,
+  "secondary_monitor": true,
+  "final_game_paused": true
+}

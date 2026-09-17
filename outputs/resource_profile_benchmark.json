@@ -1,0 +1,21 @@
+{
+  "baseline": {
+    "affinity": [
+      19
+    ],
+    "priority": 64,
+    "median_neural_seconds": 14.551695399997698,
+    "samples": 16,
+    "first_recorded_at": 1789573968.9518952,
+    "last_recorded_at": 1789574210.0972352
+  },
+  "after_affinity_change": {
+    "samples": 21,
+    "median_neural_seconds": 5.731037800003833,
+    "min": 5.570636600001308,
+    "max": 6.078348399998504
+  },
+  "observed_ratio": 2.539103022490615,
+  "scope": "Consecutive samples in same live internal episode; inputs not identical, not a controlled speedup experiment",
+  "deadline_local": "2026-09-16T19:14:25.727968"
+}

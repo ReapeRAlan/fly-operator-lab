@@ -1,0 +1,85 @@
+{
+  "scope": "Short calibration under identical state, noise and 50 ms stimulation; not long-term physiological validation",
+  "seed": 7,
+  "selected_initial_eta": 0.0001,
+  "rows": [
+    {
+      "eta": 1e-05,
+      "activity": {
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 94259,
+        "active_neurons": 16210,
+        "simulated_ms": 50,
+        "wall_seconds": 8.525288199998613,
+        "plasticity": true,
+        "eligible_edges": 2271111,
+        "spikes_sha256": "46867a4c5bf9ed53ba95d0ba8aed83f1e811ac9ec640f61d4241cd0558171cfe"
+      },
+      "update": {
+        "changed_edges": 2264719,
+        "absolute_change": 28.76425588130951,
+        "max_change": 0.0001354217529296875,
+        "delta": 0.5
+      },
+      "silent_fraction": 0.9027594481103779,
+      "near_max_spike_fraction": 0.000653869226154769,
+      "gain_min": 0.9998645782470703,
+      "gain_max": 1.0001180171966553,
+      "finite": true,
+      "mean_firing_hz": 11.308818236352728
+    },
+    {
+      "eta": 0.0001,
+      "activity": {
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 94259,
+        "active_neurons": 16210,
+        "simulated_ms": 50,
+        "wall_seconds": 7.149388199999521,
+        "plasticity": true,
+        "eligible_edges": 2271111,
+        "spikes_sha256": "46867a4c5bf9ed53ba95d0ba8aed83f1e811ac9ec640f61d4241cd0558171cfe"
+      },
+      "update": {
+        "changed_edges": 2270488,
+        "absolute_change": 287.64331126213074,
+        "max_change": 0.0013543367385864258,
+        "delta": 0.5
+      },
+      "silent_fraction": 0.9027594481103779,
+      "near_max_spike_fraction": 0.000653869226154769,
+      "gain_min": 0.9986456632614136,
+      "gain_max": 1.0011805295944214,
+      "finite": true,
+      "mean_firing_hz": 11.308818236352728
+    },
+    {
+      "eta": 0.001,
+      "activity": {
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 94259,
+        "active_neurons": 16210,
+        "simulated_ms": 50,
+        "wall_seconds": 7.097194000001764,
+        "plasticity": true,
+        "eligible_edges": 2271111,
+        "spikes_sha256": "46867a4c5bf9ed53ba95d0ba8aed83f1e811ac9ec640f61d4241cd0558171cfe"
+      },
+      "update": {
+        "changed_edges": 2271031,
+        "absolute_change": 2876.433814883232,
+        "max_change": 0.013543188571929932,
+        "delta": 0.5
+      },
+      "silent_fraction": 0.9027594481103779,
+      "near_max_spike_fraction": 0.000653869226154769,
+      "gain_min": 0.9864568114280701,
+      "gain_max": 1.0118046998977661,
+      "finite": true,
+      "mean_firing_hz": 11.308818236352728
+    }
+  ]
+}

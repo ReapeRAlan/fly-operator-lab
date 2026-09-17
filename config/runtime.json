@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "display_mode": "single_monitor",
+  "require_secondary_monitor": false,
+  "keep_display_awake": true
+}

@@ -1,0 +1,233 @@
+{
+  "game_path": "D:\\SteamLibrary\\steamapps\\common\\DoorKickers2",
+  "sha256": "7f873f34dfe37dfe40840140baf42352ea8f6b8e144d652a261a3dbddf83d747",
+  "pdb_sha256": "48e0684ef1959a794530ac50c87a2c7e452158681cc1431218cc2289e6ab3cd3",
+  "guid": "a2347bb6-eca6-424f-8b5c-a6431e79860c",
+  "age": 7,
+  "machine": 34404,
+  "image_base": 5368709120,
+  "sections": [
+    {
+      "name": ".text",
+      "rva": 4096,
+      "vsize": 7059055,
+      "raw_size": 7059456,
+      "raw": 1024
+    },
+    {
+      "name": ".rdata",
+      "rva": 7065600,
+      "vsize": 1090044,
+      "raw_size": 1090048,
+      "raw": 7060480
+    },
+    {
+      "name": ".data",
+      "rva": 8159232,
+      "vsize": 12914232,
+      "raw_size": 40960,
+      "raw": 8150528
+    },
+    {
+      "name": ".pdata",
+      "rva": 21073920,
+      "vsize": 284940,
+      "raw_size": 285184,
+      "raw": 8191488
+    },
+    {
+      "name": "_RDATA",
+      "rva": 21360640,
+      "vsize": 8712,
+      "raw_size": 9216,
+      "raw": 8476672
+    },
+    {
+      "name": ".fptable",
+      "rva": 21372928,
+      "vsize": 256,
+      "raw_size": 512,
+      "raw": 8485888
+    },
+    {
+      "name": ".rsrc",
+      "rva": 21377024,
+      "vsize": 41392,
+      "raw_size": 41472,
+      "raw": 8486400
+    },
+    {
+      "name": ".reloc",
+      "rva": 21422080,
+      "vsize": 29080,
+      "raw_size": 29184,
+      "raw": 8527872
+    }
+  ],
+  "symbols": {
+    "Human_Server::CmdQueueShootFirearmProjectile": {
+      "rva": 2763664,
+      "mangled": "?CmdQueueShootFirearmProjectile@Human_Server@@QEAAXW4eType@Inventory@@AEBVVector3@@1@Z"
+    },
+    "Human_Server::CmdCanMeleeAttack": {
+      "rva": 2754112,
+      "mangled": "?CmdCanMeleeAttack@Human_Server@@QEBA_NPEBVEntity_Server@@@Z"
+    },
+    "Human_Server::CmdFollowToggle": {
+      "rva": 2789088,
+      "mangled": "?CmdFollowToggle@Human_Server@@QEAAXPEAV1@_N@Z"
+    },
+    "Human_Server::CmdQueueSurrender": {
+      "rva": 2782352,
+      "mangled": "?CmdQueueSurrender@Human_Server@@QEAAX_N@Z"
+    },
+    "GameServer::UpdateDelayedEntitySpawns": {
+      "rva": 2921216,
+      "mangled": "?UpdateDelayedEntitySpawns@GameServer@@AEAAXH@Z"
+    },
+    "Human_Server::CmdQueueTimebombDefuse": {
+      "rva": 2794032,
+      "mangled": "?CmdQueueTimebombDefuse@Human_Server@@QEAAXI@Z"
+    },
+    "Human_Server::CmdQueueGrenadeThrow": {
+      "rva": 2767712,
+      "mangled": "?CmdQueueGrenadeThrow@Human_Server@@QEAAXW4eType@Inventory@@AEBVVector3@@M1PEBVEntity_Server@@@Z"
+    },
+    "Human_Server::CmdMountGun": {
+      "rva": 2805632,
+      "mangled": "?CmdMountGun@Human_Server@@QEAAXPEAVMountedWeapon_Server@@_N@Z"
+    },
+    "Human_Server::CmdSelfEnableVIPControl": {
+      "rva": 2785184,
+      "mangled": "?CmdSelfEnableVIPControl@Human_Server@@QEAAXPEAV1@@Z"
+    },
+    "Human_Server::CmdQueueUse": {
+      "rva": 2798048,
+      "mangled": "?CmdQueueUse@Human_Server@@QEAAXI@Z"
+    },
+    "Human_Server::CmdQueueCrouch": {
+      "rva": 2752288,
+      "mangled": "?CmdQueueCrouch@Human_Server@@QEAAX_N@Z"
+    },
+    "Human_Server::CmdCancelDoorBreach": {
+      "rva": 2777088,
+      "mangled": "?CmdCancelDoorBreach@Human_Server@@QEAAXXZ"
+    },
+    "Human_Server::CmdQueuePersuadeToReveal": {
+      "rva": 2790272,
+      "mangled": "?CmdQueuePersuadeToReveal@Human_Server@@QEAAXPEAV1@@Z"
+    },
+    "Human_Server::CmdAimIsFocusedOnArea": {
+      "rva": 2750160,
+      "mangled": "?CmdAimIsFocusedOnArea@Human_Server@@QEBA_NVVector2@@M@Z"
+    },
+    "Human_Server::CmdQueueStatusEffects": {
+      "rva": 2787104,
+      "mangled": "?CmdQueueStatusEffects@Human_Server@@AEAA_NXZ"
+    },
+    "Human_Server::CmdMarkSelfAsSpottedBy": {
+      "rva": 2785680,
+      "mangled": "?CmdMarkSelfAsSpottedBy@Human_Server@@QEAAXPEBV1@@Z"
+    },
+    "Human_Server::CmdStun": {
+      "rva": 2786768,
+      "mangled": "?CmdStun@Human_Server@@QEAAXH@Z"
+    },
+    "Human_Server::CmdBurn": {
+      "rva": 2786912,
+      "mangled": "?CmdBurn@Human_Server@@QEAAXH@Z"
+    },
+    "GameServer::Update": {
+      "rva": 2895152,
+      "mangled": "?Update@GameServer@@UEAAX_K@Z"
+    },
+    "AI::BrainPlayer::Think": {
+      "rva": 2634208,
+      "mangled": "?Think@BrainPlayer@AI@@UEAAXXZ"
+    },
+    "Human_Server::CmdCancelUse": {
+      "rva": 2798768,
+      "mangled": "?CmdCancelUse@Human_Server@@QEAAXXZ"
+    },
+    "Human_Server::CmdFirearmShoot": {
+      "rva": 2756832,
+      "mangled": "?CmdFirearmShoot@Human_Server@@QEAA_NAEBUsFirearmShoot@@@Z"
+    },
+    "Human_Server::ReplaceWaypoints": {
+      "rva": 2727472,
+      "mangled": "?ReplaceWaypoints@Human_Server@@QEAAXPEBVVector3@@HPEBUsPointParams@Waypoints@@@Z"
+    },
+    "Human_Server::CmdQueueArrest": {
+      "rva": 2782880,
+      "mangled": "?CmdQueueArrest@Human_Server@@QEAAXPEBV1@_N@Z"
+    },
+    "GameServer::UpdateGame": {
+      "rva": 2896544,
+      "mangled": "?UpdateGame@GameServer@@AEAAXH@Z"
+    },
+    "Human_Server::CmdQueueClearObstacle": {
+      "rva": 2792320,
+      "mangled": "?CmdQueueClearObstacle@Human_Server@@QEAAXI@Z"
+    },
+    "Human_Server::CmdCancelArrest": {
+      "rva": 2783600,
+      "mangled": "?CmdCancelArrest@Human_Server@@QEAAXXZ"
+    },
+    "Human_Server::CmdQueueDoorBreach": {
+      "rva": 2776448,
+      "mangled": "?CmdQueueDoorBreach@Human_Server@@QEAAXW4eType@Inventory@@PEAVDoor_Server@@@Z"
+    },
+    "Human_Server::CmdQueueMeleeAttack": {
+      "rva": 2754352,
+      "mangled": "?CmdQueueMeleeAttack@Human_Server@@QEAAXI@Z"
+    },
+    "Human_Server::CmdQueueDoorOpen": {
+      "rva": 2762016,
+      "mangled": "?CmdQueueDoorOpen@Human_Server@@QEAAXPEAVDoor_Server@@_N@Z"
+    },
+    "Human_Server::CmdPinned": {
+      "rva": 2786576,
+      "mangled": "?CmdPinned@Human_Server@@QEAAXXZ"
+    },
+    "Human_Server::CmdSuppressArea": {
+      "rva": 2764992,
+      "mangled": "?CmdSuppressArea@Human_Server@@QEAAXAEBVVector3@@@Z"
+    },
+    "Human_Server::CmdAimInDirection": {
+      "rva": 2749968,
+      "mangled": "?CmdAimInDirection@Human_Server@@QEAAXAEBVVector3@@@Z"
+    },
+    "Human_Server::CmdUnmountGun": {
+      "rva": 2806480,
+      "mangled": "?CmdUnmountGun@Human_Server@@QEAAX_N@Z"
+    },
+    "Human_Server::CmdInteractStop": {
+      "rva": 2803680,
+      "mangled": "?CmdInteractStop@Human_Server@@QEAAXXZ"
+    },
+    "Human_Server::CmdCancelClearObstacle": {
+      "rva": 2793920,
+      "mangled": "?CmdCancelClearObstacle@Human_Server@@QEAAXXZ"
+    },
+    "Human_Server::CmdQueueSpyCamera": {
+      "rva": 2778400,
+      "mangled": "?CmdQueueSpyCamera@Human_Server@@QEAAXW4eType@Inventory@@IAEBVVector3@@@Z"
+    },
+    "Human_Server::CmdQueuePointAt": {
+      "rva": 2780288,
+      "mangled": "?CmdQueuePointAt@Human_Server@@QEAAXVVector2@@@Z"
+    },
+    "Human_Server::CmdEvacuate": {
+      "rva": 2789760,
+      "mangled": "?CmdEvacuate@Human_Server@@QEAAXXZ"
+    },
+    "Human_Server::CmdKnockback": {
+      "rva": 2787568,
+      "mangled": "?CmdKnockback@Human_Server@@QEAAXVVector3@@H@Z"
+    },
+    "Human_Server::CmdQueueSabotage": {
+      "rva": 2795680,
+      "mangled": "?CmdQueueSabotage@Human_Server@@QEAAXI@Z"
+    }
+  }
+}

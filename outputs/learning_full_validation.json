@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "neurons": 166700,
+  "edges": 25582938,
+  "readout_neurons": 1314,
+  "graph_hash": "7f77d769d2fcba02f0581da8f9b3e913dd7d7d2abf067ddc71686a5b7545b161",
+  "frozen": {
+    "neurons": 166700,
+    "edges": 25582938,
+    "spikes": 36128,
+    "active_neurons": 13116,
+    "simulated_ms": 50.0,
+    "wall_seconds": 2.811536099998193,
+    "plasticity": false,
+    "eligible_edges": 0,
+    "spikes_sha256": "bc8fbc6cbd5fb1587eed79a450c4a5248eaeda044ba5a0dc6de0d1dd17461d4d"
+  },
+  "plastic": {
+    "neurons": 166700,
+    "edges": 25582938,
+    "spikes": 94259,
+    "active_neurons": 16210,
+    "simulated_ms": 50.0,
+    "wall_seconds": 8.694528399999399,
+    "plasticity": true,
+    "eligible_edges": 2271111,
+    "spikes_sha256": "46867a4c5bf9ed53ba95d0ba8aed83f1e811ac9ec640f61d4241cd0558171cfe"
+  },
+  "update": {
+    "changed_edges": 2270488,
+    "absolute_change": 287.64331126213074,
+    "max_change": 0.0013543367385864258,
+    "delta": 0.5
+  },
+  "checkpoint_exact_continuation": true,
+  "rss_mib": 953.0859375,
+  "wall_seconds": 37.2197265625
+}

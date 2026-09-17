@@ -1,0 +1,25 @@
+{
+  "file": "D:\\FlyOperatorLab\\outputs\\Fly_Operator_MaleCNS_1080p30.mp4",
+  "frames": 1800,
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "duration_seconds": 60.0,
+  "total_simulated_seconds": 60.0,
+  "episodes": 21,
+  "source_runs": [
+    "D:\\FlyOperatorLab\\outputs\\recorded_validation",
+    "D:\\FlyOperatorLab\\outputs\\recorded_tail_01"
+  ],
+  "source_sizes": [
+    [
+      1264,
+      711
+    ]
+  ],
+  "upscaled": true,
+  "wall_run_seconds": 671.2769444,
+  "sha256": "0b61ecf23aad0f742f4ebad7c81fbd246c2aea31eddbb1e698936cb06c0cc5b7",
+  "bytes": 12729526,
+  "telemetry": "Overlay is experimental telemetry; gameplay frames are direct OpenGL captures. Episode cuts exclude reload and computation waits. The final episode may be cut at the requested frame count."
+}

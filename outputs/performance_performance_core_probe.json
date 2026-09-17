@@ -1,0 +1,4787 @@
+{
+  "summary": {
+    "samples": 45,
+    "cpu_mean_pct": 12.54888888888889,
+    "cpu_max_pct": 21.1,
+    "ram_available_min_gb": 3.483148288,
+    "gpu_max_c": 48.0,
+    "gpu_mean_pct": 11.555555555555555,
+    "start_steps": 602,
+    "end_steps": 608,
+    "states": [
+      "running"
+    ]
+  },
+  "rows": [
+    {
+      "time": 1789574226.3823936,
+      "cpu_pct": 12.5,
+      "available_ram_gb": 3.542581248,
+      "committed_ram_pct": 79.0,
+      "gpu": {
+        "temperature_c": 43.0,
+        "utilization_pct": 20.0,
+        "memory_mib": 1101.0,
+        "power_w": 8.43
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 1.6949999999999998,
+          "rss_gb": 0.93212672,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.155,
+          "rss_gb": 0.173846528,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 1.6949999999999998,
+          "rss_gb": 0.93212672,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.155,
+          "rss_gb": 0.173846528,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 91,
+      "steps": 602,
+      "step_wall_s": 14.485872799996287
+    },
+    {
+      "time": 1789574227.383139,
+      "cpu_pct": 20.4,
+      "available_ram_gb": 3.521499136,
+      "committed_ram_pct": 79.1,
+      "gpu": {
+        "temperature_c": 43.0,
+        "utilization_pct": 20.0,
+        "memory_mib": 1101.0,
+        "power_w": 8.43
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 5.0,
+          "rss_gb": 0.932139008,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.395,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 5.0,
+          "rss_gb": 0.932139008,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.395,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 91,
+      "steps": 602,
+      "step_wall_s": 14.485872799996287
+    },
+    {
+      "time": 1789574228.3861034,
+      "cpu_pct": 13.2,
+      "available_ram_gb": 3.516325888,
+      "committed_ram_pct": 79.1,
+      "gpu": {
+        "temperature_c": 43.0,
+        "utilization_pct": 20.0,
+        "memory_mib": 1101.0,
+        "power_w": 8.43
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.85,
+          "rss_gb": 0.932139008,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.845,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.85,
+          "rss_gb": 0.932139008,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.845,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 91,
+      "steps": 602,
+      "step_wall_s": 14.485872799996287
+    },
+    {
+      "time": 1789574229.3866277,
+      "cpu_pct": 12.7,
+      "available_ram_gb": 3.515236352,
+      "committed_ram_pct": 79.1,
+      "gpu": {
+        "temperature_c": 43.0,
+        "utilization_pct": 20.0,
+        "memory_mib": 1101.0,
+        "power_w": 8.43
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.765,
+          "rss_gb": 0.9321472,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.17,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.765,
+          "rss_gb": 0.9321472,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.17,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 91,
+      "steps": 602,
+      "step_wall_s": 14.485872799996287
+    },
+    {
+      "time": 1789574230.3880696,
+      "cpu_pct": 11.3,
+      "available_ram_gb": 3.500335104,
+      "committed_ram_pct": 79.2,
+      "gpu": {
+        "temperature_c": 43.0,
+        "utilization_pct": 20.0,
+        "memory_mib": 1101.0,
+        "power_w": 8.43
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 5.0,
+          "rss_gb": 0.9321472,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.17,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 5.0,
+          "rss_gb": 0.9321472,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.17,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 91,
+      "steps": 602,
+      "step_wall_s": 14.485872799996287
+    },
+    {
+      "time": 1789574231.4520547,
+      "cpu_pct": 11.7,
+      "available_ram_gb": 3.494785024,
+      "committed_ram_pct": 79.3,
+      "gpu": {
+        "temperature_c": 43.0,
+        "utilization_pct": 15.0,
+        "memory_mib": 1125.0,
+        "power_w": 8.39
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.92,
+          "rss_gb": 0.932155392,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.17,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.92,
+          "rss_gb": 0.932155392,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.17,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 91,
+      "steps": 602,
+      "step_wall_s": 14.485872799996287
+    },
+    {
+      "time": 1789574232.4677048,
+      "cpu_pct": 16.7,
+      "available_ram_gb": 3.53748992,
+      "committed_ram_pct": 79.0,
+      "gpu": {
+        "temperature_c": 43.0,
+        "utilization_pct": 15.0,
+        "memory_mib": 1125.0,
+        "power_w": 8.39
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 3.625,
+          "rss_gb": 0.932155392,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.0150000000000001,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 3.625,
+          "rss_gb": 0.932155392,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.0150000000000001,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 92,
+      "steps": 603,
+      "step_wall_s": 5.715688500000397
+    },
+    {
+      "time": 1789574233.4736724,
+      "cpu_pct": 15.0,
+      "available_ram_gb": 3.55344384,
+      "committed_ram_pct": 78.9,
+      "gpu": {
+        "temperature_c": 43.0,
+        "utilization_pct": 15.0,
+        "memory_mib": 1125.0,
+        "power_w": 8.39
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 2.19,
+          "rss_gb": 0.932155392,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.0150000000000001,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 2.19,
+          "rss_gb": 0.932155392,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.0150000000000001,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 92,
+      "steps": 603,
+      "step_wall_s": 5.715688500000397
+    },
+    {
+      "time": 1789574234.47498,
+      "cpu_pct": 16.2,
+      "available_ram_gb": 3.531505664,
+      "committed_ram_pct": 79.0,
+      "gpu": {
+        "temperature_c": 43.0,
+        "utilization_pct": 15.0,
+        "memory_mib": 1125.0,
+        "power_w": 8.39
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.845000000000001,
+          "rss_gb": 0.932155392,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.17,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.845000000000001,
+          "rss_gb": 0.932155392,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.17,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 92,
+      "steps": 603,
+      "step_wall_s": 5.715688500000397
+    },
+    {
+      "time": 1789574235.4769917,
+      "cpu_pct": 15.2,
+      "available_ram_gb": 3.535966208,
+      "committed_ram_pct": 79.0,
+      "gpu": {
+        "temperature_c": 43.0,
+        "utilization_pct": 15.0,
+        "memory_mib": 1125.0,
+        "power_w": 8.39
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.92,
+          "rss_gb": 0.932155392,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.25,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.92,
+          "rss_gb": 0.932155392,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.25,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 92,
+      "steps": 603,
+      "step_wall_s": 5.715688500000397
+    },
+    {
+      "time": 1789574236.5368552,
+      "cpu_pct": 9.8,
+      "available_ram_gb": 3.518992384,
+      "committed_ram_pct": 79.1,
+      "gpu": {
+        "temperature_c": 43.0,
+        "utilization_pct": 22.0,
+        "memory_mib": 1126.0,
+        "power_w": 8.43
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 5.0,
+          "rss_gb": 0.932155392,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.86,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 5.0,
+          "rss_gb": 0.932155392,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.86,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 92,
+      "steps": 603,
+      "step_wall_s": 5.715688500000397
+    },
+    {
+      "time": 1789574237.53817,
+      "cpu_pct": 11.6,
+      "available_ram_gb": 3.509010432,
+      "committed_ram_pct": 79.2,
+      "gpu": {
+        "temperature_c": 43.0,
+        "utilization_pct": 22.0,
+        "memory_mib": 1126.0,
+        "power_w": 8.43
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 5.0,
+          "rss_gb": 0.932155392,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.8800000000000001,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 5.0,
+          "rss_gb": 0.932155392,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.8800000000000001,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 92,
+      "steps": 603,
+      "step_wall_s": 5.715688500000397
+    },
+    {
+      "time": 1789574238.539136,
+      "cpu_pct": 12.7,
+      "available_ram_gb": 3.505446912,
+      "committed_ram_pct": 79.2,
+      "gpu": {
+        "temperature_c": 43.0,
+        "utilization_pct": 22.0,
+        "memory_mib": 1126.0,
+        "power_w": 8.43
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.765,
+          "rss_gb": 0.932155392,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.86,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.765,
+          "rss_gb": 0.932155392,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.86,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 92,
+      "steps": 603,
+      "step_wall_s": 5.715688500000397
+    },
+    {
+      "time": 1789574239.5495424,
+      "cpu_pct": 8.9,
+      "available_ram_gb": 3.53396736,
+      "committed_ram_pct": 79.0,
+      "gpu": {
+        "temperature_c": 43.0,
+        "utilization_pct": 22.0,
+        "memory_mib": 1126.0,
+        "power_w": 8.43
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 1.92,
+          "rss_gb": 0.932155392,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.46,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 1.92,
+          "rss_gb": 0.932155392,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.46,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 93,
+      "steps": 604,
+      "step_wall_s": 5.751858399999037
+    },
+    {
+      "time": 1789574240.5599604,
+      "cpu_pct": 10.9,
+      "available_ram_gb": 3.544989696,
+      "committed_ram_pct": 79.0,
+      "gpu": {
+        "temperature_c": 43.0,
+        "utilization_pct": 22.0,
+        "memory_mib": 1126.0,
+        "power_w": 8.43
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.3100000000000005,
+          "rss_gb": 0.932159488,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.0,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.3100000000000005,
+          "rss_gb": 0.932159488,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.0,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 93,
+      "steps": 604,
+      "step_wall_s": 5.751858399999037
+    },
+    {
+      "time": 1789574241.6217365,
+      "cpu_pct": 16.2,
+      "available_ram_gb": 3.522015232,
+      "committed_ram_pct": 79.1,
+      "gpu": {
+        "temperature_c": 47.0,
+        "utilization_pct": 2.0,
+        "memory_mib": 1128.0,
+        "power_w": 17.08
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.455,
+          "rss_gb": 0.932159488,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.9400000000000001,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.455,
+          "rss_gb": 0.932159488,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.9400000000000001,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 93,
+      "steps": 604,
+      "step_wall_s": 5.751858399999037
+    },
+    {
+      "time": 1789574242.6219795,
+      "cpu_pct": 17.4,
+      "available_ram_gb": 3.508502528,
+      "committed_ram_pct": 79.2,
+      "gpu": {
+        "temperature_c": 47.0,
+        "utilization_pct": 2.0,
+        "memory_mib": 1128.0,
+        "power_w": 17.08
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 5.0,
+          "rss_gb": 0.932175872,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.9550000000000001,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 5.0,
+          "rss_gb": 0.932175872,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.9550000000000001,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 93,
+      "steps": 604,
+      "step_wall_s": 5.751858399999037
+    },
+    {
+      "time": 1789574243.6234188,
+      "cpu_pct": 11.7,
+      "available_ram_gb": 3.506413568,
+      "committed_ram_pct": 79.2,
+      "gpu": {
+        "temperature_c": 47.0,
+        "utilization_pct": 2.0,
+        "memory_mib": 1128.0,
+        "power_w": 17.08
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 5.0,
+          "rss_gb": 0.932175872,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.405,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 5.0,
+          "rss_gb": 0.932175872,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.405,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 93,
+      "steps": 604,
+      "step_wall_s": 5.751858399999037
+    },
+    {
+      "time": 1789574244.625616,
+      "cpu_pct": 13.3,
+      "available_ram_gb": 3.498295296,
+      "committed_ram_pct": 79.2,
+      "gpu": {
+        "temperature_c": 47.0,
+        "utilization_pct": 2.0,
+        "memory_mib": 1128.0,
+        "power_w": 17.08
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.92,
+          "rss_gb": 0.932175872,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.405,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.92,
+          "rss_gb": 0.932175872,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.405,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 93,
+      "steps": 604,
+      "step_wall_s": 5.751858399999037
+    },
+    {
+      "time": 1789574245.645239,
+      "cpu_pct": 11.4,
+      "available_ram_gb": 3.491233792,
+      "committed_ram_pct": 79.3,
+      "gpu": {
+        "temperature_c": 47.0,
+        "utilization_pct": 2.0,
+        "memory_mib": 1128.0,
+        "power_w": 17.08
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 3.3850000000000002,
+          "rss_gb": 0.932175872,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.0,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 3.3850000000000002,
+          "rss_gb": 0.932175872,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.0,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 94,
+      "steps": 605,
+      "step_wall_s": 5.586801900004502
+    },
+    {
+      "time": 1789574246.707977,
+      "cpu_pct": 7.9,
+      "available_ram_gb": 3.487727616,
+      "committed_ram_pct": 79.3,
+      "gpu": {
+        "temperature_c": 46.0,
+        "utilization_pct": 2.0,
+        "memory_mib": 1097.0,
+        "power_w": 14.4
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 2.6149999999999998,
+          "rss_gb": 0.932175872,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.075,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 2.6149999999999998,
+          "rss_gb": 0.932175872,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.075,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 94,
+      "steps": 605,
+      "step_wall_s": 5.586801900004502
+    },
+    {
+      "time": 1789574247.7082677,
+      "cpu_pct": 10.6,
+      "available_ram_gb": 3.538874368,
+      "committed_ram_pct": 79.0,
+      "gpu": {
+        "temperature_c": 46.0,
+        "utilization_pct": 2.0,
+        "memory_mib": 1097.0,
+        "power_w": 14.4
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 5.075,
+          "rss_gb": 0.932175872,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.1199999999999999,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 5.075,
+          "rss_gb": 0.932175872,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.1199999999999999,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 94,
+      "steps": 605,
+      "step_wall_s": 5.586801900004502
+    },
+    {
+      "time": 1789574248.7105496,
+      "cpu_pct": 10.9,
+      "available_ram_gb": 3.541778432,
+      "committed_ram_pct": 79.0,
+      "gpu": {
+        "temperature_c": 46.0,
+        "utilization_pct": 2.0,
+        "memory_mib": 1097.0,
+        "power_w": 14.4
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 5.0,
+          "rss_gb": 0.932175872,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.9400000000000001,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 5.0,
+          "rss_gb": 0.932175872,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.9400000000000001,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 94,
+      "steps": 605,
+      "step_wall_s": 5.586801900004502
+    },
+    {
+      "time": 1789574249.7116718,
+      "cpu_pct": 15.8,
+      "available_ram_gb": 3.555090432,
+      "committed_ram_pct": 78.9,
+      "gpu": {
+        "temperature_c": 46.0,
+        "utilization_pct": 2.0,
+        "memory_mib": 1097.0,
+        "power_w": 14.4
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.845000000000001,
+          "rss_gb": 0.932184064,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.0150000000000001,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.845000000000001,
+          "rss_gb": 0.932184064,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.0150000000000001,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 94,
+      "steps": 605,
+      "step_wall_s": 5.586801900004502
+    },
+    {
+      "time": 1789574250.713042,
+      "cpu_pct": 10.0,
+      "available_ram_gb": 3.542061056,
+      "committed_ram_pct": 79.0,
+      "gpu": {
+        "temperature_c": 46.0,
+        "utilization_pct": 2.0,
+        "memory_mib": 1097.0,
+        "power_w": 14.4
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.7700000000000005,
+          "rss_gb": 0.932192256,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.6950000000000001,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.7700000000000005,
+          "rss_gb": 0.932192256,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.6950000000000001,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 94,
+      "steps": 605,
+      "step_wall_s": 5.586801900004502
+    },
+    {
+      "time": 1789574251.7724447,
+      "cpu_pct": 13.6,
+      "available_ram_gb": 3.532767232,
+      "committed_ram_pct": 79.0,
+      "gpu": {
+        "temperature_c": 44.0,
+        "utilization_pct": 18.0,
+        "memory_mib": 1128.0,
+        "power_w": 8.58
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.92,
+          "rss_gb": 0.932192256,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.25,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.92,
+          "rss_gb": 0.932192256,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.25,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 94,
+      "steps": 605,
+      "step_wall_s": 5.586801900004502
+    },
+    {
+      "time": 1789574252.7893674,
+      "cpu_pct": 11.2,
+      "available_ram_gb": 3.531517952,
+      "committed_ram_pct": 79.0,
+      "gpu": {
+        "temperature_c": 44.0,
+        "utilization_pct": 18.0,
+        "memory_mib": 1128.0,
+        "power_w": 8.58
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 1.545,
+          "rss_gb": 0.932192256,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.25,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 1.545,
+          "rss_gb": 0.932192256,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.25,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 95,
+      "steps": 606,
+      "step_wall_s": 5.661565400005202
+    },
+    {
+      "time": 1789574253.7905915,
+      "cpu_pct": 11.6,
+      "available_ram_gb": 3.532730368,
+      "committed_ram_pct": 79.0,
+      "gpu": {
+        "temperature_c": 44.0,
+        "utilization_pct": 18.0,
+        "memory_mib": 1128.0,
+        "power_w": 8.58
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.845000000000001,
+          "rss_gb": 0.932200448,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.155,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.845000000000001,
+          "rss_gb": 0.932200448,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.155,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 95,
+      "steps": 606,
+      "step_wall_s": 5.661565400005202
+    },
+    {
+      "time": 1789574254.7915168,
+      "cpu_pct": 13.1,
+      "available_ram_gb": 3.52772096,
+      "committed_ram_pct": 79.1,
+      "gpu": {
+        "temperature_c": 44.0,
+        "utilization_pct": 18.0,
+        "memory_mib": 1128.0,
+        "power_w": 8.58
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.92,
+          "rss_gb": 0.932200448,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.9400000000000001,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.92,
+          "rss_gb": 0.932200448,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.9400000000000001,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 95,
+      "steps": 606,
+      "step_wall_s": 5.661565400005202
+    },
+    {
+      "time": 1789574255.7939513,
+      "cpu_pct": 9.7,
+      "available_ram_gb": 3.5365888,
+      "committed_ram_pct": 79.0,
+      "gpu": {
+        "temperature_c": 44.0,
+        "utilization_pct": 18.0,
+        "memory_mib": 1128.0,
+        "power_w": 8.58
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.92,
+          "rss_gb": 0.932200448,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.095,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.92,
+          "rss_gb": 0.932200448,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.095,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 95,
+      "steps": 606,
+      "step_wall_s": 5.661565400005202
+    },
+    {
+      "time": 1789574256.8559525,
+      "cpu_pct": 13.8,
+      "available_ram_gb": 3.534508032,
+      "committed_ram_pct": 79.0,
+      "gpu": {
+        "temperature_c": 48.0,
+        "utilization_pct": 2.0,
+        "memory_mib": 1135.0,
+        "power_w": 17.13
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.61,
+          "rss_gb": 0.932200448,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.78,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.61,
+          "rss_gb": 0.932200448,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.78,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 95,
+      "steps": 606,
+      "step_wall_s": 5.661565400005202
+    },
+    {
+      "time": 1789574257.8579996,
+      "cpu_pct": 12.4,
+      "available_ram_gb": 3.5185664,
+      "committed_ram_pct": 79.1,
+      "gpu": {
+        "temperature_c": 48.0,
+        "utilization_pct": 2.0,
+        "memory_mib": 1135.0,
+        "power_w": 17.13
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.485,
+          "rss_gb": 0.932200448,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.105,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.485,
+          "rss_gb": 0.932200448,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.105,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 95,
+      "steps": 606,
+      "step_wall_s": 5.661565400005202
+    },
+    {
+      "time": 1789574258.8795788,
+      "cpu_pct": 19.0,
+      "available_ram_gb": 3.565305856,
+      "committed_ram_pct": 78.8,
+      "gpu": {
+        "temperature_c": 48.0,
+        "utilization_pct": 2.0,
+        "memory_mib": 1135.0,
+        "power_w": 17.13
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 3.0,
+          "rss_gb": 0.932200448,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.46,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 3.0,
+          "rss_gb": 0.932200448,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.46,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 96,
+      "steps": 607,
+      "step_wall_s": 5.665906499998528
+    },
+    {
+      "time": 1789574259.8870814,
+      "cpu_pct": 10.3,
+      "available_ram_gb": 3.551576064,
+      "committed_ram_pct": 78.9,
+      "gpu": {
+        "temperature_c": 48.0,
+        "utilization_pct": 2.0,
+        "memory_mib": 1135.0,
+        "power_w": 17.13
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 2.77,
+          "rss_gb": 0.93220864,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.0,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 2.77,
+          "rss_gb": 0.93220864,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.0,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 96,
+      "steps": 607,
+      "step_wall_s": 5.665906499998528
+    },
+    {
+      "time": 1789574260.888299,
+      "cpu_pct": 9.0,
+      "available_ram_gb": 3.543666688,
+      "committed_ram_pct": 79.0,
+      "gpu": {
+        "temperature_c": 48.0,
+        "utilization_pct": 2.0,
+        "memory_mib": 1135.0,
+        "power_w": 17.13
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.765,
+          "rss_gb": 0.932216832,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.0150000000000001,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.765,
+          "rss_gb": 0.932216832,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.0150000000000001,
+          "rss_gb": 0.173850624,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 96,
+      "steps": 607,
+      "step_wall_s": 5.665906499998528
+    },
+    {
+      "time": 1789574261.9509382,
+      "cpu_pct": 15.3,
+      "available_ram_gb": 3.524702208,
+      "committed_ram_pct": 79.1,
+      "gpu": {
+        "temperature_c": 44.0,
+        "utilization_pct": 21.0,
+        "memory_mib": 1139.0,
+        "power_w": 8.41
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.845000000000001,
+          "rss_gb": 0.932216832,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.9400000000000001,
+          "rss_gb": 0.17385472,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.845000000000001,
+          "rss_gb": 0.932216832,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.9400000000000001,
+          "rss_gb": 0.17385472,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 96,
+      "steps": 607,
+      "step_wall_s": 5.665906499998528
+    },
+    {
+      "time": 1789574262.9525058,
+      "cpu_pct": 21.1,
+      "available_ram_gb": 3.483148288,
+      "committed_ram_pct": 79.3,
+      "gpu": {
+        "temperature_c": 44.0,
+        "utilization_pct": 21.0,
+        "memory_mib": 1139.0,
+        "power_w": 8.41
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.63,
+          "rss_gb": 0.932216832,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.395,
+          "rss_gb": 0.17385472,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.63,
+          "rss_gb": 0.932216832,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.395,
+          "rss_gb": 0.17385472,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 96,
+      "steps": 607,
+      "step_wall_s": 5.665906499998528
+    },
+    {
+      "time": 1789574263.9540315,
+      "cpu_pct": 13.3,
+      "available_ram_gb": 3.48485632,
+      "committed_ram_pct": 79.3,
+      "gpu": {
+        "temperature_c": 44.0,
+        "utilization_pct": 21.0,
+        "memory_mib": 1139.0,
+        "power_w": 8.41
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.529999999999999,
+          "rss_gb": 0.932216832,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.0150000000000001,
+          "rss_gb": 0.173858816,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.529999999999999,
+          "rss_gb": 0.932216832,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.0150000000000001,
+          "rss_gb": 0.173858816,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 96,
+      "steps": 607,
+      "step_wall_s": 5.665906499998528
+    },
+    {
+      "time": 1789574264.9558995,
+      "cpu_pct": 13.8,
+      "available_ram_gb": 3.518988288,
+      "committed_ram_pct": 79.1,
+      "gpu": {
+        "temperature_c": 44.0,
+        "utilization_pct": 21.0,
+        "memory_mib": 1139.0,
+        "power_w": 8.41
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 5.0,
+          "rss_gb": 0.932225024,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.9400000000000001,
+          "rss_gb": 0.173858816,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 5.0,
+          "rss_gb": 0.932225024,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.9400000000000001,
+          "rss_gb": 0.173858816,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 96,
+      "steps": 607,
+      "step_wall_s": 5.665906499998528
+    },
+    {
+      "time": 1789574265.9687252,
+      "cpu_pct": 5.1,
+      "available_ram_gb": 3.523334144,
+      "committed_ram_pct": 79.1,
+      "gpu": {
+        "temperature_c": 44.0,
+        "utilization_pct": 21.0,
+        "memory_mib": 1139.0,
+        "power_w": 8.41
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 1.54,
+          "rss_gb": 0.932225024,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.77,
+          "rss_gb": 0.173858816,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 1.54,
+          "rss_gb": 0.932225024,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.77,
+          "rss_gb": 0.173858816,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 97,
+      "steps": 608,
+      "step_wall_s": 5.731037800003833
+    },
+    {
+      "time": 1789574267.0211768,
+      "cpu_pct": 9.1,
+      "available_ram_gb": 3.511857152,
+      "committed_ram_pct": 79.2,
+      "gpu": {
+        "temperature_c": 48.0,
+        "utilization_pct": 2.0,
+        "memory_mib": 1108.0,
+        "power_w": 17.04
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.92,
+          "rss_gb": 0.932225024,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.9400000000000001,
+          "rss_gb": 0.173858816,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.92,
+          "rss_gb": 0.932225024,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.9400000000000001,
+          "rss_gb": 0.173858816,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 97,
+      "steps": 608,
+      "step_wall_s": 5.731037800003833
+    },
+    {
+      "time": 1789574268.0225348,
+      "cpu_pct": 9.5,
+      "available_ram_gb": 3.51227904,
+      "committed_ram_pct": 79.2,
+      "gpu": {
+        "temperature_c": 48.0,
+        "utilization_pct": 2.0,
+        "memory_mib": 1108.0,
+        "power_w": 17.04
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 5.075,
+          "rss_gb": 0.932225024,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.67,
+          "rss_gb": 0.173858816,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 5.075,
+          "rss_gb": 0.932225024,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.67,
+          "rss_gb": 0.173858816,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 97,
+      "steps": 608,
+      "step_wall_s": 5.731037800003833
+    },
+    {
+      "time": 1789574269.0250723,
+      "cpu_pct": 8.3,
+      "available_ram_gb": 3.502260224,
+      "committed_ram_pct": 79.2,
+      "gpu": {
+        "temperature_c": 48.0,
+        "utilization_pct": 2.0,
+        "memory_mib": 1108.0,
+        "power_w": 17.04
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.92,
+          "rss_gb": 0.932225024,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.845,
+          "rss_gb": 0.173858816,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.92,
+          "rss_gb": 0.932225024,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.845,
+          "rss_gb": 0.173858816,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 97,
+      "steps": 608,
+      "step_wall_s": 5.731037800003833
+    },
+    {
+      "time": 1789574270.0266635,
+      "cpu_pct": 10.2,
+      "available_ram_gb": 3.496443904,
+      "committed_ram_pct": 79.2,
+      "gpu": {
+        "temperature_c": 48.0,
+        "utilization_pct": 2.0,
+        "memory_mib": 1108.0,
+        "power_w": 17.04
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.92,
+          "rss_gb": 0.932225024,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.095,
+          "rss_gb": 0.173858816,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.92,
+          "rss_gb": 0.932225024,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 1.095,
+          "rss_gb": 0.173858816,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 97,
+      "steps": 608,
+      "step_wall_s": 5.731037800003833
+    },
+    {
+      "time": 1789574271.0280635,
+      "cpu_pct": 11.3,
+      "available_ram_gb": 3.49401088,
+      "committed_ram_pct": 79.3,
+      "gpu": {
+        "temperature_c": 48.0,
+        "utilization_pct": 2.0,
+        "memory_mib": 1108.0,
+        "power_w": 17.04
+      },
+      "top_cpu": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.6899999999999995,
+          "rss_gb": 0.932225024,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.545,
+          "rss_gb": 0.173858816,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "lab": [
+        {
+          "pid": 34448,
+          "name": "python.exe",
+          "cpu_machine_pct": 4.6899999999999995,
+          "rss_gb": 0.932225024,
+          "priority": 16384,
+          "affinity": [
+            2,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "pid": 14056,
+          "name": "DoorKickers2.exe",
+          "cpu_machine_pct": 0.545,
+          "rss_gb": 0.173858816,
+          "priority": 16384,
+          "affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "state": "running",
+      "phase": "internal",
+      "episode": 91,
+      "sequence": 97,
+      "steps": 608,
+      "step_wall_s": 5.731037800003833
+    }
+  ]
+}

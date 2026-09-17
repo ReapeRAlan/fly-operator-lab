@@ -1,0 +1,64 @@
+{
+  "campaign.bak": {
+    "original_sha256": "5a6a0a252ebc1e75c0d222fda902951aa09fe500c42df4c3a14334d7f2f7f3f6",
+    "backup_sha256": "5a6a0a252ebc1e75c0d222fda902951aa09fe500c42df4c3a14334d7f2f7f3f6",
+    "matches": true
+  },
+  "campaign.xml": {
+    "original_sha256": "18c4dc793d564f6ddde5490e9e07b859396b31b62091f5d155ff78002a09c9fe",
+    "backup_sha256": "18c4dc793d564f6ddde5490e9e07b859396b31b62091f5d155ff78002a09c9fe",
+    "matches": true
+  },
+  "campaign_history.bak": {
+    "original_sha256": "9e106b158fa71ea87cef9d7ed1b374a751652232f67891b9a9de242750b652c5",
+    "backup_sha256": "9e106b158fa71ea87cef9d7ed1b374a751652232f67891b9a9de242750b652c5",
+    "matches": true
+  },
+  "campaign_history.xml": {
+    "original_sha256": "ddd853aa98227bc59d8f6ff7e3d791c3494c1512965cb1ca8311ee03bbfc168f",
+    "backup_sha256": "ddd853aa98227bc59d8f6ff7e3d791c3494c1512965cb1ca8311ee03bbfc168f",
+    "matches": true
+  },
+  "keybinds.xml": {
+    "original_sha256": "a16ae9e5bbdb6c3fbbc2db263c30fe1b76e47f2ea606d3f58f76962355779d86",
+    "backup_sha256": "a16ae9e5bbdb6c3fbbc2db263c30fe1b76e47f2ea606d3f58f76962355779d86",
+    "matches": true
+  },
+  "mapsaves.bak": {
+    "original_sha256": "3f5f4ddbc68bd95e4bcec3f8b08e81659585140bc6ddf3443d5c79c959b5880f",
+    "backup_sha256": "3f5f4ddbc68bd95e4bcec3f8b08e81659585140bc6ddf3443d5c79c959b5880f",
+    "matches": true
+  },
+  "mapsaves.xml": {
+    "original_sha256": "967e9544f91805c8d24764d636c94f7e7e52d53593e0870ed4192f7d2d5154c5",
+    "backup_sha256": "967e9544f91805c8d24764d636c94f7e7e52d53593e0870ed4192f7d2d5154c5",
+    "matches": true
+  },
+  "options.xml": {
+    "original_sha256": "bf6a72363e0fc2244f1001c561c91ad0b91cd5409c8d95e83e82462ca121e4f5",
+    "backup_sha256": "bf6a72363e0fc2244f1001c561c91ad0b91cd5409c8d95e83e82462ca121e4f5",
+    "matches": true,
+    "before_restore_sha256": "ce899d6f0660d3f51bdebc0801cecbb8ba4fbe7dde96c24516dd676f0cba28a3",
+    "restoration": "Restored the original options after an earlier pre-isolation launch changed video preferences, squad selection and the Mods list. Previous contents retained in work/options_before_restore_20260915.xml."
+  },
+  "roster.bak": {
+    "original_sha256": "7adbedeb4642645263f3a2d817a92a198bdf8768977a41ded96686f349cc3dd9",
+    "backup_sha256": "7adbedeb4642645263f3a2d817a92a198bdf8768977a41ded96686f349cc3dd9",
+    "matches": true
+  },
+  "roster.xml": {
+    "original_sha256": "a4dc8bf22f6f1cfb7aca75bdb666a649a94628ef6c32a886b5ecd10e5838470d",
+    "backup_sha256": "a4dc8bf22f6f1cfb7aca75bdb666a649a94628ef6c32a886b5ecd10e5838470d",
+    "matches": true
+  },
+  "unlocked.bak": {
+    "original_sha256": "7a93a5c0ef65a44622b3c36e0d81d4f61757cecaf8b349778d780c16b62d928e",
+    "backup_sha256": "7a93a5c0ef65a44622b3c36e0d81d4f61757cecaf8b349778d780c16b62d928e",
+    "matches": true
+  },
+  "unlocked.xml": {
+    "original_sha256": "a499bc40150de9b2cf3c733c618d0582374128ed48bf44bdf0ed23869c93d7b3",
+    "backup_sha256": "a499bc40150de9b2cf3c733c618d0582374128ed48bf44bdf0ed23869c93d7b3",
+    "matches": true
+  }
+}

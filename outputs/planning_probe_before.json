@@ -1,0 +1,350 @@
+{
+  "action_events": [],
+  "action_receipt": {},
+  "active": true,
+  "automatic_thinks_blocked": 1,
+  "capture_directory": "D:\\FlyOperatorLab\\work/frames\\8604_32_6548468",
+  "capture_frame": 0,
+  "client0_state": 5,
+  "episode": 32,
+  "game_flags": 17,
+  "game_state": 1,
+  "humans": [
+    {
+      "aim": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "ammo": 30,
+      "capacity": 30,
+      "commands": 0,
+      "health": 100.0,
+      "id": 101,
+      "kind": 1,
+      "look": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "position": [
+        24.0,
+        0.0,
+        24.0
+      ],
+      "recent_damage": 0.0,
+      "speed": 0.0,
+      "weapon_state": 3
+    },
+    {
+      "aim": [
+        1.0,
+        0.0,
+        -1.9311904907226562e-05
+      ],
+      "ammo": 31,
+      "capacity": 31,
+      "commands": 0,
+      "health": 100.0,
+      "id": 302,
+      "kind": 0,
+      "look": [
+        1.0,
+        0.0,
+        -1.9311904907226562e-05
+      ],
+      "position": [
+        -3.2517642974853516,
+        0.0,
+        -1.4483928680419922e-05
+      ],
+      "recent_damage": 0.0,
+      "speed": 0.0,
+      "weapon_state": 3
+    }
+  ],
+  "inventory": [
+    {
+      "ammo": 31,
+      "binding": "PrimaryWeapon",
+      "capacity": 31,
+      "category": "rifle",
+      "effective_params": {
+        "accuracyEnd": 300.0,
+        "accuracyEndDist": 100.0,
+        "accuracyStart": 300.0,
+        "accuracyStartDist": 0.0,
+        "changeInTime": 0.0,
+        "changeOutTime": 0.0,
+        "closedBolt": 1.0,
+        "cyclicReload": 0.0,
+        "efficiencyPercent": 102.5,
+        "guardTime": 220.0,
+        "numPellets": 1.0,
+        "readyTime": 450.0,
+        "reloadEmptyTime": 3200.0,
+        "reloadTime": 2400.0,
+        "roundsPerMagazine": 30.0
+      },
+      "equipped": true,
+      "name": "M16A4",
+      "quantity": 31,
+      "slot": 1,
+      "state": 3,
+      "state_duration_ms": 0,
+      "state_timer_ms": 0,
+      "type": 0
+    },
+    {
+      "binding": "PrimaryWeaponScope",
+      "category": "",
+      "effective_params": {
+        "efficiencyPercent": 102.5
+      },
+      "equipped": false,
+      "name": "IronSights",
+      "quantity": 0,
+      "slot": 2,
+      "state": 0,
+      "state_duration_ms": 0,
+      "state_timer_ms": 0,
+      "type": 14
+    },
+    {
+      "binding": "",
+      "category": "",
+      "effective_params": {
+        "efficiencyPercent": 102.5
+      },
+      "equipped": false,
+      "name": "556FMJM855_M16A4",
+      "quantity": 0,
+      "slot": 3,
+      "state": 0,
+      "state_duration_ms": 0,
+      "state_timer_ms": 0,
+      "type": 13
+    },
+    {
+      "ammo": 16,
+      "binding": "SecondaryWeapon",
+      "capacity": 16,
+      "category": "pistol",
+      "effective_params": {
+        "accuracyEnd": 85.0,
+        "accuracyEndDist": 100.0,
+        "accuracyStart": 90.0,
+        "accuracyStartDist": 0.0,
+        "changeInTime": 800.0,
+        "changeOutTime": 1000.0,
+        "closedBolt": 1.0,
+        "cyclicReload": 0.0,
+        "efficiencyPercent": 102.5,
+        "guardTime": 50.0,
+        "numPellets": 1.0,
+        "readyTime": 100.0,
+        "reloadEmptyTime": 1800.0,
+        "reloadTime": 1400.0,
+        "roundsPerMagazine": 15.0
+      },
+      "equipped": false,
+      "name": "M9 Pistol",
+      "quantity": 16,
+      "slot": 5,
+      "state": 0,
+      "state_duration_ms": 0,
+      "state_timer_ms": 0,
+      "type": 0
+    },
+    {
+      "binding": "SecondaryWeaponScope",
+      "category": "",
+      "effective_params": {
+        "efficiencyPercent": 102.5
+      },
+      "equipped": false,
+      "name": "IronSights_Pistol",
+      "quantity": 0,
+      "slot": 6,
+      "state": 0,
+      "state_duration_ms": 0,
+      "state_timer_ms": 0,
+      "type": 14
+    },
+    {
+      "binding": "",
+      "category": "",
+      "effective_params": {
+        "efficiencyPercent": 102.5
+      },
+      "equipped": false,
+      "name": "919FMJM882_Handgun",
+      "quantity": 0,
+      "slot": 7,
+      "state": 0,
+      "state_duration_ms": 0,
+      "state_timer_ms": 0,
+      "type": 13
+    },
+    {
+      "binding": "Helmet",
+      "category": "",
+      "effective_params": {
+        "efficiencyPercent": 102.5
+      },
+      "equipped": false,
+      "name": "HelmetACH",
+      "quantity": 0,
+      "slot": 9,
+      "state": 0,
+      "state_duration_ms": 0,
+      "state_timer_ms": 0,
+      "type": 17
+    },
+    {
+      "binding": "Armor",
+      "category": "",
+      "effective_params": {
+        "efficiencyPercent": 102.5
+      },
+      "equipped": false,
+      "name": "Rangers SFLCS Level III",
+      "quantity": 0,
+      "slot": 11,
+      "state": 0,
+      "state_duration_ms": 0,
+      "state_timer_ms": 0,
+      "type": 1
+    },
+    {
+      "binding": "UtilityPouch",
+      "category": "",
+      "effective_params": {
+        "changeInTime": 0.0,
+        "changeOutTime": 0.0,
+        "efficiencyPercent": 102.5,
+        "throwTime": 1000.0,
+        "throwTimeCorner": 1400.0
+      },
+      "equipped": false,
+      "name": "Flashbang",
+      "quantity": 2,
+      "slot": 12,
+      "state": 0,
+      "state_duration_ms": 0,
+      "state_timer_ms": 0,
+      "type": 3
+    },
+    {
+      "binding": "UtilityPouch",
+      "category": "",
+      "effective_params": {
+        "changeInTime": 0.0,
+        "changeOutTime": 0.0,
+        "efficiencyPercent": 102.5,
+        "throwTime": 1000.0,
+        "throwTimeCorner": 1400.0
+      },
+      "equipped": false,
+      "name": "Frag Grenade",
+      "quantity": 2,
+      "slot": 13,
+      "state": 0,
+      "state_duration_ms": 0,
+      "state_timer_ms": 0,
+      "type": 3
+    },
+    {
+      "binding": "SupportGear3",
+      "category": "",
+      "effective_params": {
+        "audibleSoundRadius": 12.0,
+        "changeInTime": 1456.0,
+        "changeOutTime": 1808.0,
+        "efficiencyPercent": 102.5
+      },
+      "equipped": false,
+      "name": "Crowbar",
+      "quantity": 0,
+      "slot": 16,
+      "state": 0,
+      "state_duration_ms": 0,
+      "state_timer_ms": 0,
+      "type": 8
+    }
+  ],
+  "loadout_choice": -1,
+  "map_load_id": 31,
+  "map_path": "data/maps_wip/fly_door_train_23.xml",
+  "map_seed": 1482702054,
+  "mission_result": 0,
+  "objects": [
+    {
+      "door_state": 2,
+      "id": 300,
+      "initial_position": [
+        -2.0,
+        0.0,
+        0.0
+      ],
+      "kind": "door",
+      "locked": false,
+      "position": [
+        -1.8791475296020508,
+        0.0,
+        0.9466055631637573
+      ],
+      "source": "scenario_geometry",
+      "template": "door_wood_01"
+    }
+  ],
+  "ok": true,
+  "operator": {
+    "aim": [
+      1.0,
+      0.0,
+      -1.9311904907226562e-05
+    ],
+    "ammo": 31,
+    "capacity": 31,
+    "commands": 0,
+    "health": 100.0,
+    "id": 302,
+    "kind": 0,
+    "look": [
+      1.0,
+      0.0,
+      -1.9311904907226562e-05
+    ],
+    "position": [
+      -3.2517642974853516,
+      0.0,
+      -1.4483928680419922e-05
+    ],
+    "recent_damage": 0.0,
+    "speed": 0.0,
+    "weapon_state": 3
+  },
+  "presentation_count": 7915,
+  "presentation_interval_ms": 50,
+  "protocol": 2,
+  "reload_requests": 0,
+  "requested_dt_ms": 50,
+  "sequence": 1,
+  "shot_requests": 0,
+  "shots_accepted": 0,
+  "sim_time_ms": 1700,
+  "simulation_thread": 14304,
+  "visible_enemies": [],
+  "visible_ids": [
+    300
+  ],
+  "frame": {
+    "client_sim_time_ms": 1700,
+    "frame": 0,
+    "height": 703,
+    "saved": true,
+    "sim_time_ms": 1700,
+    "width": 1262
+  }
+}

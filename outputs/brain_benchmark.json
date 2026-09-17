@@ -1,0 +1,2510 @@
+{
+  "assertions": {
+    "same_seed_exact_repeat": true,
+    "altered_inputs_change_spikes": true,
+    "silent_inputs_no_spikes": true,
+    "altered_inputs_change_actions": true,
+    "all_neurons_loaded": true,
+    "all_internal_edges_loaded": true
+  },
+  "adapter_channels": {
+    "vision_left": 0.0,
+    "vision_right": 0.6125741132772068,
+    "proprioception": 0.0,
+    "damage": 0.0,
+    "ammo": 0.967741935483871,
+    "tonic": 0.2
+  },
+  "python": "3.9.13",
+  "rss_mib": 339.92578125,
+  "runs": {
+    "normal": [
+      {
+        "wall_seconds": 1.3915676000000001,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 54974,
+        "active_neurons": 15582,
+        "state_sha256": "707669bc5b287b0082aa8b467b7c237363478812c52669e17ea1b98db6319354",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 11.412429378531074,
+          "stop": 12.083333333333332,
+          "turn_left": 11.208791208791208,
+          "turn_right": 7.455621301775149,
+          "aim": 8.901098901098901,
+          "fire": 11.10047846889952,
+          "reload": 13.793103448275863
+        }
+      },
+      {
+        "wall_seconds": 0.31529870000000004,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98308,
+        "active_neurons": 16680,
+        "state_sha256": "354e1b3effeef23de6f3d9ec66bd3db315e030772c9873a1160e064f71d929f1",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.17514124293785,
+          "stop": 17.604166666666668,
+          "turn_left": 13.406593406593407,
+          "turn_right": 11.715976331360945,
+          "aim": 10.549450549450551,
+          "fire": 16.172248803827753,
+          "reload": 17.832512315270936
+        }
+      },
+      {
+        "wall_seconds": 0.3002791,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97500,
+        "active_neurons": 16454,
+        "state_sha256": "1ddff80b82abbface3d142d6daaa8afa3ccae8e251f0174ce31323830c0f927b",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 18.87005649717514,
+          "stop": 17.395833333333332,
+          "turn_left": 13.516483516483518,
+          "turn_right": 10.532544378698226,
+          "aim": 11.428571428571429,
+          "fire": 16.842105263157894,
+          "reload": 19.014778325123153
+        }
+      },
+      {
+        "wall_seconds": 0.2995443999999998,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98855,
+        "active_neurons": 16824,
+        "state_sha256": "1e32147307d38128e7bc980eff0fc9296c8ec85d16661cff9f1b0ca1cc85d115",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 18.07909604519774,
+          "stop": 18.125,
+          "turn_left": 14.835164835164836,
+          "turn_right": 11.95266272189349,
+          "aim": 10.879120879120878,
+          "fire": 16.842105263157894,
+          "reload": 18.029556650246306
+        }
+      },
+      {
+        "wall_seconds": 0.29944119999999996,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97985,
+        "active_neurons": 16599,
+        "state_sha256": "b85f256e204cc2d19f67a5bcd910d171824b0a0d408c499ce3141b083d6ba16f",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.627118644067796,
+          "stop": 17.395833333333332,
+          "turn_left": 13.406593406593407,
+          "turn_right": 10.650887573964498,
+          "aim": 10.219780219780219,
+          "fire": 16.650717703349283,
+          "reload": 19.310344827586206
+        }
+      },
+      {
+        "wall_seconds": 0.2839717999999998,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98387,
+        "active_neurons": 16661,
+        "state_sha256": "9c83afc3545bf64d85ccc0d39ecf9d2b3e78206b54d6e6d3f824aa808b9772ce",
+        "command": {
+          "action": "move",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 18.64406779661017,
+          "stop": 17.916666666666668,
+          "turn_left": 13.516483516483518,
+          "turn_right": 12.544378698224852,
+          "aim": 10.769230769230768,
+          "fire": 17.320574162679424,
+          "reload": 18.423645320197046
+        }
+      },
+      {
+        "wall_seconds": 0.29181170000000023,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98570,
+        "active_neurons": 16807,
+        "state_sha256": "e1c4860a009b964ce64a496180a0c4a6cf0282304b1a571dfff5a3c5bcf22c4e",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.28813559322034,
+          "stop": 18.229166666666668,
+          "turn_left": 13.846153846153845,
+          "turn_right": 10.887573964497042,
+          "aim": 10.43956043956044,
+          "fire": 17.129186602870814,
+          "reload": 18.423645320197046
+        }
+      },
+      {
+        "wall_seconds": 0.30867060000000013,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98854,
+        "active_neurons": 16814,
+        "state_sha256": "a7159beb6fac076ad422daeadfae44c4ce934a03ea8a70526e95ceb8d41afb8b",
+        "command": {
+          "action": "move",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 19.548022598870055,
+          "stop": 17.916666666666668,
+          "turn_left": 14.505494505494505,
+          "turn_right": 12.544378698224852,
+          "aim": 10.769230769230768,
+          "fire": 17.894736842105264,
+          "reload": 18.32512315270936
+        }
+      },
+      {
+        "wall_seconds": 0.3021326000000002,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98239,
+        "active_neurons": 16596,
+        "state_sha256": "f00341688b591c0ffe1d3357d7889e9272bf076e7d96b160ffc7cdbfea037059",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.853107344632768,
+          "stop": 18.645833333333332,
+          "turn_left": 14.835164835164836,
+          "turn_right": 11.597633136094673,
+          "aim": 10.32967032967033,
+          "fire": 17.22488038277512,
+          "reload": 18.817733990147783
+        }
+      },
+      {
+        "wall_seconds": 0.3087363999999999,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97316,
+        "active_neurons": 16544,
+        "state_sha256": "c2c827339e86ca7596d025caf143f3955374a9d276b8749a38c944db81d1350a",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.401129943502823,
+          "stop": 16.458333333333332,
+          "turn_left": 13.516483516483518,
+          "turn_right": 10.887573964497042,
+          "aim": 10.0,
+          "fire": 16.555023923444978,
+          "reload": 18.52216748768473
+        }
+      },
+      {
+        "wall_seconds": 0.29033890000000007,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98421,
+        "active_neurons": 16728,
+        "state_sha256": "57b0fcb87b26176f89f9b9684d17499d223981ffef8ea0b802dfc53b17ed88bc",
+        "command": {
+          "action": "move",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 18.418079096045197,
+          "stop": 17.916666666666668,
+          "turn_left": 13.846153846153845,
+          "turn_right": 11.479289940828403,
+          "aim": 11.978021978021978,
+          "fire": 15.980861244019138,
+          "reload": 17.733990147783253
+        }
+      },
+      {
+        "wall_seconds": 0.29547349999999994,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97759,
+        "active_neurons": 16452,
+        "state_sha256": "dc06ded5e1df1668ea945337f505d5a318ba108e236f3ffd6cbd03c945ea23b4",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.627118644067796,
+          "stop": 17.604166666666668,
+          "turn_left": 13.736263736263735,
+          "turn_right": 10.769230769230768,
+          "aim": 10.65934065934066,
+          "fire": 17.320574162679424,
+          "reload": 18.32512315270936
+        }
+      },
+      {
+        "wall_seconds": 0.29627999999999943,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98399,
+        "active_neurons": 16797,
+        "state_sha256": "bf38a667585f4321e43ce9689c179803c5f0378469bafa7a9198b9babd00dea8",
+        "command": {
+          "action": "move",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 18.418079096045197,
+          "stop": 18.333333333333332,
+          "turn_left": 15.054945054945057,
+          "turn_right": 12.42603550295858,
+          "aim": 11.098901098901099,
+          "fire": 16.555023923444978,
+          "reload": 18.226600985221676
+        }
+      },
+      {
+        "wall_seconds": 0.27802469999999957,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97936,
+        "active_neurons": 16578,
+        "state_sha256": "b182cb9dc1fa2d3b4340a874f1295616df6abb98ba00b99a61724a0a6db01bdc",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.740112994350284,
+          "stop": 18.125,
+          "turn_left": 13.846153846153845,
+          "turn_right": 11.95266272189349,
+          "aim": 12.087912087912086,
+          "fire": 17.607655502392344,
+          "reload": 19.704433497536947
+        }
+      },
+      {
+        "wall_seconds": 0.3015581000000003,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98155,
+        "active_neurons": 16560,
+        "state_sha256": "f3118be989a190623ce6fd3b4426a41c42fb8ae4d28f97a034df7c54cb3d167a",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.740112994350284,
+          "stop": 16.770833333333332,
+          "turn_left": 13.626373626373628,
+          "turn_right": 10.650887573964498,
+          "aim": 10.32967032967033,
+          "fire": 16.076555023923444,
+          "reload": 18.423645320197046
+        }
+      },
+      {
+        "wall_seconds": 0.28031700000000015,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97915,
+        "active_neurons": 16452,
+        "state_sha256": "af426fb4c816c0893974b4a83ac67149974cc6242d2e43237c8d6b5fe43a3e18",
+        "command": {
+          "action": "move",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 18.192090395480225,
+          "stop": 17.8125,
+          "turn_left": 13.296703296703297,
+          "turn_right": 11.242603550295858,
+          "aim": 10.32967032967033,
+          "fire": 16.842105263157894,
+          "reload": 18.12807881773399
+        }
+      },
+      {
+        "wall_seconds": 0.3019436000000004,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98610,
+        "active_neurons": 16796,
+        "state_sha256": "40b56b0a756a486802e5fbf2028ce014d4da5c0cfea0d3b798a3538cef6e5308",
+        "command": {
+          "action": "move",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 18.07909604519774,
+          "stop": 17.395833333333332,
+          "turn_left": 14.835164835164836,
+          "turn_right": 11.834319526627219,
+          "aim": 11.098901098901099,
+          "fire": 16.555023923444978,
+          "reload": 17.93103448275862
+        }
+      },
+      {
+        "wall_seconds": 0.2934045999999997,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97874,
+        "active_neurons": 16470,
+        "state_sha256": "6d93120dfcb8adf847bbfd93f935f2953fb2cb767261206b39b084536041dca7",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.51412429378531,
+          "stop": 17.604166666666668,
+          "turn_left": 14.505494505494505,
+          "turn_right": 10.650887573964498,
+          "aim": 10.32967032967033,
+          "fire": 16.9377990430622,
+          "reload": 18.029556650246306
+        }
+      },
+      {
+        "wall_seconds": 0.2832017999999996,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98784,
+        "active_neurons": 16843,
+        "state_sha256": "eb9c012d6c472d96ae14a13c749e9bdc9c313b9983e822b171b79a4b6f7ff69e",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 18.983050847457626,
+          "stop": 18.333333333333332,
+          "turn_left": 14.065934065934066,
+          "turn_right": 12.189349112426035,
+          "aim": 10.549450549450551,
+          "fire": 17.41626794258373,
+          "reload": 19.704433497536947
+        }
+      },
+      {
+        "wall_seconds": 0.2824719,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97653,
+        "active_neurons": 16459,
+        "state_sha256": "5bce7a199edee899cf536041e663f89413ed4db9954541d96dbbf51bdc292418",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.401129943502823,
+          "stop": 17.8125,
+          "turn_left": 13.956043956043954,
+          "turn_right": 10.29585798816568,
+          "aim": 10.549450549450551,
+          "fire": 16.45933014354067,
+          "reload": 17.635467980295566
+        }
+      }
+    ],
+    "repeat": [
+      {
+        "wall_seconds": 0.2212601000000003,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 54974,
+        "active_neurons": 15582,
+        "state_sha256": "707669bc5b287b0082aa8b467b7c237363478812c52669e17ea1b98db6319354",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 11.412429378531074,
+          "stop": 12.083333333333332,
+          "turn_left": 11.208791208791208,
+          "turn_right": 7.455621301775149,
+          "aim": 8.901098901098901,
+          "fire": 11.10047846889952,
+          "reload": 13.793103448275863
+        }
+      },
+      {
+        "wall_seconds": 0.28307530000000014,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98308,
+        "active_neurons": 16680,
+        "state_sha256": "354e1b3effeef23de6f3d9ec66bd3db315e030772c9873a1160e064f71d929f1",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.17514124293785,
+          "stop": 17.604166666666668,
+          "turn_left": 13.406593406593407,
+          "turn_right": 11.715976331360945,
+          "aim": 10.549450549450551,
+          "fire": 16.172248803827753,
+          "reload": 17.832512315270936
+        }
+      },
+      {
+        "wall_seconds": 0.28149460000000026,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97500,
+        "active_neurons": 16454,
+        "state_sha256": "1ddff80b82abbface3d142d6daaa8afa3ccae8e251f0174ce31323830c0f927b",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 18.87005649717514,
+          "stop": 17.395833333333332,
+          "turn_left": 13.516483516483518,
+          "turn_right": 10.532544378698226,
+          "aim": 11.428571428571429,
+          "fire": 16.842105263157894,
+          "reload": 19.014778325123153
+        }
+      },
+      {
+        "wall_seconds": 0.27464780000000033,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98855,
+        "active_neurons": 16824,
+        "state_sha256": "1e32147307d38128e7bc980eff0fc9296c8ec85d16661cff9f1b0ca1cc85d115",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 18.07909604519774,
+          "stop": 18.125,
+          "turn_left": 14.835164835164836,
+          "turn_right": 11.95266272189349,
+          "aim": 10.879120879120878,
+          "fire": 16.842105263157894,
+          "reload": 18.029556650246306
+        }
+      },
+      {
+        "wall_seconds": 0.2735529000000003,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97985,
+        "active_neurons": 16599,
+        "state_sha256": "b85f256e204cc2d19f67a5bcd910d171824b0a0d408c499ce3141b083d6ba16f",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.627118644067796,
+          "stop": 17.395833333333332,
+          "turn_left": 13.406593406593407,
+          "turn_right": 10.650887573964498,
+          "aim": 10.219780219780219,
+          "fire": 16.650717703349283,
+          "reload": 19.310344827586206
+        }
+      },
+      {
+        "wall_seconds": 0.27637419999999935,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98387,
+        "active_neurons": 16661,
+        "state_sha256": "9c83afc3545bf64d85ccc0d39ecf9d2b3e78206b54d6e6d3f824aa808b9772ce",
+        "command": {
+          "action": "move",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 18.64406779661017,
+          "stop": 17.916666666666668,
+          "turn_left": 13.516483516483518,
+          "turn_right": 12.544378698224852,
+          "aim": 10.769230769230768,
+          "fire": 17.320574162679424,
+          "reload": 18.423645320197046
+        }
+      },
+      {
+        "wall_seconds": 0.26721109999999904,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98570,
+        "active_neurons": 16807,
+        "state_sha256": "e1c4860a009b964ce64a496180a0c4a6cf0282304b1a571dfff5a3c5bcf22c4e",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.28813559322034,
+          "stop": 18.229166666666668,
+          "turn_left": 13.846153846153845,
+          "turn_right": 10.887573964497042,
+          "aim": 10.43956043956044,
+          "fire": 17.129186602870814,
+          "reload": 18.423645320197046
+        }
+      },
+      {
+        "wall_seconds": 0.27321039999999996,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98854,
+        "active_neurons": 16814,
+        "state_sha256": "a7159beb6fac076ad422daeadfae44c4ce934a03ea8a70526e95ceb8d41afb8b",
+        "command": {
+          "action": "move",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 19.548022598870055,
+          "stop": 17.916666666666668,
+          "turn_left": 14.505494505494505,
+          "turn_right": 12.544378698224852,
+          "aim": 10.769230769230768,
+          "fire": 17.894736842105264,
+          "reload": 18.32512315270936
+        }
+      },
+      {
+        "wall_seconds": 0.27217410000000086,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98239,
+        "active_neurons": 16596,
+        "state_sha256": "f00341688b591c0ffe1d3357d7889e9272bf076e7d96b160ffc7cdbfea037059",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.853107344632768,
+          "stop": 18.645833333333332,
+          "turn_left": 14.835164835164836,
+          "turn_right": 11.597633136094673,
+          "aim": 10.32967032967033,
+          "fire": 17.22488038277512,
+          "reload": 18.817733990147783
+        }
+      },
+      {
+        "wall_seconds": 0.30789829999999974,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97316,
+        "active_neurons": 16544,
+        "state_sha256": "c2c827339e86ca7596d025caf143f3955374a9d276b8749a38c944db81d1350a",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.401129943502823,
+          "stop": 16.458333333333332,
+          "turn_left": 13.516483516483518,
+          "turn_right": 10.887573964497042,
+          "aim": 10.0,
+          "fire": 16.555023923444978,
+          "reload": 18.52216748768473
+        }
+      },
+      {
+        "wall_seconds": 0.2814900999999992,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98421,
+        "active_neurons": 16728,
+        "state_sha256": "57b0fcb87b26176f89f9b9684d17499d223981ffef8ea0b802dfc53b17ed88bc",
+        "command": {
+          "action": "move",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 18.418079096045197,
+          "stop": 17.916666666666668,
+          "turn_left": 13.846153846153845,
+          "turn_right": 11.479289940828403,
+          "aim": 11.978021978021978,
+          "fire": 15.980861244019138,
+          "reload": 17.733990147783253
+        }
+      },
+      {
+        "wall_seconds": 0.28326589999999996,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97759,
+        "active_neurons": 16452,
+        "state_sha256": "dc06ded5e1df1668ea945337f505d5a318ba108e236f3ffd6cbd03c945ea23b4",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.627118644067796,
+          "stop": 17.604166666666668,
+          "turn_left": 13.736263736263735,
+          "turn_right": 10.769230769230768,
+          "aim": 10.65934065934066,
+          "fire": 17.320574162679424,
+          "reload": 18.32512315270936
+        }
+      },
+      {
+        "wall_seconds": 0.33040740000000035,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98399,
+        "active_neurons": 16797,
+        "state_sha256": "bf38a667585f4321e43ce9689c179803c5f0378469bafa7a9198b9babd00dea8",
+        "command": {
+          "action": "move",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 18.418079096045197,
+          "stop": 18.333333333333332,
+          "turn_left": 15.054945054945057,
+          "turn_right": 12.42603550295858,
+          "aim": 11.098901098901099,
+          "fire": 16.555023923444978,
+          "reload": 18.226600985221676
+        }
+      },
+      {
+        "wall_seconds": 0.27681250000000013,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97936,
+        "active_neurons": 16578,
+        "state_sha256": "b182cb9dc1fa2d3b4340a874f1295616df6abb98ba00b99a61724a0a6db01bdc",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.740112994350284,
+          "stop": 18.125,
+          "turn_left": 13.846153846153845,
+          "turn_right": 11.95266272189349,
+          "aim": 12.087912087912086,
+          "fire": 17.607655502392344,
+          "reload": 19.704433497536947
+        }
+      },
+      {
+        "wall_seconds": 0.2738030999999985,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98155,
+        "active_neurons": 16560,
+        "state_sha256": "f3118be989a190623ce6fd3b4426a41c42fb8ae4d28f97a034df7c54cb3d167a",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.740112994350284,
+          "stop": 16.770833333333332,
+          "turn_left": 13.626373626373628,
+          "turn_right": 10.650887573964498,
+          "aim": 10.32967032967033,
+          "fire": 16.076555023923444,
+          "reload": 18.423645320197046
+        }
+      },
+      {
+        "wall_seconds": 0.2727813000000001,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97915,
+        "active_neurons": 16452,
+        "state_sha256": "af426fb4c816c0893974b4a83ac67149974cc6242d2e43237c8d6b5fe43a3e18",
+        "command": {
+          "action": "move",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 18.192090395480225,
+          "stop": 17.8125,
+          "turn_left": 13.296703296703297,
+          "turn_right": 11.242603550295858,
+          "aim": 10.32967032967033,
+          "fire": 16.842105263157894,
+          "reload": 18.12807881773399
+        }
+      },
+      {
+        "wall_seconds": 0.27400290000000105,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98610,
+        "active_neurons": 16796,
+        "state_sha256": "40b56b0a756a486802e5fbf2028ce014d4da5c0cfea0d3b798a3538cef6e5308",
+        "command": {
+          "action": "move",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 18.07909604519774,
+          "stop": 17.395833333333332,
+          "turn_left": 14.835164835164836,
+          "turn_right": 11.834319526627219,
+          "aim": 11.098901098901099,
+          "fire": 16.555023923444978,
+          "reload": 17.93103448275862
+        }
+      },
+      {
+        "wall_seconds": 0.28357410000000094,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97874,
+        "active_neurons": 16470,
+        "state_sha256": "6d93120dfcb8adf847bbfd93f935f2953fb2cb767261206b39b084536041dca7",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.51412429378531,
+          "stop": 17.604166666666668,
+          "turn_left": 14.505494505494505,
+          "turn_right": 10.650887573964498,
+          "aim": 10.32967032967033,
+          "fire": 16.9377990430622,
+          "reload": 18.029556650246306
+        }
+      },
+      {
+        "wall_seconds": 0.2977489000000002,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98784,
+        "active_neurons": 16843,
+        "state_sha256": "eb9c012d6c472d96ae14a13c749e9bdc9c313b9983e822b171b79a4b6f7ff69e",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 18.983050847457626,
+          "stop": 18.333333333333332,
+          "turn_left": 14.065934065934066,
+          "turn_right": 12.189349112426035,
+          "aim": 10.549450549450551,
+          "fire": 17.41626794258373,
+          "reload": 19.704433497536947
+        }
+      },
+      {
+        "wall_seconds": 0.290982099999999,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97653,
+        "active_neurons": 16459,
+        "state_sha256": "5bce7a199edee899cf536041e663f89413ed4db9954541d96dbbf51bdc292418",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.401129943502823,
+          "stop": 17.8125,
+          "turn_left": 13.956043956043954,
+          "turn_right": 10.29585798816568,
+          "aim": 10.549450549450551,
+          "fire": 16.45933014354067,
+          "reload": 17.635467980295566
+        }
+      }
+    ],
+    "altered": [
+      {
+        "wall_seconds": 0.22148099999999893,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 50503,
+        "active_neurons": 14917,
+        "state_sha256": "ce88e90b835c9fdf229d6df7f0245158c71712594881fd7df2fb560f6616cc44",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 10.508474576271187,
+          "stop": 10.9375,
+          "turn_left": 10.0,
+          "turn_right": 6.390532544378699,
+          "aim": 7.362637362637363,
+          "fire": 9.856459330143542,
+          "reload": 10.738916256157635
+        }
+      },
+      {
+        "wall_seconds": 0.2996219999999994,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98076,
+        "active_neurons": 16411,
+        "state_sha256": "b35a7f08ebed9525b915098383ce00a5e5d13c343177ff3aef62eb13e586b10c",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.401129943502823,
+          "stop": 16.5625,
+          "turn_left": 13.076923076923077,
+          "turn_right": 11.36094674556213,
+          "aim": 9.56043956043956,
+          "fire": 16.267942583732058,
+          "reload": 17.832512315270936
+        }
+      },
+      {
+        "wall_seconds": 0.3234387000000005,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98244,
+        "active_neurons": 16531,
+        "state_sha256": "89d92ae4066a0c358dfc24e8c3c4d3cb0f306bdff286493d6c98e70655843b0d",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 18.192090395480225,
+          "stop": 17.5,
+          "turn_left": 13.516483516483518,
+          "turn_right": 11.834319526627219,
+          "aim": 10.219780219780219,
+          "fire": 16.9377990430622,
+          "reload": 18.620689655172413
+        }
+      },
+      {
+        "wall_seconds": 0.2980080999999988,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98187,
+        "active_neurons": 16640,
+        "state_sha256": "89f026d7b9f1bddce844466c6fe04c914b5497e0ea2b7082e183f26c59af1e49",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.740112994350284,
+          "stop": 17.083333333333332,
+          "turn_left": 13.516483516483518,
+          "turn_right": 12.071005917159761,
+          "aim": 9.56043956043956,
+          "fire": 16.172248803827753,
+          "reload": 19.507389162561577
+        }
+      },
+      {
+        "wall_seconds": 0.29382649999999977,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97843,
+        "active_neurons": 16489,
+        "state_sha256": "b58c42c69e85034629f4ccef4e1a972d3c780ef522954db52afe2e72155ef808",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.28813559322034,
+          "stop": 18.125,
+          "turn_left": 13.186813186813188,
+          "turn_right": 11.005917159763314,
+          "aim": 8.901098901098901,
+          "fire": 17.320574162679424,
+          "reload": 18.32512315270936
+        }
+      },
+      {
+        "wall_seconds": 0.29154579999999974,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97323,
+        "active_neurons": 16375,
+        "state_sha256": "1a23b7e83f9613117f81cfd109c40bdf326734379e882395ed372462af1085b9",
+        "command": {
+          "action": "move",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 18.418079096045197,
+          "stop": 17.083333333333332,
+          "turn_left": 13.626373626373628,
+          "turn_right": 10.29585798816568,
+          "aim": 9.56043956043956,
+          "fire": 15.50239234449761,
+          "reload": 18.226600985221676
+        }
+      },
+      {
+        "wall_seconds": 0.28450600000000037,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98211,
+        "active_neurons": 16644,
+        "state_sha256": "09b51fa5d2b6e5ec7a8721662dfac19781934ccfe4d1f566f7681da7ce211f9b",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 16.836158192090394,
+          "stop": 17.916666666666668,
+          "turn_left": 13.296703296703297,
+          "turn_right": 11.242603550295858,
+          "aim": 9.45054945054945,
+          "fire": 16.842105263157894,
+          "reload": 18.226600985221676
+        }
+      },
+      {
+        "wall_seconds": 0.27767820000000043,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97436,
+        "active_neurons": 16414,
+        "state_sha256": "fb55a38d7f265af8c99b8967a2c211b8960998b947a8c092b236840a63da33e2",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.51412429378531,
+          "stop": 16.5625,
+          "turn_left": 13.846153846153845,
+          "turn_right": 10.532544378698226,
+          "aim": 9.340659340659341,
+          "fire": 16.267942583732058,
+          "reload": 18.226600985221676
+        }
+      },
+      {
+        "wall_seconds": 0.2801784000000005,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98167,
+        "active_neurons": 16575,
+        "state_sha256": "8141a390c086eb44fb863035b6c5c5a47365373270e1bf10b0ff5f7a733f3e02",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.062146892655367,
+          "stop": 17.1875,
+          "turn_left": 13.516483516483518,
+          "turn_right": 10.887573964497042,
+          "aim": 9.230769230769232,
+          "fire": 15.980861244019138,
+          "reload": 18.52216748768473
+        }
+      },
+      {
+        "wall_seconds": 0.286578200000001,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97639,
+        "active_neurons": 16563,
+        "state_sha256": "022a51fe0661e8550c57fd2f95f98e0d0cba31c27cc51cf4bb416d2de7678a92",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 16.949152542372882,
+          "stop": 17.1875,
+          "turn_left": 13.406593406593407,
+          "turn_right": 11.95266272189349,
+          "aim": 9.780219780219781,
+          "fire": 16.076555023923444,
+          "reload": 18.226600985221676
+        }
+      },
+      {
+        "wall_seconds": 0.28295719999999847,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98441,
+        "active_neurons": 16602,
+        "state_sha256": "bfc20369b6572ae5529e0a12a3b5cc8430a92b6d7a7cf855d9b4fe474e651f57",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 18.07909604519774,
+          "stop": 18.020833333333332,
+          "turn_left": 13.076923076923077,
+          "turn_right": 11.36094674556213,
+          "aim": 9.780219780219781,
+          "fire": 17.033492822966508,
+          "reload": 18.719211822660096
+        }
+      },
+      {
+        "wall_seconds": 0.27020279999999985,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97290,
+        "active_neurons": 16398,
+        "state_sha256": "a7fc1a340ff45d96c1a41bb9d826319fff24f6dd4201a7460f217c05d7550ba3",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 16.610169491525422,
+          "stop": 16.875,
+          "turn_left": 12.747252747252746,
+          "turn_right": 10.414201183431953,
+          "aim": 9.230769230769232,
+          "fire": 16.45933014354067,
+          "reload": 18.029556650246306
+        }
+      },
+      {
+        "wall_seconds": 0.28821379999999763,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98507,
+        "active_neurons": 16684,
+        "state_sha256": "212ccf8d89bb86779b8bbdb9e1cd0bae77a3b9405fdbfc40eea32cf0c8db7c5c",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.062146892655367,
+          "stop": 17.083333333333332,
+          "turn_left": 13.956043956043954,
+          "turn_right": 11.242603550295858,
+          "aim": 9.230769230769232,
+          "fire": 15.885167464114835,
+          "reload": 17.832512315270936
+        }
+      },
+      {
+        "wall_seconds": 0.28988490000000056,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97837,
+        "active_neurons": 16456,
+        "state_sha256": "93973aa2b92a5d9931038fba5c5e0ff160d6a4f95889022e19c0e43e670e62a2",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 18.531073446327685,
+          "stop": 18.229166666666668,
+          "turn_left": 13.846153846153845,
+          "turn_right": 10.650887573964498,
+          "aim": 9.56043956043956,
+          "fire": 16.555023923444978,
+          "reload": 19.014778325123153
+        }
+      },
+      {
+        "wall_seconds": 0.2773372000000016,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98266,
+        "active_neurons": 16655,
+        "state_sha256": "9bf4fb149f4de7ae982bd74b29cd9e8c532d3ede0ddddd42ce3342f4777c6b16",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.966101694915256,
+          "stop": 17.083333333333332,
+          "turn_left": 13.406593406593407,
+          "turn_right": 11.479289940828403,
+          "aim": 10.10989010989011,
+          "fire": 16.842105263157894,
+          "reload": 18.32512315270936
+        }
+      },
+      {
+        "wall_seconds": 0.2861450000000012,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 96837,
+        "active_neurons": 16206,
+        "state_sha256": "05ef0695fe2e13fa5423e3d25e06d5dc4028e74475187d46e5313f83aa212089",
+        "command": {
+          "action": "move",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.17514124293785,
+          "stop": 16.666666666666668,
+          "turn_left": 13.296703296703297,
+          "turn_right": 10.29585798816568,
+          "aim": 9.12087912087912,
+          "fire": 15.789473684210527,
+          "reload": 17.044334975369456
+        }
+      },
+      {
+        "wall_seconds": 0.2778618999999978,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97988,
+        "active_neurons": 16602,
+        "state_sha256": "a8cb288f566e3026626f421830c79947a9d1f527f69e1978d81744bf33cc32fd",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.627118644067796,
+          "stop": 16.979166666666668,
+          "turn_left": 13.736263736263735,
+          "turn_right": 11.715976331360945,
+          "aim": 9.230769230769232,
+          "fire": 16.172248803827753,
+          "reload": 19.113300492610836
+        }
+      },
+      {
+        "wall_seconds": 0.27926069999999825,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97702,
+        "active_neurons": 16505,
+        "state_sha256": "692a04aeacc8440e06b5e1bc71139852eebc52d428f70a39e7263b3dc5f7d197",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.401129943502823,
+          "stop": 17.1875,
+          "turn_left": 14.175824175824177,
+          "turn_right": 11.124260355029584,
+          "aim": 10.43956043956044,
+          "fire": 16.650717703349283,
+          "reload": 18.12807881773399
+        }
+      },
+      {
+        "wall_seconds": 0.3389222000000025,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 98354,
+        "active_neurons": 16657,
+        "state_sha256": "041f5ff04280713f2722625da8dd36f6c09a7eca90f7a19ffffb8fe37cd356cb",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 18.192090395480225,
+          "stop": 17.8125,
+          "turn_left": 13.846153846153845,
+          "turn_right": 11.597633136094673,
+          "aim": 9.56043956043956,
+          "fire": 16.9377990430622,
+          "reload": 18.817733990147783
+        }
+      },
+      {
+        "wall_seconds": 0.30137479999999783,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 97838,
+        "active_neurons": 16510,
+        "state_sha256": "e36d217e828c0f11815ae9fe030c3a29cb3c00f589a8b278635450314705f9eb",
+        "command": {
+          "action": "reload",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 17.401129943502823,
+          "stop": 16.979166666666668,
+          "turn_left": 13.186813186813188,
+          "turn_right": 11.479289940828403,
+          "aim": 9.56043956043956,
+          "fire": 16.45933014354067,
+          "reload": 18.12807881773399
+        }
+      }
+    ],
+    "silent": [
+      {
+        "wall_seconds": 0.13609680000000068,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 0,
+        "active_neurons": 0,
+        "state_sha256": "e9a45224c83c76ee5775b39378403faaf358ffebc3a38b8113fed220f71a625b",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 0.0,
+          "stop": 0.0,
+          "turn_left": 0.0,
+          "turn_right": 0.0,
+          "aim": 0.0,
+          "fire": 0.0,
+          "reload": 0.0
+        }
+      },
+      {
+        "wall_seconds": 0.13661420000000035,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 0,
+        "active_neurons": 0,
+        "state_sha256": "e9a45224c83c76ee5775b39378403faaf358ffebc3a38b8113fed220f71a625b",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 0.0,
+          "stop": 0.0,
+          "turn_left": 0.0,
+          "turn_right": 0.0,
+          "aim": 0.0,
+          "fire": 0.0,
+          "reload": 0.0
+        }
+      },
+      {
+        "wall_seconds": 0.1351772000000011,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 0,
+        "active_neurons": 0,
+        "state_sha256": "e9a45224c83c76ee5775b39378403faaf358ffebc3a38b8113fed220f71a625b",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 0.0,
+          "stop": 0.0,
+          "turn_left": 0.0,
+          "turn_right": 0.0,
+          "aim": 0.0,
+          "fire": 0.0,
+          "reload": 0.0
+        }
+      },
+      {
+        "wall_seconds": 0.12863420000000048,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 0,
+        "active_neurons": 0,
+        "state_sha256": "e9a45224c83c76ee5775b39378403faaf358ffebc3a38b8113fed220f71a625b",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 0.0,
+          "stop": 0.0,
+          "turn_left": 0.0,
+          "turn_right": 0.0,
+          "aim": 0.0,
+          "fire": 0.0,
+          "reload": 0.0
+        }
+      },
+      {
+        "wall_seconds": 0.13267899999999955,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 0,
+        "active_neurons": 0,
+        "state_sha256": "e9a45224c83c76ee5775b39378403faaf358ffebc3a38b8113fed220f71a625b",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 0.0,
+          "stop": 0.0,
+          "turn_left": 0.0,
+          "turn_right": 0.0,
+          "aim": 0.0,
+          "fire": 0.0,
+          "reload": 0.0
+        }
+      },
+      {
+        "wall_seconds": 0.126687399999998,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 0,
+        "active_neurons": 0,
+        "state_sha256": "e9a45224c83c76ee5775b39378403faaf358ffebc3a38b8113fed220f71a625b",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 0.0,
+          "stop": 0.0,
+          "turn_left": 0.0,
+          "turn_right": 0.0,
+          "aim": 0.0,
+          "fire": 0.0,
+          "reload": 0.0
+        }
+      },
+      {
+        "wall_seconds": 0.13582290000000086,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 0,
+        "active_neurons": 0,
+        "state_sha256": "e9a45224c83c76ee5775b39378403faaf358ffebc3a38b8113fed220f71a625b",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 0.0,
+          "stop": 0.0,
+          "turn_left": 0.0,
+          "turn_right": 0.0,
+          "aim": 0.0,
+          "fire": 0.0,
+          "reload": 0.0
+        }
+      },
+      {
+        "wall_seconds": 0.13384190000000018,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 0,
+        "active_neurons": 0,
+        "state_sha256": "e9a45224c83c76ee5775b39378403faaf358ffebc3a38b8113fed220f71a625b",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 0.0,
+          "stop": 0.0,
+          "turn_left": 0.0,
+          "turn_right": 0.0,
+          "aim": 0.0,
+          "fire": 0.0,
+          "reload": 0.0
+        }
+      },
+      {
+        "wall_seconds": 0.13511890000000193,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 0,
+        "active_neurons": 0,
+        "state_sha256": "e9a45224c83c76ee5775b39378403faaf358ffebc3a38b8113fed220f71a625b",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 0.0,
+          "stop": 0.0,
+          "turn_left": 0.0,
+          "turn_right": 0.0,
+          "aim": 0.0,
+          "fire": 0.0,
+          "reload": 0.0
+        }
+      },
+      {
+        "wall_seconds": 0.13487559999999732,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 0,
+        "active_neurons": 0,
+        "state_sha256": "e9a45224c83c76ee5775b39378403faaf358ffebc3a38b8113fed220f71a625b",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 0.0,
+          "stop": 0.0,
+          "turn_left": 0.0,
+          "turn_right": 0.0,
+          "aim": 0.0,
+          "fire": 0.0,
+          "reload": 0.0
+        }
+      },
+      {
+        "wall_seconds": 0.12861330000000137,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 0,
+        "active_neurons": 0,
+        "state_sha256": "e9a45224c83c76ee5775b39378403faaf358ffebc3a38b8113fed220f71a625b",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 0.0,
+          "stop": 0.0,
+          "turn_left": 0.0,
+          "turn_right": 0.0,
+          "aim": 0.0,
+          "fire": 0.0,
+          "reload": 0.0
+        }
+      },
+      {
+        "wall_seconds": 0.13244219999999984,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 0,
+        "active_neurons": 0,
+        "state_sha256": "e9a45224c83c76ee5775b39378403faaf358ffebc3a38b8113fed220f71a625b",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 0.0,
+          "stop": 0.0,
+          "turn_left": 0.0,
+          "turn_right": 0.0,
+          "aim": 0.0,
+          "fire": 0.0,
+          "reload": 0.0
+        }
+      },
+      {
+        "wall_seconds": 0.1344771999999992,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 0,
+        "active_neurons": 0,
+        "state_sha256": "e9a45224c83c76ee5775b39378403faaf358ffebc3a38b8113fed220f71a625b",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 0.0,
+          "stop": 0.0,
+          "turn_left": 0.0,
+          "turn_right": 0.0,
+          "aim": 0.0,
+          "fire": 0.0,
+          "reload": 0.0
+        }
+      },
+      {
+        "wall_seconds": 0.13171960000000027,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 0,
+        "active_neurons": 0,
+        "state_sha256": "e9a45224c83c76ee5775b39378403faaf358ffebc3a38b8113fed220f71a625b",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 0.0,
+          "stop": 0.0,
+          "turn_left": 0.0,
+          "turn_right": 0.0,
+          "aim": 0.0,
+          "fire": 0.0,
+          "reload": 0.0
+        }
+      },
+      {
+        "wall_seconds": 0.13200979999999873,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 0,
+        "active_neurons": 0,
+        "state_sha256": "e9a45224c83c76ee5775b39378403faaf358ffebc3a38b8113fed220f71a625b",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 0.0,
+          "stop": 0.0,
+          "turn_left": 0.0,
+          "turn_right": 0.0,
+          "aim": 0.0,
+          "fire": 0.0,
+          "reload": 0.0
+        }
+      },
+      {
+        "wall_seconds": 0.12549680000000052,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 0,
+        "active_neurons": 0,
+        "state_sha256": "e9a45224c83c76ee5775b39378403faaf358ffebc3a38b8113fed220f71a625b",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 0.0,
+          "stop": 0.0,
+          "turn_left": 0.0,
+          "turn_right": 0.0,
+          "aim": 0.0,
+          "fire": 0.0,
+          "reload": 0.0
+        }
+      },
+      {
+        "wall_seconds": 0.13211399999999784,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 0,
+        "active_neurons": 0,
+        "state_sha256": "e9a45224c83c76ee5775b39378403faaf358ffebc3a38b8113fed220f71a625b",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 0.0,
+          "stop": 0.0,
+          "turn_left": 0.0,
+          "turn_right": 0.0,
+          "aim": 0.0,
+          "fire": 0.0,
+          "reload": 0.0
+        }
+      },
+      {
+        "wall_seconds": 0.1281175999999995,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 0,
+        "active_neurons": 0,
+        "state_sha256": "e9a45224c83c76ee5775b39378403faaf358ffebc3a38b8113fed220f71a625b",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 0.0,
+          "stop": 0.0,
+          "turn_left": 0.0,
+          "turn_right": 0.0,
+          "aim": 0.0,
+          "fire": 0.0,
+          "reload": 0.0
+        }
+      },
+      {
+        "wall_seconds": 0.12890549999999834,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 0,
+        "active_neurons": 0,
+        "state_sha256": "e9a45224c83c76ee5775b39378403faaf358ffebc3a38b8113fed220f71a625b",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 0.0,
+          "stop": 0.0,
+          "turn_left": 0.0,
+          "turn_right": 0.0,
+          "aim": 0.0,
+          "fire": 0.0,
+          "reload": 0.0
+        }
+      },
+      {
+        "wall_seconds": 0.1274557999999999,
+        "simulated_ms": 50.0,
+        "neurons": 166700,
+        "edges": 25582938,
+        "spikes": 0,
+        "active_neurons": 0,
+        "state_sha256": "e9a45224c83c76ee5775b39378403faaf358ffebc3a38b8113fed220f71a625b",
+        "command": {
+          "action": "stop",
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "destination": [
+            0.4,
+            0,
+            0.0
+          ]
+        },
+        "scores": {
+          "move": 0.0,
+          "stop": 0.0,
+          "turn_left": 0.0,
+          "turn_right": 0.0,
+          "aim": 0.0,
+          "fire": 0.0,
+          "reload": 0.0
+        }
+      }
+    ]
+  }
+}

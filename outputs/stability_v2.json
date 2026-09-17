@@ -1,0 +1,338 @@
+{
+  "passed": true,
+  "episodes": 20,
+  "scope": "native bridge action cycles; instructor commands, no neuronal learning claim",
+  "rows": [
+    {
+      "episode": 7,
+      "stage": "switch",
+      "passed": true,
+      "steps": 18,
+      "simulated_ms": 900,
+      "receipt": {
+        "action": "equip",
+        "command_sequence": 1,
+        "elapsed_ms": 900,
+        "reason": "",
+        "start_sim_ms": 0,
+        "status": "completed"
+      },
+      "mission_result": 0
+    },
+    {
+      "episode": 8,
+      "stage": "door",
+      "passed": true,
+      "steps": 30,
+      "simulated_ms": 1500,
+      "receipt": {
+        "action": "door_open",
+        "command_sequence": 1,
+        "elapsed_ms": 1500,
+        "reason": "",
+        "start_sim_ms": 0,
+        "status": "completed"
+      },
+      "mission_result": 0
+    },
+    {
+      "episode": 9,
+      "stage": "breach",
+      "passed": true,
+      "steps": 89,
+      "simulated_ms": 4450,
+      "receipt": {
+        "action": "door_breach",
+        "command_sequence": 1,
+        "elapsed_ms": 4450,
+        "reason": "",
+        "start_sim_ms": 0,
+        "status": "completed"
+      },
+      "mission_result": 0
+    },
+    {
+      "episode": 10,
+      "stage": "defuse",
+      "passed": true,
+      "steps": 101,
+      "simulated_ms": 5050,
+      "receipt": {
+        "action": "defuse",
+        "command_sequence": 1,
+        "elapsed_ms": 5050,
+        "reason": "",
+        "start_sim_ms": 0,
+        "status": "completed"
+      },
+      "mission_result": 1
+    },
+    {
+      "episode": 11,
+      "stage": "grenade",
+      "passed": true,
+      "steps": 16,
+      "simulated_ms": 800,
+      "receipt": {
+        "action": "throw",
+        "command_sequence": 1,
+        "elapsed_ms": 800,
+        "reason": "",
+        "start_sim_ms": 0,
+        "status": "completed"
+      },
+      "mission_result": 0
+    },
+    {
+      "episode": 12,
+      "stage": "switch",
+      "passed": true,
+      "steps": 18,
+      "simulated_ms": 900,
+      "receipt": {
+        "action": "equip",
+        "command_sequence": 1,
+        "elapsed_ms": 900,
+        "reason": "",
+        "start_sim_ms": 0,
+        "status": "completed"
+      },
+      "mission_result": 0
+    },
+    {
+      "episode": 13,
+      "stage": "door",
+      "passed": true,
+      "steps": 30,
+      "simulated_ms": 1500,
+      "receipt": {
+        "action": "door_open",
+        "command_sequence": 1,
+        "elapsed_ms": 1500,
+        "reason": "",
+        "start_sim_ms": 0,
+        "status": "completed"
+      },
+      "mission_result": 0
+    },
+    {
+      "episode": 14,
+      "stage": "breach",
+      "passed": true,
+      "steps": 89,
+      "simulated_ms": 4450,
+      "receipt": {
+        "action": "door_breach",
+        "command_sequence": 1,
+        "elapsed_ms": 4450,
+        "reason": "",
+        "start_sim_ms": 0,
+        "status": "completed"
+      },
+      "mission_result": 0
+    },
+    {
+      "episode": 15,
+      "stage": "defuse",
+      "passed": true,
+      "steps": 101,
+      "simulated_ms": 5050,
+      "receipt": {
+        "action": "defuse",
+        "command_sequence": 1,
+        "elapsed_ms": 5050,
+        "reason": "",
+        "start_sim_ms": 0,
+        "status": "completed"
+      },
+      "mission_result": 1
+    },
+    {
+      "episode": 16,
+      "stage": "grenade",
+      "passed": true,
+      "steps": 16,
+      "simulated_ms": 800,
+      "receipt": {
+        "action": "throw",
+        "command_sequence": 1,
+        "elapsed_ms": 800,
+        "reason": "",
+        "start_sim_ms": 0,
+        "status": "completed"
+      },
+      "mission_result": 0
+    },
+    {
+      "episode": 17,
+      "stage": "switch",
+      "passed": true,
+      "steps": 18,
+      "simulated_ms": 900,
+      "receipt": {
+        "action": "equip",
+        "command_sequence": 1,
+        "elapsed_ms": 900,
+        "reason": "",
+        "start_sim_ms": 0,
+        "status": "completed"
+      },
+      "mission_result": 0
+    },
+    {
+      "episode": 18,
+      "stage": "door",
+      "passed": true,
+      "steps": 30,
+      "simulated_ms": 1500,
+      "receipt": {
+        "action": "door_open",
+        "command_sequence": 1,
+        "elapsed_ms": 1500,
+        "reason": "",
+        "start_sim_ms": 0,
+        "status": "completed"
+      },
+      "mission_result": 0
+    },
+    {
+      "episode": 19,
+      "stage": "breach",
+      "passed": true,
+      "steps": 89,
+      "simulated_ms": 4450,
+      "receipt": {
+        "action": "door_breach",
+        "command_sequence": 1,
+        "elapsed_ms": 4450,
+        "reason": "",
+        "start_sim_ms": 0,
+        "status": "completed"
+      },
+      "mission_result": 0
+    },
+    {
+      "episode": 20,
+      "stage": "defuse",
+      "passed": true,
+      "steps": 101,
+      "simulated_ms": 5050,
+      "receipt": {
+        "action": "defuse",
+        "command_sequence": 1,
+        "elapsed_ms": 5050,
+        "reason": "",
+        "start_sim_ms": 0,
+        "status": "completed"
+      },
+      "mission_result": 1
+    },
+    {
+      "episode": 21,
+      "stage": "grenade",
+      "passed": true,
+      "steps": 16,
+      "simulated_ms": 800,
+      "receipt": {
+        "action": "throw",
+        "command_sequence": 1,
+        "elapsed_ms": 800,
+        "reason": "",
+        "start_sim_ms": 0,
+        "status": "completed"
+      },
+      "mission_result": 0
+    },
+    {
+      "episode": 22,
+      "stage": "switch",
+      "passed": true,
+      "steps": 18,
+      "simulated_ms": 900,
+      "receipt": {
+        "action": "equip",
+        "command_sequence": 1,
+        "elapsed_ms": 900,
+        "reason": "",
+        "start_sim_ms": 0,
+        "status": "completed"
+      },
+      "mission_result": 0
+    },
+    {
+      "episode": 23,
+      "stage": "door",
+      "passed": true,
+      "steps": 30,
+      "simulated_ms": 1500,
+      "receipt": {
+        "action": "door_open",
+        "command_sequence": 1,
+        "elapsed_ms": 1500,
+        "reason": "",
+        "start_sim_ms": 0,
+        "status": "completed"
+      },
+      "mission_result": 0
+    },
+    {
+      "episode": 24,
+      "stage": "breach",
+      "passed": true,
+      "steps": 89,
+      "simulated_ms": 4450,
+      "receipt": {
+        "action": "door_breach",
+        "command_sequence": 1,
+        "elapsed_ms": 4450,
+        "reason": "",
+        "start_sim_ms": 0,
+        "status": "completed"
+      },
+      "mission_result": 0
+    },
+    {
+      "episode": 25,
+      "stage": "defuse",
+      "passed": true,
+      "steps": 101,
+      "simulated_ms": 5050,
+      "receipt": {
+        "action": "defuse",
+        "command_sequence": 1,
+        "elapsed_ms": 5050,
+        "reason": "",
+        "start_sim_ms": 0,
+        "status": "completed"
+      },
+      "mission_result": 1
+    },
+    {
+      "episode": 26,
+      "stage": "grenade",
+      "passed": true,
+      "steps": 16,
+      "simulated_ms": 800,
+      "receipt": {
+        "action": "throw",
+        "command_sequence": 1,
+        "elapsed_ms": 800,
+        "reason": "",
+        "start_sim_ms": 0,
+        "status": "completed"
+      },
+      "mission_result": 0
+    }
+  ],
+  "session": {
+    "pid": 14056,
+    "pipe": "\\\\.\\pipe\\FlyOperator_14056",
+    "exe_sha256": "7f873f34dfe37dfe40840140baf42352ea8f6b8e144d652a261a3dbddf83d747",
+    "pdb_guid": "a2347bb6-eca6-424f-8b5c-a6431e79860c",
+    "pdb_age": 7,
+    "profile": "D:\\FlyOperatorLab\\work\\profile",
+    "started_unix": 1789520196.1953998,
+    "dll_sha256": "00e6acbbbc368b965f7ba9aa95217af1dd2c990499f7e214a40ab8101c40719c"
+  },
+  "wall_seconds": 63.33098292350769
+}

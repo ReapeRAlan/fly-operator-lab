@@ -1,0 +1,17 @@
+{
+  "pass": true,
+  "method": "256 independently selected presynaptic body IDs; compare every internal outgoing edge and integer weight with raw Feather, using body-ID dictionaries",
+  "sampled_neurons": 256,
+  "sampled_raw_pairs": 40952,
+  "total_neurons": 166700,
+  "total_pairs": 25582938,
+  "total_synapse_weight": 124177617,
+  "graph_sha256": {
+    "body_ids.npy": "ab90597b7b0ce07cbc22cb39a65b70bea2ac73cc7fd225951bd9d73f2fc8dd3f",
+    "indptr.npy": "fe43420f11e6242a11f8199ae7f097cab4b8a6db181d36f2a46b9e46670acbb4",
+    "indices.npy": "ce20f7433f78442c717ad2a7b5394cf4a3b109d990b4be0788040b7b0f4ed150",
+    "counts.npy": "ba4def60ad30332e94a3e9cf58d23dd8e7ce6afb5fefce7ec7d49ffa14bb9952",
+    "transmitter_sign.npy": "0a8b1abe338e17afde197f7ef2d9a6b86cc67a2b51d0f50d9610108f809af69f"
+  },
+  "audited_unix": 1789498158.4434738
+}

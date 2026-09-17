@@ -1,0 +1,290 @@
+{
+  "dataset": "male-cns:v1.0",
+  "neurons": 166700,
+  "edges": 25582938,
+  "session": {
+    "pid": 8960,
+    "pipe": "\\\\.\\pipe\\FlyOperator_8960",
+    "exe_sha256": "7f873f34dfe37dfe40840140baf42352ea8f6b8e144d652a261a3dbddf83d747",
+    "pdb_guid": "a2347bb6-eca6-424f-8b5c-a6431e79860c",
+    "pdb_age": 7,
+    "profile": "D:\\FlyOperatorLab\\work\\profile",
+    "started_unix": 1789499811.0870626,
+    "dll_sha256": "3cc923c2d43c70494382b095467f200eca0fe138cff4cdd73d80e18d8c3287e2"
+  },
+  "python": "3.9.13",
+  "arguments": {
+    "episodes": 1,
+    "seconds": 3,
+    "frames": 159,
+    "last_dt": 35,
+    "record": true,
+    "interventions": false,
+    "name": "recorded_tail_01"
+  },
+  "episodes": [
+    {
+      "index": 0,
+      "mode": "normal",
+      "seed": 7,
+      "game_episode": 45,
+      "reason": "horizon",
+      "steps": 159,
+      "sim_time_ms": 5301,
+      "wall_seconds": 59.2482814,
+      "spikes": 10438282,
+      "actions": {
+        "reload": 126,
+        "move": 26,
+        "stop": 5,
+        "fire": 2
+      },
+      "initial": {
+        "active": true,
+        "automatic_thinks_blocked": 0,
+        "client0_state": 5,
+        "episode": 45,
+        "game_flags": 17,
+        "game_state": 1,
+        "humans": [
+          {
+            "aim": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "ammo": 30,
+            "capacity": 30,
+            "commands": 0,
+            "health": 100.0,
+            "id": 101,
+            "kind": 1,
+            "look": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "position": [
+              4.0,
+              0.0,
+              0.0
+            ],
+            "recent_damage": 0.0,
+            "speed": 0.0,
+            "weapon_state": 3
+          },
+          {
+            "aim": [
+              1.0,
+              0.0,
+              -1.9311904907226562e-05
+            ],
+            "ammo": 31,
+            "capacity": 31,
+            "commands": 0,
+            "health": 100.0,
+            "id": 103,
+            "kind": 0,
+            "look": [
+              1.0,
+              0.0,
+              -1.9311904907226562e-05
+            ],
+            "position": [
+              -4.002000331878662,
+              0.0,
+              0.0029993057250976562
+            ],
+            "recent_damage": 0.0,
+            "speed": 0.0,
+            "weapon_state": 3
+          }
+        ],
+        "map_load_id": 45,
+        "ok": true,
+        "operator": {
+          "aim": [
+            1.0,
+            0.0,
+            -1.9311904907226562e-05
+          ],
+          "ammo": 31,
+          "capacity": 31,
+          "commands": 0,
+          "health": 100.0,
+          "id": 103,
+          "kind": 0,
+          "look": [
+            1.0,
+            0.0,
+            -1.9311904907226562e-05
+          ],
+          "position": [
+            -4.002000331878662,
+            0.0,
+            0.0029993057250976562
+          ],
+          "recent_damage": 0.0,
+          "speed": 0.0,
+          "weapon_state": 3
+        },
+        "protocol": 1,
+        "reload_requests": 0,
+        "requested_dt_ms": 0,
+        "sequence": 0,
+        "shot_requests": 0,
+        "shots_accepted": 0,
+        "sim_time_ms": 0,
+        "simulation_thread": 7184,
+        "visible_enemies": [],
+        "visible_ids": []
+      },
+      "final": {
+        "active": true,
+        "automatic_thinks_blocked": 159,
+        "capture_directory": "D:\\FlyOperatorLab\\work/frames\\8960_45_17947125",
+        "capture_frame": 158,
+        "client0_state": 5,
+        "episode": 45,
+        "game_flags": 17,
+        "game_state": 1,
+        "humans": [
+          {
+            "aim": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "ammo": 30,
+            "capacity": 30,
+            "commands": 0,
+            "health": 100.0,
+            "id": 101,
+            "kind": 1,
+            "look": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "position": [
+              4.0,
+              0.0,
+              0.0
+            ],
+            "recent_damage": 0.0,
+            "speed": 0.0,
+            "weapon_state": 3
+          },
+          {
+            "aim": [
+              1.0,
+              0.0,
+              -1.9311904907226562e-05
+            ],
+            "ammo": 31,
+            "capacity": 31,
+            "commands": 0,
+            "health": 100.0,
+            "id": 103,
+            "kind": 0,
+            "look": [
+              1.0,
+              0.0,
+              -1.9311904907226562e-05
+            ],
+            "position": [
+              2.1952579021453857,
+              0.0,
+              0.0028796233236789703
+            ],
+            "recent_damage": 0.0,
+            "speed": 0.0,
+            "weapon_state": 5
+          }
+        ],
+        "map_load_id": 45,
+        "ok": true,
+        "operator": {
+          "aim": [
+            1.0,
+            0.0,
+            -1.9311904907226562e-05
+          ],
+          "ammo": 31,
+          "capacity": 31,
+          "commands": 0,
+          "health": 100.0,
+          "id": 103,
+          "kind": 0,
+          "look": [
+            1.0,
+            0.0,
+            -1.9311904907226562e-05
+          ],
+          "position": [
+            2.1952579021453857,
+            0.0,
+            0.0028796233236789703
+          ],
+          "recent_damage": 0.0,
+          "speed": 0.0,
+          "weapon_state": 5
+        },
+        "protocol": 1,
+        "reload_requests": 116,
+        "requested_dt_ms": 35,
+        "sequence": 159,
+        "shot_requests": 2,
+        "shots_accepted": 0,
+        "sim_time_ms": 5301,
+        "simulation_thread": 7184,
+        "visible_enemies": [
+          {
+            "aim": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "ammo": 30,
+            "capacity": 30,
+            "commands": 0,
+            "health": 100.0,
+            "id": 101,
+            "kind": 1,
+            "look": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "position": [
+              4.0,
+              0.0,
+              0.0
+            ],
+            "recent_damage": 0.0,
+            "speed": 0.0,
+            "weapon_state": 3
+          }
+        ],
+        "visible_ids": [
+          101
+        ],
+        "frame": {
+          "client_sim_time_ms": 5301,
+          "frame": 158,
+          "height": 711,
+          "saved": true,
+          "sim_time_ms": 5301,
+          "width": 1264
+        }
+      },
+      "frames": 159,
+      "rss_mib": 267.3359375
+    }
+  ],
+  "adapter_sha256": "48a2677118e0cefd447bf8608135b5ff2b885de68eefab543112761ecae23b8c",
+  "errors": [],
+  "wall_seconds": 59.460131499999996,
+  "completed_episodes": 1,
+  "passed": true
+}

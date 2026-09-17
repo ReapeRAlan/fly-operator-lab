@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "checkpoint": "D:\\FlyOperatorLab\\work\\learning\\checkpoints\\common_43\\current.json",
+  "actor_sha256": "f74d9283bd28856995e653cc4d91e084e96edaf928c4b087089a0943c8502b2e",
+  "steps_saved": 554,
+  "steps_after_restart": 555,
+  "examples_restored": 554,
+  "examples_sha256": "625fdb32205000098f811585b5b89907b85502b54613dbecdc97489e96695273",
+  "pid": 34448,
+  "game_session": "14056:1789520196.1953998",
+  "scope": "Real checkpoint and teaching examples restored together; pilot left running for up to 24 hours"
+}

@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "session": {
+    "pid": 40376,
+    "pipe": "\\\\.\\pipe\\FlyOperator_40376",
+    "exe_sha256": "7f873f34dfe37dfe40840140baf42352ea8f6b8e144d652a261a3dbddf83d747",
+    "pdb_guid": "a2347bb6-eca6-424f-8b5c-a6431e79860c",
+    "pdb_age": 7,
+    "profile": "D:\\FlyOperatorLab\\work\\profile",
+    "started_unix": 1789591124.4340482,
+    "dll_sha256": "9c3f1b1d79018d17508c4f10c9e27df718084a730b394c2da4218a1d76eee3b2",
+    "display_mode": "single_monitor"
+  }
+}

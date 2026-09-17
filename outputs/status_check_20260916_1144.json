@@ -1,0 +1,110 @@
+{
+  "checked_at": 1789580729.9449263,
+  "record_id": 21476,
+  "condition": "internal",
+  "phase": "internal",
+  "episode": 101,
+  "sequence": 216,
+  "top_actions": [
+    {
+      "index": 0,
+      "label": "wait",
+      "probability": 0.9940764904022217,
+      "allowed": true
+    },
+    {
+      "index": 13,
+      "label": "move \u00c2\u00b7 180\u00c2\u00b0",
+      "probability": 0.0026212173979729414,
+      "allowed": true
+    },
+    {
+      "index": 10,
+      "label": "move \u00c2\u00b7 45\u00c2\u00b0",
+      "probability": 0.002258450258523226,
+      "allowed": true
+    },
+    {
+      "index": 11,
+      "label": "move \u00c2\u00b7 90\u00c2\u00b0",
+      "probability": 0.00036811691825278103,
+      "allowed": true
+    },
+    {
+      "index": 16,
+      "label": "move \u00c2\u00b7 315\u00c2\u00b0",
+      "probability": 0.00035548696178011596,
+      "allowed": true
+    },
+    {
+      "index": 6,
+      "label": "equip \u00c2\u00b7 slot 5",
+      "probability": 0.00020709993259515613,
+      "allowed": true
+    },
+    {
+      "index": 28,
+      "label": "turn \u00c2\u00b7 90\u00c2\u00b0",
+      "probability": 6.789324834244326e-05,
+      "allowed": true
+    },
+    {
+      "index": 14,
+      "label": "move \u00c2\u00b7 225\u00c2\u00b0",
+      "probability": 4.392355913296342e-05,
+      "allowed": true
+    }
+  ],
+  "allowed_actions": 45,
+  "controller": "neuronal_actor",
+  "position": [
+    -4.273501873016357,
+    0.0,
+    0.4989373981952667
+  ],
+  "goal": [
+    -4.582822829654026,
+    0.0,
+    2.942841747229041
+  ],
+  "goal_distance": 2.4634016971337496,
+  "speed": 0.0,
+  "queue": 0,
+  "sim_time_ms": 10800,
+  "action_receipt": {
+    "action": "move",
+    "command_sequence": 152,
+    "elapsed_ms": 350,
+    "reason": "",
+    "start_sim_ms": 7550,
+    "status": "completed"
+  },
+  "brain_activity": {
+    "neurons": 166700,
+    "edges": 25582938,
+    "spikes": 97296,
+    "active_neurons": 16440,
+    "simulated_ms": 50.0,
+    "wall_seconds": 6.248742399999173,
+    "plasticity": true,
+    "eligible_edges": 3215873,
+    "spikes_sha256": "e54cd85abf22496853ccfed8c3b9f721cac3cdef4198e4ad656663244a774649"
+  },
+  "learning": {
+    "changed_edges": 2153156,
+    "absolute_change": 1.5269323587417603,
+    "max_change": 1.2159347534179688e-05,
+    "delta": 0.00010228157043457031,
+    "value_loss": 1.0461519650561968e-08,
+    "prediction_error": 0.00010228157043457031
+  },
+  "progress_check": {
+    "from_record": 21466,
+    "to_record": 21476,
+    "elapsed_wall_seconds": 65.44761419296265,
+    "simulated_ms_advanced": 500,
+    "same_episode": true,
+    "state": "running",
+    "status_age_seconds": 5.5415284633636475
+  }
+}
